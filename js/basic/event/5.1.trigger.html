@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <title></title>
+</head>
+<body>
+
+<div id="test1" style="width: 200px;height: 200px;background-color: #ff0000" >
+    <div id="green-box" style="position: absolute; width: 32px;height: 32px;background-color: green;" ></div>
+</div>
+
+
+<div id="test2" style="width: 200px;height: 200px;border: 1px solid;" >
+
+</div>
+
+
+
+<script>
+
+    var target_node = document.getElementById('test1');
+    var green_node = document.getElementById('green-box');
+    target_node.addEventListener('mousedown',function(e) {
+
+        console.log(e);
+
+        green_node.style.webkitTransform = 'translate(' + e.clientX + 'px,'+ e.clientY + 'px)';
+
+    });
+
+
+    document.getElementById('test2').addEventListener('mousedown',function(e) {
+
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("mousedown", true, true, window,
+                0, e.screenX, e.screenY-200, e.clientX, e.clientY-200, false, false, false, false, 0, null);
+        target_node.dispatchEvent(evt);
+    });
+
+    document.getElementById('test2').addEventListener('touchstart',function(e) {
+
+        var touch = e.touches[0];
+
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("mousedown", true, true, window,
+                0, touch.pageX, touch.pageY-200, touch.pageX, touch.pageY-200, false, false, false, false, 0, null);
+        target_node.dispatchEvent(evt);
+
+    });
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

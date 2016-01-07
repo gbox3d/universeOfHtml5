@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> BGM </title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
+		
+		<script>
+			$(function() {
+				console.log('START...!');
+				var hID = setInterval(function() {
+				  	//$('#bgm')[0].play();
+				  	$('button:eq(1)').trigger('click');
+				  	//console.log('try...');
+				  	$('<p></p>').text(' try...').appendTo('#log');
+				  	
+				  },1000);
+				  
+				$('button:eq(0)').bind('click', function(event) {
+				  console.log('click');
+				  window.clearInterval(hID);
+				  
+				});
+				$('button:eq(1)').bind('click', function(event) {
+				  console.log('click play');
+				  $('<p></p>').text('click try...').appendTo('#log');
+				  $('#bgm')[0].play();
+				   $('#bgm')[0].stop();
+				  
+				});
+				
+			});
+		</script>
+		
+	</head>
+	<body>
+		<audio id='bgm' controls="controls">
+			<source src="http://ukga.web-bi.net/mp3/rockGuitar.mp3" type="audio/mpeg" />
+			Your browser does not support the audio element.
+		</audio>
+		
+		<button>stop</button>
+		<button>play</button>
+		<p id='log'></p>
+	</body>
+</html>

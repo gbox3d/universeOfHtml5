@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>jqm toggle-slider</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script>
+		
+			$(document).bind('mobileinit', function(evt) {
+
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+
+				//$.mobile 관련 전역변수 초기화는 여기서한다.
+				$.mobile.autoInitializePage = false;
+				console.log('mobile init');
+
+			});
+
+		</script>
+		
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				console.log('document ready..');
+				console.log('before jqm pageinit');
+				
+				//페이지 관련 이밴트들은 여기서 바인딩시켜줘야한다.
+				//$(':jqmData(role="content")').text('hello jqm!');
+				
+				$.mobile.initializePage();
+				// 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+
+				// 이 시점부터 첫 페이지가 보이기 시작.....
+				console.log('after jqm pageinit');
+				//document 이벤트관련 초기화는 여기서 한다.
+				
+				$('#slider2').bind('change', function(event) {
+				 	$('#log')[0].innerHTML += 'change ' + $(this).val() + '<br>';
+				});
+				
+				//슬라이더값 얻어내기
+				$(':jqmData(role="button"):eq(0)').bind('click',function(event) {
+					$('#log')[0].innerHTML += $('#slider2').val() + '<br>';
+				});
+				
+				
+				//버튼을 누루면 온으로 변경하기
+				$(':jqmData(role="button"):eq(1)').bind('click',function(event) {
+					$('#slider2').val('on'); 
+					$('#slider2').slider('refresh'); //슬라이더 상태 갱신
+				});
+				
+				$(':jqmData(role="button"):eq(2)').bind('click', function(event) {
+				  $('#slider2').slider('enable'); 
+				  //$('#slider2').slider('refresh');
+				});
+				$(':jqmData(role="button"):eq(3)').bind('click', function(event) {
+				  $('#slider2').slider('disable');
+				  //$('#slider2').slider('refresh');
+				});
+				
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>header</h1>
+			</div><!-- /header -->
+			
+			<div data-role='content'>
+				<div data-role="fieldcontain">
+					<label for="slider2">Flip switch:</label>
+					<select name="slider2" id="slider2" data-role="slider">
+						<option value="off">Off</option>
+						<option value="on">On</option>
+					</select>
+				</div>
+				
+				<a data-role='button'>데이터얻기</a>
+				<a data-role='button'>데이터적용</a>
+				<a data-role='button'>유효화</a>
+				<a data-role='button'>무효화</a>
+				
+				<div id='log'>
+					
+				</div>
+				
+			</div><!-- /content -->
+			
+			<div data-role='footer' data-position="fixed">
+				<h1>&copy; 2011-12 goorume</h1>
+			</div><!-- /footer -->
+		</div>
+			
+	</body>
+</html>

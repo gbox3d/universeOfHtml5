@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> jquery </title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
+		<script>
+			
+			$(function() {
+				$('[data-role="header"]').text('header').css('background-color','red');
+				$('[data-role="content"]').text('content');
+			})
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+		<div data-role='header'></div>
+		<div data-role='content'></div>
+		
+	</body>
+</html>

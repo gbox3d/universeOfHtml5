@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> no tile </title>
+
+		<meta name="viewport" content="
+		 width=device-width;
+		 maximum-scale=1.0;
+		 initial-scale=1.0" />
+		
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<!-- 자바스크립트는 는 여기에... -->
+		<script>
+			$(function() {
+				
+				$("option:contains('html5'):eq(0)").attr("selected", "true");
+		
+		$("select").change(function() {
+			{
+				var singleValues = $(this).val();
+				$("#log").text("Single" + singleValues);
+				
+			}
+		});
+			});
+		</script>
+	</head>
+<!-- HTML 태그들은 여기에... -->
+	<body>
+		<div data-role='page' >
+			<div data-role='header'>
+				<h1> 안녕하세요 </h1>
+			</div>
+			<div data-role='content'>
+				<button> test </button>
+				<div>
+				<select id="single">
+					<option> berry </option>
+					<option> android </option>
+					<option> apple </option>
+					<option> html5 </option>
+					<option> bada </option>
+				</select>
+				<!--
+					<select>
+						<option> 아이폰 </option>
+						<option> 안드로이드 </option>
+						<option> HTML5 </option>
+					</select>
+					-->
+				</div>
+				<p></p>
+			</div>
+			<div data-role='footer' data-position='fixed'>
+				<h1> 정보영상진흥원 </h1>
+			</div>
+		</div>
+	</body>
+</html>

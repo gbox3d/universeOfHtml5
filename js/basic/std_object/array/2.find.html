@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> no tile </title>
+
+		<meta name="viewport" content="
+		 width=device-width;
+		 maximum-scale=1.0;
+		 initial-scale=1.0" />
+		 
+		<!-- css 는 여기에... -->
+		<style>
+		</style>
+		
+		<script src="jquery-1.7.2.min.js"></script>
+		<!-- 자바스크립트는 는 여기에... -->
+		<script>
+			var fruits = ["Apple","Banana", "Orange", "Apple", "Mango"];
+			
+			//왼쪽부터 찾는다.(찾아진 원소중에 첫번째 원소의 위치를 반환한)
+			var findindex =  fruits.indexOf("Apple");
+			
+			//찾아진 원소중에 마지막 원소의 위치를 반환한다.
+			var lastindex =  fruits.lastIndexOf("Apple");
+			
+			document.write(findindex + ':' + fruits[findindex] + '<br/>');
+			document.write(lastindex + ':' + fruits[findindex] + '<br/>');
+			
+			
+		</script>
+	</head>
+<!-- HTML 태그들은 여기에... -->
+	<body>
+			</body>
+</html>

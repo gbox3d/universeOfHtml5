@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>iOS Inspired jQuery Mobile Theme</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="stylesheet"  href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<link rel="stylesheet" href="ios_inspired/styles.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+			// all dialog buttons should close their parent dialog
+			$(".ui-dialog button").live("click", function() {
+				$("[data-role='dialog']").dialog("close");
+			});
+			$(document).on("mobileinit", function() {
+				$.mobile.defaultPageTransition = "slide";
+			});
+		</script>
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		<style>
+			#footerTabs {
+				background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
+			}
+		</style>
+
+	</head>
+	<body>
+
+		<div data-role="page">
+
+			<div data-role="header" data-position="fixed">
+				<h1>Page Header</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+
+				<p> Hello Ios Theme </p>
+
+			</div><!-- /ui-body wrapper -->
+		</div><!-- /page -->
+
+		
+
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../libs/async.js"></script>
+
+    <script>
+
+        /*
+        패러럴은 인자로 주어진 함수들이 동시에 실행되며 모두 끝날때 콜백이 일어난다.
+         */
+
+        async.parallel([
+            function(callback){
+                setTimeout(function(){
+                    callback(null, 'one');
+                }, 2000);
+            },
+            function(callback){
+                setTimeout(function(){
+                    callback(null, 'two');
+                }, 1000);
+            }
+        ],
+// optional callback
+                function(err, results){
+                    // the results array will equal ['one','two'] even though
+                    // the second function had a shorter timeout.
+
+                    console.log(results);
+                });
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

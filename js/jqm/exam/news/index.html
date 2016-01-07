@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>1</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script>
+			function redirectStarup() {
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+			}
+		/*
+		 * 이 두 라이브러리가 서로 각자 초기화가 완료된 후에야 각 라이브러리에서 제공하는 모든 기능을 충분히 활용할 수 있게 됩니다. 
+		 * 하지만 이 두 라이브러리의 초기화 과정에서 서로 충돌이 발생해서 둘중 한가지는 
+		 * 충분히 초기화 되기 이전에 페이지가 사용자에게 노출되어 에러를 발생하게 하는 원인이 됩니다.
+		 * 
+		 */
+		//순서에 주의한다. 제이쿼리 와 제이쿼리 모바일의 중간에 위치 시킨다.
+			$(document).bind('mobileinit',function(evt) {
+				
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				
+				
+				$.mobile.autoInitializePage = false;  
+				console.log('mobile init');
+				
+				//폰갭등의 하이브리드 프레임웍사용시 디바이스 초기화 콜백 선언을 여기서 해준다.
+				//...
+				
+				$(document).bind('pageinit', function(evt) {
+					//console.log('page init : ' + $(evt.target).attr('id') );
+					return true;
+				});
+				
+				
+				$(document).bind('pagechange', function(evt,data) {
+					//console.log('page from : ' + $(data.options.fromPage).attr('id') + ' pagr to :' + $(data.toPage).attr('id') );
+					
+				});
+				
+				$('#page1').bind('click',
+					function(evt) {
+						
+					}	
+				);
+				
+			} );
+		</script>
+		<!--
+			//$.mobile.autoInitializePage = true;(디폴) 이면   
+			//initializePage가 호출된다.
+			-->
+		
+		
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+				
+		<script>
+			$(document).ready(function() {
+				
+				console.log('ready..');
+				$.mobile.initializePage(); // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+				console.log('ready..after');
+
+			});
+		</script>
+
+	</head>
+	<body>
+		<div data-role="page" id='page1'>
+
+			<div data-role="header">
+				<h1>Page1 Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<ul data-role='listview'>
+					<li><a href='#page2'>item1</a></li>
+					<li><a href='#page2'>item2</a></li>
+					<li><a href='#page2'>item3</a></li>
+				</ul>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page2'>
+
+			<div data-role="header">
+				<a href="#" data-icon='back' data-rel='back'>back</a>
+				<h1>Page2 Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					Page content goes here.
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+	</body>
+</html>

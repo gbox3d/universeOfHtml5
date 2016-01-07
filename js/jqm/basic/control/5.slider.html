@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>phonegap jqm basic sample 0</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		
+		<script>
+			$(function() {
+				
+				//변경 이밴트
+				$(':jqmData(role="fieldcontain") input:eq(0)').bind('change',function(event) {
+					//$('#log')[0].innerHTML = $(this).val();
+				});
+				
+				
+				$(':jqmData(role="fieldcontain") input:eq(0)').bind('step', function(event) {
+				  console.log('step');
+				});
+				
+				//읽기
+				$(':jqmData(role="button"):eq(0)').bind('click', function(event) {
+				  $('#log')[0].innerHTML += '<br>' +$(':jqmData(role="fieldcontain") input:eq(0)').val();
+				});
+				
+				//쓰기
+				$(':jqmData(role="button"):eq(1)').bind('click', function(event) {
+				  $(':jqmData(role="fieldcontain") input:eq(0)').val(0).slider('refresh');
+				  
+				});
+			});
+		</script>
+		
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>Home</h1>
+			</div><!-- /header -->
+			
+			<div data-role='content'>
+				<div data-role='fieldcontain' >
+					
+					<input type="range" min='0' max="100" value="50" />
+					<a data-role='button'> 읽기 </a>
+					<a data-role='button'> 쓰기 </a>
+					
+				</div>
+				<p id='log'></p>
+			</div><!-- /content -->
+			
+			<div data-role='footer' data-position="fixed">
+				<h1>&copy; 2011-12 goorume</h1>
+			</div><!-- /footer -->
+		</div>
+			
+	</body>
+</html>

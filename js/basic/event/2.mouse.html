@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+    <title> mouse event sample </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+
+</head>
+
+<body>
+
+<div style="width: 320px; margin: auto;">
+    <div id='game_screen' style="
+    position: relative;
+    width : 320px;
+    height :240px;
+    ">
+
+        <svg class='helper-grid' style="
+        position: absolute;
+        height :240px;
+        border: 1px solid;
+        " >
+
+            <line x1="0" y1="120" x2="320" y2="120" style="stroke:#000000;"/>
+            <line x1="160" y1="0" x2="160" y2="240" style="stroke:#000000;"/>
+        </svg>
+
+        <div style="
+    width: 64px;
+    height: 64px;
+    background-color: red;
+    position: absolute;
+    -webkit-transform : translate(160px,120px);
+    " ></div>
+
+        <div style="
+    width: 64px;
+    height: 64px;
+    background-color: #0000ff;
+    position: absolute;
+    top : 100px;
+    left : 50px;
+    " ></div>
+
+
+    </div>
+
+    <div id='text-info' >
+        <p class="offset"></p>
+        <p class="layer"></p>
+        <p class="client"></p>
+        <p class="page"></p>
+        <p class="screen"></p>
+    </div>
+
+</div>
+
+<script>
+
+    var game_screen = document.querySelector('#game_screen');
+
+    //var text_info_offset = document.querySelector('#text-info .offset');
+
+    /*
+
+    offset 은 현재 커서가 올라와있는 앨리먼트 기준의 좌표
+
+    layer 는 이밴트를 받은 앨리먼트의 top,left 속성을 기준으로한  좌표(transform 좌표는 적용받지않는다)
+
+    page 는 웹브라우져 창기준으로 한좌표
+    page,client 는 같다.
+
+    screen 전체 화면을 기준을 한 좌표
+
+     */
+
+    game_screen.addEventListener('mousemove',function(evt) {
+
+        document.querySelector('#text-info .offset').innerText = 'offset : ' + + evt.offsetX + ',' + evt.offsetY;
+        document.querySelector('#text-info .layer').innerText = 'layer : ' + + evt.layerX + ',' + evt.layerY;
+        document.querySelector('#text-info .client').innerText = 'client : ' + + evt.clientX + ',' + evt.clientY;
+        document.querySelector('#text-info .page').innerText = 'page : ' + + evt.pageX + ',' + evt.pageY;
+        document.querySelector('#text-info .screen').innerText = 'screen : ' + + evt.screenX + ',' + evt.screenY;
+
+
+
+    });
+
+    game_screen.addEventListener('touchmove',function(evt) {
+
+        evt.preventDefault();
+
+        var touch = evt.touches[0];
+
+        document.querySelector('#text-info .offset').innerText = 'offset : ' + + touch.offsetX + ',' + touch.offsetY;
+        document.querySelector('#text-info .layer').innerText = 'layer : ' + + touch.layerX + ',' + touch.layerY;
+        document.querySelector('#text-info .page').innerText = 'page : ' + + touch.pageX + ',' + touch.pageY;
+        document.querySelector('#text-info .screen').innerText = 'screen : ' + + touch.screenX + ',' + touch.screenY;
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

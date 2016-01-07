@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>gameloop</title>
+        <script src='../libs/jquery-1.7.1.min.js'></script>
+        <script>
+
+            //var g_lastTick;
+            window.requestAnimFrame = (function(callback) {
+                return window.requestAnimationFrame ||
+                        window.webkitRequestAnimationFrame ||
+                        window.mozRequestAnimationFrame ||
+                        window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function(callback) {
+                            //60 fps.
+                            window.setTimeout(callback, 1000 / 60);
+                        };
+
+            })();
+
+            function gameloop(lastTick) {
+
+                var current_tick = (new Date()).getTime();
+                var fdelta_tick = (current_tick - lastTick) / 1000;
+                //g_lastTick = current_tick;
+
+                $('p').text("delta tick : " + fdelta_tick);
+
+                requestAnimFrame(function() {
+                    gameloop(current_tick);
+                });
+
+            }
+
+            $(document).ready(
+                    function() {
+
+                        gameloop((new Date()).getTime());
+                    }
+            );
+
+
+        </script>
+    </head>
+    <body>
+        <p></p>
+    </body>
+</html>

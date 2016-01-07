@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>가리기 보이기 예제 </title>
+		<style>
+			#container {
+				position: absolute;
+				margin: 0;
+			}
+			
+		</style>
+		
+		<script src="../lib/jquery-1.4.2.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#test').click(function(e) {
+					//console.log('click ' + $(this).css());
+					$('#back_btn').css('visibility', 'visible')
+
+				});
+				$('#back_btn').click(function(e) {
+					$("#container").animate({"left": "-=250px"}, 500);
+				});
+			});
+
+		</script>
+	</head>
+	<body>
+		<div id ='container'>
+			<img id='back_btn' src='../step4/back.png' style="visibility: hidden;">
+			<div id='test' style="background: rgba(255,255,0,128); width: 150px; height: 150px; position: absolute; left: 50px;top: 100px;"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		
+		<title> none </title>
+		
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<style></style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			//현재부터 30일전 날짜 구하기
+			
+			var loadDt = new Date(); //현재 날짜 및 시간   //현재시간 기준 계산
+			
+			var bf30day = new Date(loadDt.getTime() - (30 * 1000 * 60 * 60 * 24) );
+			
+			document.write(bf30day); //30일전
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+</html>

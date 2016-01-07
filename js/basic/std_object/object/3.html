@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title></title>
+
+</head>
+<body>
+
+
+
+<div id="log"></div>
+
+<script>
+
+    /*
+    객체 내용 삭제하기
+     */
+
+    var obj = {
+        name : '윤아',
+        group : '소녀시대',
+        song : '없음'
+    }
+
+    //song 항목 삭제하기
+    delete (obj['song']);
+
+    //객체 출력하기
+    var ele = document.createElement('p');
+    var parent = document.getElementById('log');
+
+    ele.innerText = JSON.stringify(obj);
+
+    parent.appendChild(ele);
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

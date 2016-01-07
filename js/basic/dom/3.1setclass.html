@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>class control sample</title>
+
+    <style>
+
+        .hello {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .border {
+            border: 3px solid blue;
+            width: 50px;
+            height: 50px;
+        }
+
+        .border-tog {
+            border: 5px solid blue;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<div id='test' ></div>
+<div id='test2' ></div>
+
+<script>
+
+    /*
+
+    클래스 다루기 예제
+
+     */
+    //참고
+    //http://stackoverflow.com/questions/195951/change-an-elements-css-class-with-javascript
+
+    var element = document.querySelector('#test');
+
+    element.addEventListener('click',function() {
+
+        //클래스추가하기
+        //element.setAttribute('class', element.getAttribute('class')+ ' border');
+        //html5 에 새롭게 추가된 기능
+        element.classList.add('border');
+        element.classList.remove('hello');
+    },false);
+
+    //element.setAttribute('class','hello');
+    element.classList.add('hello');
+
+
+    var element2 = document.querySelector('#test2');
+    element2.addEventListener('click',function() {
+
+        element2.classList.toggle('border-tog');
+
+    },false);
+    element2.classList.add('hello');
+
+
+</script>
+
+</body>
+</html>

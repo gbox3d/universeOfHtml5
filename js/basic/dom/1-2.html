@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+
+
+</head>
+<body>
+
+<button id ='btn_test'> test </button>
+
+<div>
+    <input id='log_test'/>
+</div>
+
+<p id="img_res_test" style="text-align: center; clear: none; float: none;">
+    <span class="imageblock" style="display:inline-block;width:128px;;height:auto">
+        <img src="http://cfile7.uf.tistory.com/image/02464135518606C3206E9F" height="192" width="128">
+    </span>
+</p>
+
+
+<script>
+
+    var testbtn = document.querySelector('#btn_test');
+    var testimg = document.querySelector('#img_res_test img');
+
+    console.log(testimg);
+
+    testbtn.addEventListener('click',function() {
+        console.log('hello html5');
+        document.querySelector('#log_test').setAttribute('value',testimg.getAttribute('src'));
+
+    },false);
+
+</script>
+
+
+</body>
+</html>

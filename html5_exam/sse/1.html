@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title> none </title>
+
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+        <style></style>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script>
+            $(function() {
+
+                var source = null;
+
+                $('button:eq(0)').bind('click', function() {
+                    if (typeof (EventSource) !== "undefined") {
+                        source = new EventSource("http://sf2009.web-bi.net/work/html5/sse.php");
+                        $('#result').html($('#result').html() + 'start' + '</br>');
+
+                        $(source).bind('message', function(event) {
+                            console.log(event);
+                            document.getElementById("result").innerHTML += event.originalEvent.data + "<br />";
+                        });
+
+                        /*source.onmessage = function(event) {
+                         document.getElementById("result").innerHTML += event.data + "<br />";
+                         };*/
+
+
+                    } else {
+                        document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+                    }
+
+                });
+
+                $('button:eq(1)').bind('click', function() {
+                    source.close();
+                    $('#result').html($('#result').html() + 'stop' + '</br>');
+                });
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <button>start</button><button>stop</button>
+        <div id='result' >
+
+        </div>
+    </body>
+</html>

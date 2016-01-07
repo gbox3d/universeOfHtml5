@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/javascript">
+
+    //    txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+    //    txt+= "<p>Browser Name: " + navigator.appName + "</p>";
+    //    txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
+    //    txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+    //    txt+= "<p>Platform: " + navigator.platform + "</p>";
+    //    txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
+
+    //var index = navigator.userAgent.indexOf('Mobile');
+
+    var strMsg = 'pc';
+    var deviceStr = 'desktop';
+    if( navigator.userAgent.indexOf('Mobile') >= 0 ) {
+        strMsg = 'mobile';
+
+        if( navigator.userAgent.indexOf('iPhone') >= 0 ) {
+            deviceStr = 'iPhone';
+        }
+        else {
+            deviceStr = 'Android';
+
+        }
+
+    }
+
+
+
+
+    document.getElementById("example").innerHTML= strMsg + ',' + deviceStr;
+
+</script>
+
+
+</body>
+</html>

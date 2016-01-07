@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+    직접 오디오 컨택스트를 만들고 싸운드 파일을 로딩해서 디코딩해서 연주 하는 예제 -->
+
+    <title> audio context </title>
+
+    <script>
+        var dogBarkingBuffer = null; //로딩된 싸운드 버퍼
+        var context;
+
+        function loadDogSound(url) {
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.responseType = 'arraybuffer';
+
+            // Decode asynchronously
+            request.onload = function() {
+
+                context.decodeAudioData(request.response, function(buffer) {//로딩 성공했으면
+                    dogBarkingBuffer = buffer;
+                    document.getElementById('log').innerText = 'load success';
+                    //ios 의 경우는 자동연주가 안된다.
+                    //오직 클릭 이벤트를 통해서만 연주가 가능하다.
+                    playSound(dogBarkingBuffer);
+
+                }, function() {
+                    document.getElementById('log').innerText = 'load failed';
+                    //$('#log').html($('#log').text() + '<br/>' + 'failed load :' + url);
+                });
+            }
+
+            request.onerror = function() {
+                alert('BufferLoader: XHR error');
+            }
+
+            request.send();	//요청(접촉) 시작
+        }
+
+        function playSound(buffer) {
+            var source = context.createBufferSource();		// creates a sound source
+            source.buffer = buffer;			// tell the source which sound to play
+            source.connect(context.destination);		// connect the source to the context's destination (the speakers)
+            source.start(0);		// play the source now(0 이면 지체없이 바로 연주함,)
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+<!--<button id='play-btn'>-->
+    <!--play-->
+<!--</button>-->
+
+<p id ='log'></p>
+
+<script>
+    try {
+        context = new AudioContext();
+        document.getElementById('log').innerText = 'this browser support webkitAudioContext ';
+
+        //$('#log').html('this browser support webkitAudioContext ');
+        //loadDogSound('http://1.214.222.77:8080/ohmtide/toygen/it1/res/sound.mp3');
+
+//        loadDogSound('http://sf2009.web-bi.net/sample/sounds/techno.wav');//'./sounds/techno.wav');
+        loadDogSound('./sounds/techno.wav');
+
+    } catch(e) {
+        alert('Web Audio API is not supported in this browser');
+        //$('#log').html('this browser do not support webkitAudioContext ');
+    }
+</script>
+
+</body>
+</html>

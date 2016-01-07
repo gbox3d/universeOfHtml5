@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>bind sample</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+        <script src="../model/6.js"></script>
+
+        <script>
+            $(function() {
+                Person = Backbone.Model.extend({
+                    mytest : 'hello',
+                    initialize: function(data) {
+
+                        _.bindAll(this,'bindTest');
+
+                        console.log('welcome backbone');
+                        console.log('hello ' + data.name);
+                        console.log('u are ' + this.get('age') + ' years old');
+                        this.test = 666;
+                        
+                    },
+                    default: {
+                        name: 'jeny',
+                        age: 16
+                    },
+                    bindTest: function() {
+                        console.log('1 :' + this.test);
+                        console.log('1 :' + this.get('age'));
+
+                    },
+                    bindTest2: function() {
+                        console.log( '2 :' + this.test);
+                        console.log('2 :' + this.get('age'));
+
+                    }
+                });
+                
+                var person = new Person({name: 'tom', age: 27});
+
+                //해당 함수가 콜백될때만 해당된다. 직접호출시에는 바인드와 해당사항이없다.
+                setTimeout(person.bindTest,1);
+                setTimeout(person.bindTest2,1);
+
+
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

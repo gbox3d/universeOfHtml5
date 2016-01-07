@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> no tile </title>
+
+		<meta name="viewport" content="
+		 width=device-width;
+		 maximum-scale=1.0;
+		 initial-scale=1.0" />
+		 
+		<!-- css 는 여기에... -->
+		<style>
+		</style>
+		
+		<script src="jquery-1.7.2.min.js"></script>
+		<!-- 자바스크립트는 는 여기에... -->
+		<script>
+			$(document).ready(function() {
+				$('button').bind('click',function() {
+					
+					var myrand = Math.random();
+					
+					//$('div').text(  myrand * 100  );
+					$('div').text(  Math.round(myrand * 100) - 50 );
+				});
+				
+					
+			});
+		</script>
+	</head>
+<!-- HTML 태그들은 여기에... -->
+	<body>
+		<button> make random </button>
+		<div>hello html5</div>
+	</body>
+</html>

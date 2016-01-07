@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    var buffer = new ArrayBuffer(10);
+
+    var x = new DataView(buffer, 0);
+
+    /*buffer[0]=(0x80)
+    buffer[1]=(0x00)
+    buffer[2]=(0x04)
+    buffer[3]=(0x43)
+    buffer[4]=(0x75)
+    buffer[5]=(0x48)
+    buffer[6]=(0x40)
+    buffer[7]=(0x00)
+    buffer[8]=(0x18)
+    buffer[9]=(0x81)
+    */
+    x.setInt8(0, 0x80);
+    x.setInt8(1, 0x00);//1024
+    x.setInt8(2, 0x04);
+    x.setInt8(3, 0x43); //3.14
+    x.setInt8(4, 0x75);
+    x.setInt8(5, 0x48);
+    x.setInt8(6, 0x40);
+    x.setInt8(7, 0x00);
+    x.setInt8(8, 0x18);
+    x.setInt8(9, 0x81);
+
+    console.log(x.getInt16(1,true));
+
+
+    console.log(x.getFloat32(
+            3,
+            true //little endian
+    ));
+
+</script>
+
+</body>
+</html>

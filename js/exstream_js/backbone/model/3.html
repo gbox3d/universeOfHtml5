@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hello-backbonejs</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+        <script>
+            $(function() {
+
+                Person = Backbone.Model.extend({
+                    initialize: function() {
+                        console.log('wellcome' + this.get('name'));
+                    },
+                    defaults: {
+                        name: 'lsz',
+                        age: 42,
+                        children: []
+                    },
+                    adopt: function(newchildName) {
+                        var child_array = this.get('children');
+                        child_array.push(newchildName);
+                    }
+
+                });
+
+                var person = new Person();
+                person.set({name: 'tommy'});
+                person.adopt('piter');
+                console.log(person.get('name'));
+                console.log(person.get('children'));
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

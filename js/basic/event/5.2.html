@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <title></title>
+</head>
+<body>
+
+<div id="test1" style="width: 200px;height: 200px;background-color: #ff0000" >
+    <div id="green-box" style="position: absolute; width: 32px;height: 32px;background-color: green;" ></div>
+</div>
+
+
+<div id="test2" style="width: 200px;height: 200px;border: 1px solid;" >
+
+</div>
+
+<div id="text-log" ></div>
+
+
+
+<script>
+
+    var target_node = document.getElementById('test1');
+    var green_node = document.getElementById('green-box');
+
+    target_node.addEventListener('touchstart',function(e) {
+
+        var touch = e.touches[0];
+
+        console.log(e);
+
+        green_node.style.webkitTransform = 'translate(' + touch.pageX + 'px,'+ touch.pageY + 'px)';
+
+        document.getElementById('text-log').innerText = 'translate(' + touch.pageX + 'px,'+ touch.pageY + 'px)';
+
+        alert('touch');
+
+
+    });
+
+
+    document.getElementById('test2').addEventListener('touchstart',function(e) {
+
+
+        try {
+            var targetElement = target_node;
+            console.log(targetElement);
+            var evt = document.createEvent('TouchEvent');
+            evt.initTouchEvent('touchstart', true, true);
+            //evt.initUIEvent('touchstart', true, true);
+
+            evt.view = window;
+            evt.altKey = false;
+            evt.ctrlKey = false;
+            evt.shiftKey = false;
+            evt.metaKey = false;
+
+            targetElement.dispatchEvent(evt);
+        } catch (except){
+            alert(except);
+        }
+
+
+    });
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

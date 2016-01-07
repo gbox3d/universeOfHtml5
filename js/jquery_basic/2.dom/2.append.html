@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Dynamic append demo</title>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+
+
+	$(document).ready(function() {
+		var index = 0;
+		$('#test1').click(function() {
+			$('<li></li>').html('append demo' + index).appendTo($($('ul')[0]));
+			index++;
+		});
+		$('#test3').click(function() {
+			$('<li></li>').html('append demo' + index).appendTo('ul');
+			index++;
+		});
+		
+		(function() {
+			var index = 0;
+			$('#test2').click(function() {
+				$('#list1').append($('<li></li>').html('append demo' + index));
+				index++;
+			});
+		})();
+		
+	});
+</script>
+</head>
+<body>
+	<div id='layout'>
+		<button id='test1' style='background:blue; color:white;' >click me test1</button>
+		<button id='test2' style='background:red; color:yellow;''>click me test2</button>
+		<button id='test3' style='background:red; color:yellow;''>click me test3</button>
+		
+		
+		<ul></ul>
+
+		<ul id='list1' class="cls1">
+			<li>1</li>
+		</ul>
+
+	</div>
+
+
+
+</body>
+</html>

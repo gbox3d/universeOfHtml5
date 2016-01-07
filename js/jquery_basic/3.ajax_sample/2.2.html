@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+    <title>jquery for Ajax</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $('button').click(function() {
+                $('#log').append($('<p></p>').text('connecting....'));
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'text',
+                    url: 'http://www.todayhumor.co.kr/',
+                    success: function(data, textStatus, jqXHR) {
+
+                        var temp = $(data).find('tr td table tbody tr td a');
+
+                        $.each(temp,function(i,item) {
+                            console.log($(item).attr('href'));
+                            console.log($(item).text());
+                        });
+
+                        //console.log(temp);
+
+                    },
+                    complete: function(jqXHR, textStatus) {
+                        console.log('complete');
+                        $('#log').append($('<p></p>').text('complete : ' + textStatus));
+
+                    },
+                    error: function(qXHR, textStatus, errorThrown) {
+                        console.log('error');
+                        $('#log').append($('<p></p>').text('error :' + textStatus ));
+
+                    }
+                });
+            })
+
+        });
+
+    </script>
+
+</head>
+<body>
+<button>download</button>
+<div id='log'></div>
+<!--<textarea id='textvw' style="height: 400px; width: 100%; "></textarea>-->
+
+
+</body>
+</html>

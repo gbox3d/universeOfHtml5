@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> jquery </title>
+		
+<!-- 		<script src="http://code.jquery.com/jquery-latest.js"></script> -->
+		<script src="../libs/URI/URI.min.js"></script>
+		<script>
+		
+			var result = URI.parseQuery("?foo=bar&hello=world&hello=mars&bam=&yup");
+			
+			console.log(result);
+
+
+            result = URI.parse("http://example.org:8080/foo.html?foo=bar&hello=world&hello=mars&bam=&yup");
+
+            console.log(result);
+
+            result = URI.parseHost("http://example.org:8080/foo.html?foo=bar&hello=world&hello=mars&bam=&yup");
+
+            console.log(result);
+			
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+</html>

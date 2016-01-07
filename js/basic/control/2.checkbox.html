@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div class="group" >
+
+    <div><input type="checkbox" >item1</div>
+    <div><input type="checkbox" >item2</div>
+
+</div>
+
+<button id="btn-get" >get</button>
+<button id="btn-set" >set</button>
+
+<script>
+
+    document.getElementById('btn-get').addEventListener('click',function(e) {
+
+        var elements = document.querySelectorAll('.group input');
+
+        for(var i=0;i<elements.length;i++) {
+
+            var child = elements[i];
+
+            console.log( i + '/' + child.checked );
+
+        }
+    });
+
+    document.getElementById('btn-set').addEventListener('click',function(e) {
+
+        var elements = document.querySelectorAll('.group input');
+
+        elements[0].checked = true;
+        elements[1].checked = true;
+
+
+    });
+
+</script>
+
+
+</body>
+</html>

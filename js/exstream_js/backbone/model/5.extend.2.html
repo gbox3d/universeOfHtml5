@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> super calling 1 </title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+        <script>
+            $(function() {
+                Person = Backbone.Model.extend({
+                    initialize: function() {
+                        console.log('init person');
+                        this.set({
+                            name: 'tommy',
+                            age: 26,
+                            sex: 'male'
+                        });
+                    }
+//                    defaults: {
+//                        name: 'jeny',
+//                        age: 16
+//                    }
+                });
+                Soldier = Person.extend({
+                    initialize: function() {
+
+                        Person.prototype.initialize.call(this);
+
+                        this.set({
+                            level : 'segent'
+                        });
+
+                        console.log('init soldier');
+
+                    }
+//                    ,
+//                    defaults: {
+//                        level: 'private'
+//                    }
+                });
+                var soldier = new Soldier();
+                var person = new Person();
+                console.log(soldier);
+                console.log(person);
+                $('body').append($('<p></p>').text(JSON.stringify(soldier)));
+                //$('body').append($('<p></p>').text(soldier.get('name'))); //변수못얻어옴
+
+            });
+
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

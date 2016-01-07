@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+	window.onload = function() {
+		var uri = 'http://test.co.kr?test=한"글"입니다.&test=hell"o" hi';
+		
+		var out ='';
+		
+		out += 'escape : ' + escape(uri) + '</br>';
+		out += 'encodeURI : ' + encodeURI(uri) + '</br>';
+		out += 'encodeURIComponent : ' + encodeURIComponent(uri) + '</br>';
+		
+		var log = document.getElementById('log');
+		log.innerHTML = out;
+	}
+
+</script>
+
+</head>
+<body>
+	<div id='log'></div>
+</body>
+</html>

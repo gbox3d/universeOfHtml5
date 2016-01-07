@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>sprite frame animation</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="../../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css"/>
+
+        <script src="../../lib/std-jqm/js/jquery.js"></script>
+
+        <script src="../../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+
+        <style>
+
+            .gbox3d-2dgv-fullscreen {
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                top : 0px;
+                bottom: 0px;
+                background-color : #9966FF;
+
+            }
+
+            .sprite-box {
+                position: absolute;
+                width: 32px;
+                height:  48px;
+                background-image: url(http://ukga.web-bi.net/files/rpg_pack/Graphics/Characters/006-Fighter06.png);
+                -webkit-transform : translate(0px,200px);
+                -webkit-transition: -webkit-transform 2s; 
+                
+            }    
+
+        </style>
+
+        <script>
+            $(function() {
+                $("#btn-right").on("vmousedown",function() {
+                    console.log($('#fighter').css("-webkit-transform"));
+                   $('#fighter').css("-webkit-transform","translate(100px,200px)"); 
+                });
+                $("#btn-left").on("vmousedown",function() {
+                    console.log($('#fighter').css("-webkit-transform"));
+                   $('#fighter').css("-webkit-transform","translate(0px,200px)"); 
+                   
+                   
+                   
+                   
+                   
+                });
+                
+            });
+            
+        </script>
+
+
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="header">
+                <h1>Home</h1>
+            </div><!-- /header -->
+
+            <div data-role='content'>
+                <div class="gbox3d-2dgv-fullscreen" style="bottom:100px" >
+                    
+                
+                    <div id='fighter' class="sprite-box"></div>
+                    
+                    <button id="btn-right">right</button>
+                    <button id="btn-left">left</button>
+                    
+                </div>
+                
+
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed">
+                <h1>&copy; 2011-12 goorume</h1>
+            </div><!-- /footer -->
+        </div>
+
+    </body>
+</html>

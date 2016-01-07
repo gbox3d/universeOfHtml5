@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>스크롤이밴트 와 포지션얻기</title>
+
+    <script src="../libs/jquery-1.7.1.min.js"></script>
+
+    <script>
+
+
+        $(function() {
+
+
+            $('#test_window').on('scroll',
+                    function(evt) {
+
+                        //console.log('scrol');
+                        console.log(evt.currentTarget.scrollLeft + ',' + evt.currentTarget.scrollTop);
+
+                        $('#text_log').text(evt.currentTarget.scrollLeft + ',' + evt.currentTarget.scrollTop);
+
+                    }
+            );
+        });
+
+
+
+
+    </script>
+
+</head>
+<body>
+
+<div
+        id="test_window"
+        style="
+
+background-color: #ff0000;
+width: 200px;
+height: 200px;
+overflow: auto;
+
+"
+        >
+    <div style="background-color: green;
+    width: 250px;
+    height: 50px" ></div>
+    <div style="background-color: blue;
+    width: 50px;
+    height: 150px" ></div>
+    <div style="background-color: #ffff00;
+    width: 50px;
+    height: 150px" ></div>
+
+
+</div>
+
+<p id='text_log' >...</p>
+
+</body>
+</html>

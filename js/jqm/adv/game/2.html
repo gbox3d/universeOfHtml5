@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>sprite frame animation</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="../../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css"/>
+
+        <script src="../../lib/std-jqm/js/jquery.js"></script>
+
+        <script src="../../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+
+        <style>
+
+            .gbox3d-2dgv-fullscreen {
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                top : 0px;
+                bottom: 0px;
+                background-color : #9966FF;
+
+            }
+
+            .sprite-box {
+                position: absolute;
+                width: 32px;
+                height:  48px;
+                background-image: url(http://ukga.web-bi.net/files/rpg_pack/Graphics/Characters/006-Fighter06.png);
+            }    
+
+        </style>
+
+        <script>
+            var spritedata = {
+                image: "http://ukga.web-bi.net/files/rpg_pack/Graphics/Characters/006-Fighter06.png",
+                batchnode: [
+                    {
+                        name: "walk_fornt_01",
+                        rect: [0, 0, 32, 48]
+                    },
+                    {
+                        name: "walk_fornt_02",
+                        rect: [32, 0, 32, 48]
+                    },
+                    {
+                        name: "walk_fornt_03",
+                        rect: [64, 0, 32, 48]
+                    },
+                    {
+                        name: "walk_fornt_04",
+                        rect: [96, 0, 32, 48]
+                    }
+                ],
+                sequence: [
+                    {
+                        name: "walk_fornt",
+                        delay: 0.4,
+                        node: ["walk_fornt_01", "walk_fornt_02", "walk_fornt_03", "walk_fornt_04"]
+
+                    }
+                ]
+            }
+            $(function() {
+                var frame_index = 0;
+                window.setInterval(function() {
+                    frame_index++;
+                    frame_index %= spritedata.batchnode.length;
+                    var css_val ="-" + spritedata.batchnode[frame_index].rect[0]+"px " + "-" +spritedata.batchnode[frame_index].rect[1]+"px";
+                    console.log(css_val);
+                    $('#fighter').css('background-position', css_val );
+                },400);
+                
+            });
+        </script>
+
+
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="header">
+                <h1>Home</h1>
+            </div><!-- /header -->
+
+            <div data-role='content'>
+                <div class="gbox3d-2dgv-fullscreen" >
+
+                    <div id='fighter' class="sprite-box"></div>
+                    
+                    
+
+                </div>
+
+
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed">
+                <h1>&copy; 2011-12 goorume</h1>
+            </div><!-- /footer -->
+        </div>
+
+    </body>
+</html>

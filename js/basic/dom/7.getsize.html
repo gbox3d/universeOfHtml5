@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>실제넓이 높이 구하기</title>
+</head>
+<body>
+
+<div id="test" style="background-color: #ff0000;height: 100px;">
+
+</div>
+
+<script>
+
+//    document.addEventListener('')
+
+var node = document.getElementById('test');
+
+    window.addEventListener( 'resize', function() {
+
+
+        console.log(node.offsetWidth);
+
+        node.innerText = node.offsetWidth + ',' + node.offsetHeight;
+
+    }, false );
+
+node.innerText = node.offsetWidth + ',' + node.offsetHeight;
+
+</script>
+
+</body>
+</html>

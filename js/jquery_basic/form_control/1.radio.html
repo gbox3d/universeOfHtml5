@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		$("#item-1 input").on('click',function(evt) {
+
+            console.log($("#item-1 input:checked").val());
+            $('#text_log').text($("#item-1 input:checked").val());
+
+		});
+	});
+</script>
+
+</head>
+<body>
+
+<div id='item-1'>
+    <input type="radio" name="fruit" value="orange" id="orange">
+    <label for="orange">orange</label>
+    <input type="radio" name="fruit" value="apple" id="apple">
+    <label for="apple">apple</label>
+    <input type="radio" name="fruit" value="banana" id="banana">
+    <label for="banana">banana</label>
+</div>
+
+<p id='text_log' ></p>
+
+</body>
+</html>

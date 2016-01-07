@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			span, strong, p {
+				padding: 8px;
+				display: block;
+				border: 1px solid #999;
+				background: #fff;
+			}
+			p.over { background: #ccc; }
+			span.over { background: #0cc; }
+			strong.over { background: #c0c; }
+		</style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$("body").bind('click',function(event) {
+					$("#log").html("clicked: " + event.target.nodeName);
+					$(event.target).toggleClass("over");
+					
+				});
+				/*
+				$("body").bind('mouseenter mouseleave',function (){
+					$(event.target).toggleClass("over");
+				});
+				*/
+
+			});
+
+		</script>
+
+	</head>
+	<body>
+
+		
+		<div>
+			<p>
+				<strong><span>click</span></strong>
+			</p>
+		</div>
+		<div id="log"></div>
+
+	</body>
+</html>

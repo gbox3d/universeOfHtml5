@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div><input id="range-test" type="range" min="0" max="100" ></div>
+
+<button id="btn-set" >set</button>
+
+<div id="log" >change event : <span></span></div>
+<div id="continue-log" > input event : <span></span> </div>
+<script>
+
+    var log_element = document.querySelector('#log span');
+
+    /*
+    방향키보드를 누르거나 마우스 드래그가 끝나면 발생한다.
+    */
+    document.getElementById('range-test').addEventListener('change',function(e) {
+
+        log_element.innerText = this.value;
+
+    });
+
+    /*
+    input 이밴트는 마우스가 드래그되는 동안에도 계속 이밴트를 발생시킨다.
+     */
+
+    document.getElementById('range-test').addEventListener('input',function(e) {
+
+        document.querySelector('#continue-log span').innerText = this.value;
+
+    });
+
+    document.getElementById('btn-set').addEventListener('click',function(e) {
+
+        document.getElementById('range-test').value = 50;
+
+        var event = document.createEvent('HTMLEvents');
+        event.initEvent('change', true, true);
+
+        document.getElementById('range-test').dispatchEvent(event);
+
+
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

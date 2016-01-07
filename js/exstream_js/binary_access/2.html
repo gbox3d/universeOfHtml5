@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title> string to byte </title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			function string2Bin(str) {
+				var result = [];
+				for(var i = 0; i < str.length; i++) {
+					result.push(str.charCodeAt(i).toString(16));
+				}
+				return result;
+			}
+			
+			
+			function string2ByteArray(str) {
+				var result = [];
+				for(var i = 0; i < str.length; i++) {
+					
+					var d = str.charCodeAt(i);
+					
+					var low = d & 0x00ff;
+					var high = (d & 0xff00) >> 8;
+					
+					result.push(high); //빅앤디언 
+					result.push(low);
+				}
+				return result;
+			}
+			
+			function byteArray2String (bary) {
+				var result = [];
+				for(var i = 0;i< bary.length;i+=2) {
+					var h = (bary[i] << 8);
+					var d =  h + bary[i+1];
+					result.push(d);
+				}
+				
+				return String.fromCharCode.apply(String, result);
+				
+				//return result;
+			}
+
+
+			$(document).ready(function() {
+				$('button').bind('click', function(e) {
+					var strMsg = $('#msg').val();
+					
+					console.log(string2Bin(strMsg).toString());
+					
+					console.log(string2ByteArray(strMsg).toString());
+					console.log(byteArray2String(string2ByteArray(strMsg)) );
+
+				});
+			});
+
+		</script>
+	</head>
+	<body>
+		<input id='msg' value="사랑해~" />
+		<button></button>
+	</body>
+</html>

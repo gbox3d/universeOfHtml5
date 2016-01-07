@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>message </title>
+		
+		<script>
+			window.onload = function() {
+
+				document.getElementById('send_btn').onclick = function() {
+
+					var message = document.getElementById('message').value;
+					var location = window.location;
+					var protocol = location.protocol;
+					var host = location.host;
+					//document.getElementById('iframe').contentWindow.postMessage(message, protocol + '//' + host);
+					document.getElementById('iframe').contentWindow.postMessage(message, '*');
+				}
+			}
+		</script>
+		
+		</head>
+	<body>
+		<iframe id='iframe' src='2_child.html' height="300" width="320">
+			
+		</iframe><br>
+		Message to Send : <input id='message' text='text' >
+		<input type="button" id='send_btn' value="Send">
+	</body>
+</html>

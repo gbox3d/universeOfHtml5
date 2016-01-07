@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> jquery </title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="../js/jquery.knob.js"></script>
+        
+		<script>
+// 
+// * min : min value | default=0.
+// * max : max value | default=100.
+// * angleOffset : starting angle in degrees | default=0. 시작 각도 기본은 0도(윗방향)
+// * angleArc : arc size in degrees | default=360.
+// * stopper : stop at min & max on keydown/mousewheel | default=true.
+// * readOnly : disable input and events | default=false.
+
+			$(function() {
+				 $("input:eq(0)").knob({
+				 	min : -50,
+				 	max : 50,
+				 	angleOffset : 45,
+				 	angleArc :  180
+				 	
+				 });
+				 
+				 $("input:eq(1)").knob({
+				 	min : -50,
+				 	max : 50,
+				 	readOnly : true
+				 });	
+				 
+				
+			});
+					
+		</script>
+		
+	</head>
+
+	<body>
+		<p>angleArc : 180, angleOffset : 45</p>
+		<input type="text" value="0" >
+		
+		<p>readOnly:true</p>
+		<input type="text" value="18" >
+		
+	</body>
+</html>

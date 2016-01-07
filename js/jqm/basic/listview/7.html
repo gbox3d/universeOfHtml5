@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>3.listview</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script>
+		
+			$(document).bind('mobileinit', function(evt) {
+
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+
+				//$.mobile 관련 전역변수 초기화는 여기서한다.
+				$.mobile.autoInitializePage = false;
+				console.log('mobile init');
+
+			});
+
+		</script>
+		
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		
+		
+		
+		<script>
+			$(document).ready(function() {
+				
+				$.mobile.initializePage();
+				
+				console.log($('div :jqmData(role="content") p'));
+				
+				$('div :jqmData(role="content") p').bind('click', function(event) {				 	
+				//이면에서 초기화 하기
+				  $('div :jqmData(role="content") ul').listview();
+				});
+				
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<div data-role="page">
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					Page content goes here.
+				</p>
+				<ul>
+					<li>item1</li>
+					<li><a href='#'>item2</a></li>
+					<li data-role='list-divider'>divider</li>
+					<li>item3</li>
+				</ul>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+	</body>
+</html>

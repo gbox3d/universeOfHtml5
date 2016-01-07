@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>1</title>
+		<meta name="viewport" content="width=device-width initial-scale=1.0" />
+		
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<!--
+			초기화는 이곳에서 해야함..mobileinit, pageinit
+			-->
+		<script>
+		
+			$(document).bind('mobileinit', function(evt) {
+
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+
+				//$.mobile 관련 전역변수 초기화는 여기서한다.
+				
+				$.mobile.autoInitializePage = false;
+				
+				$.mobile.page.prototype.options.addBackBtn      = true;
+				
+				console.log('mobile init');
+				
+				
+
+			});
+	
+		</script>	
+		
+		
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				console.log('document ready..');
+				console.log('before jqm pageinit');
+				
+				//페이지 관련 이밴트들은 여기서 바인딩시켜줘야한다.
+				//$(':jqmData(role="content")').text('hello jqm!');
+				
+				$.mobile.initializePage();
+				// 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+
+				// 이 시점부터 첫 페이지가 보이기 시작.....
+				console.log('after jqm pageinit');
+				//document 이벤트관련 초기화는 여기서 한다.
+				
+				var pages = $(':jqmData(role="page")');
+				
+				var pagelist = $(':jqmData(role="listview"):eq(0)');
+				
+				$.each(pages, function(index, page) {
+					if($(page).attr('id') != undefined) {
+						
+						$('<a></a>').text($(page).attr('id')).attr('href','#'+$(page).attr('id') ).appendTo($('<li></li>').appendTo(pagelist));
+						
+					}
+					//console.log($(page).attr('id'));
+					//1002-438-472029
+				  
+				});
+				
+				pagelist.listview('refresh');
+				
+				
+				
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div data-role="page">
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<ul data-role='listview'>
+					
+				</ul>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page1' data-add-back-btn='true' >
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm! 1
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page2'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!2
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page3'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!3
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		<div data-role="page" id='page4'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!4
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		<div data-role="page" id='page5'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!5
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page6'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!6
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page7'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!7
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page8'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!8
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page9'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!9
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page10'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!10
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page11'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!11
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page12'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!12
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page13'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!13
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page14'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!14
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page15'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!15
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page16'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!16
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page17'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!17
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page18'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!18
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page19'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!19
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page20'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!20
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page21'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!21
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page22'>
+
+			<div data-role="header">
+				<h1>Page Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					hello jqm!22
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		
+	</body>
+</html>

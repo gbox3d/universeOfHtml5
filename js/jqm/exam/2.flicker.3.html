@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- 
+                제이쿼리 모바일용 교육용 코스웨어 샘플 프레임웍
+        작성자 : 도플광어 (twitter.com/gbox3d)
+        버전 : 1.0b
+        
+        -구성요소 정리-
+        jqm 1.1.1 (http://jquerymobile.com/blog/2012/07/12/jqm-1-1-1/)
+        iscroll 4.1 (http://cubiq.org/iscroll-4)
+        ios theme plugin (http://taitems.github.com/iOS-Inspired-jQuery-Mobile-Theme/)
+        
+        저작권 : jqm 과 iscoll 의 라이센스 정책을 상속받음
+        -->
+
+        <title>iqm simple sample</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css" />
+
+        <script src="../lib/std-jqm/js/jquery.js"></script>
+
+        <script>
+
+            $(document).bind('mobileinit', function(evt) {
+                //$.mobile 관련 전역변수 초기화는 여기서한다.
+                $.mobile.autoInitializePage = false;
+                console.log('mobile init');
+
+            });
+
+        </script>
+
+        <script src="../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+        
+        <script type="text/javascript">
+
+            $(function() {
+
+                //페이지 초기화 이전작업은 여기서 코딩해준다..
+
+                // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+                $.mobile.initializePage();
+
+                //페이지 초기화 이후작업 여기에 코딩해준다.
+
+                $('#img-list').on('click', function(evt) {
+                    var parents = $(evt.target).parents('li');
+                    var data = $(parents[0]).data('myapp-detail');
+                    $('#imgvw-page').data('myapp-detail', data);
+                });
+
+                $('#imgvw-page').on('pagebeforeshow', function() {
+                    var dtdata = $(this).data('myapp-detail');
+                    var img_url = dtdata.media.m;
+                    var detail_text = dtdata.description;
+
+                    $(this).find('#detail-text').text(detail_text);
+                    $(this).find('#detail-img').attr('src', img_url);
+
+                });
+
+
+
+                $('#get-btn').on('click', function() {
+
+                    $.mobile.showPageLoadingMsg();
+
+                    var url =
+                            'http://api.flickr.com/services/feeds/photos_public.gne';
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: {
+                            tags: 'gun',
+                            tagmode: 'any',
+                            format: 'json'
+                        },
+                        jsonp: 'jsoncallback',
+                        jsonpCallback: 'flicker',
+                        dataType: 'jsonp',
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('success');
+                            console.log(data);
+                            $.each(data.items, function(index, item) {
+                                $('<img/>').attr('src', item.media.m)
+                                        .appendTo($('<a></a>').text(item.title).attr('href', '#imgvw-page')
+                                        .appendTo($('<li></li>').data('myapp-detail', item)
+                                        .appendTo('#img-list'))
+                                        );
+                            });
+
+                            $('#img-list').listview('refresh');
+
+                        },
+                        error: function(jqXHR,textStatus) {
+                            console.log('error ' + textStatus);
+
+                        },
+                        complete: function() {
+                            console.log('complete');
+                            $.mobile.hidePageLoadingMsg();
+                        }
+                    });
+
+                });
+
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="header" data-position="fixed"  data-theme='a'>
+                <h1>Home</h1>
+            </div><!-- /header -->
+
+            <div data-role='content' >
+                <ul data-role="listview" id="img-list" >
+
+                </ul>
+
+                <div>
+                    <a id="get-btn" data-role="button">get image</a>
+                </div>
+
+                <div id="images" ></div>
+
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed" >
+                <h1>&copy; 2011-12 goorume</h1>
+            </div><!-- /footer -->
+        </div>
+
+        <div data-role="page" id="imgvw-page" data-add-back-btn="true">
+            <div data-role="header">
+                <h1>사진 상세 보기</h1>
+            </div>
+            <div>
+                <p id="detail-text" ></p>
+                <img id="detail-img" src=""/>
+            </div>
+
+        </div>
+
+    </body>
+</html>

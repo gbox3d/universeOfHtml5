@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+        <title> jquery </title>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--        
+        클릭이밴트를 직접받으면 해당 컨트롤이 껌벅인다.
+        이를 방지하기위해서는 터치스타트를 사용하면 되지만
+        제이쿼리 모바일을 쓴다면 무엇을써도 껌벅임이없다.
+실제 디바이스에서만 깜박임이 발생한다.
+시뮬레이터나 데탑용 브라우져에서는 발생하지않는다.
+-->
+
+        <script>
+            $(function() {
+                var count = 0;
+                $('div:eq(0)').on('touchstart', function(evt) {
+                    $(this).text('touch start ' + count++);
+                    return false;
+                });
+                $('div:eq(1)').on('click', function(evt) {
+                    $(this).text( 'click ' +  count++);
+                    return false;
+                });
+                
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <div style="
+             width : 100px;
+             height: 100px;
+             background-color: yellow;
+             border-radius: 10px;">touch start</div>
+        <br>
+        <div style="
+             width : 100px;
+             height: 100px;
+             background-color: yellow;
+             border-radius: 10px;">click </div>
+        <br>
+        
+
+    </body>
+</html>

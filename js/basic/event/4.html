@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>트리거</title>
+
+    <style>
+
+        .frame {
+
+            position: absolute;
+            width: 300px;
+            height: 300px;
+
+            border: 1px solid;
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div id="frame1" class="frame">
+
+</div>
+
+<div id="frame2" class="frame" ></div>
+
+<script>
+
+    document.getElementById('frame1').addEventListener('mousedown',function(e) {
+        console.log(e);
+    });
+
+    document.getElementById('frame2').addEventListener('mousedown',function(e) {
+
+        var event;
+        event = document.createEvent('MouseEvents');
+        event.initMouseEvent('mousedown', true, true, window,{},
+                e.screenX,e.screenY,
+                e.clientX,e.clientY
+        );
+        document.getElementById('frame1').dispatchEvent(event);
+    });
+
+</script>
+
+
+
+</body>
+</html>

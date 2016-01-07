@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+        <title>jquery for Ajax</title>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+                $('button').click(function() {
+                    $('#log').append($('<p></p>').text('connecting....'));
+
+                    var url =
+                            'http://api.flickr.com/services/feeds/photos_public.gne';
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: {
+                            tags: 'gun',
+                            tagmode: 'any',
+                            format: 'json'
+                        },
+                        jsonp: 'jsoncallback',
+                        jsonpCallback: 'flicker',
+                        dataType: 'jsonp',
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('success');
+                            console.log(data);
+                            $('#textvw').val( JSON.stringify(data) );
+
+
+                        },
+                        error: function(jqXHR,textStatus) {
+                            console.log('error ' + textStatus);
+
+                        },
+                        complete: function() {
+                            console.log('complete');
+
+                        }
+                    });
+
+                    /*
+                    var url =
+                            'http://api.flickr.com/services/feeds/photos_public.gne';
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: {
+                            tags: 'gun',
+                            tagmode: 'any',
+                            format: 'json'
+                        },
+                        jsonp: 'jsoncallback',
+                        jsonpCallback: 'flicker',
+                        dataType: 'text',
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('success');
+                            console.log(data);
+                            console.log(textStatus);
+                            console.log(jqXHR);
+                            $('#textvw').val(data);
+
+                        },
+                        complete: function(jqXHR, textStatus) {
+                            console.log('complete');
+                            $('#log').append($('<p></p>').text('complete : ' + textStatus));
+                            
+                        },
+                        error: function(qXHR, textStatus, errorThrown) {
+                            console.log('error');
+                            $('#log').append($('<p></p>').text('error :' + textStatus ));
+
+                        }
+                    });
+                    */
+
+
+                })
+
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <button>download</button>
+        <div id='log'></div>
+        <textarea id='textvw' style="height: 400px; width: 100%; "></textarea>
+        
+
+    </body>
+</html>

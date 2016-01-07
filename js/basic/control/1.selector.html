@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<select id='test'  style="opacity: 0.5; border: 1px;height: 100px;width: 100px;">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+</select>
+
+<button id="btn-set" > set </button>
+<button id="btn-get" > get </button>
+<button id="btn-open" > open </button>
+
+<div id="log" ></div>
+
+
+
+<script>
+
+
+
+    document.getElementById('test').addEventListener('change',function(evt) {
+
+        console.log(evt.target.value);
+
+        var element = document.createElement('div');
+
+        element.innerText = evt.target.value;
+        document.getElementById('log').appendChild(element);
+
+    });
+
+    document.getElementById('btn-set').addEventListener('click',function(evt) {
+
+        document.getElementById('test').value = 'opel';
+    });
+    document.getElementById('btn-get').addEventListener('click',function(evt) {
+
+        var element = document.createElement('div');
+
+        element.innerText = document.getElementById('test').value;
+        document.getElementById('log').appendChild(element);
+    });
+
+    //간접적으로 열기
+    document.getElementById('btn-open').addEventListener('click',function(evt) {
+
+        var element  = document.getElementById('test');
+
+
+        var event;
+        event = document.createEvent('MouseEvents');
+        event.initMouseEvent('mousedown', true, true, window);
+        element.dispatchEvent(event);
+
+        //element.focus();
+        //document.getElementById('test').value = 'opel';
+    });
+
+
+
+</script>
+
+</body>
+</html>

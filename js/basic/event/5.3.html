@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <title></title>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
+
+</head>
+<body>
+
+<select id='test'  style="opacity: 0.5; border: 1px;height: 100px;width: 100px;">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+</select>
+
+<button id="btn-test">test</button>
+
+<script>
+
+    $(function() {
+
+        $('#btn-test').on('click',function() {
+            $('#test').trigger("click");
+
+
+        });
+
+        $('#test').on('click',function() {
+
+            console.log('test');
+        });
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

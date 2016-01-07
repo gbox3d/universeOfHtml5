@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>custom swipe</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="../../lib/custom/jquery.mobile.custom.css" />
+		
+		<script src="../../lib/std-jqm/js/jquery.js"></script>
+		<script src="../../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+		
+		<script>
+		
+			function getGesture(startX,startY,endX,endY) 
+			{
+				var result = {};
+				
+				var dx = endX - startX;
+				var dy = endY - startY;
+				
+				dist = Math.sqrt(dx*dx + dy*dy);
+				
+				var rad = Math.acos(dx/dist);
+				
+				var angle = 0;
+				if(dx < 0) {
+						
+					if(dy > 0)	
+						angle = 360 - 180 * (rad/Math.PI);	
+					else
+						angle = 180 * (rad/Math.PI) ;
+							
+				}
+				else {
+					if(dy < 0)
+						angle = 180 * (rad/Math.PI) ;	
+					else
+						angle = 360 - 180 * (rad/Math.PI);	
+				}
+				
+				result.angle = angle;
+				result.dist = dist;
+				
+				return result;
+			}
+			
+			$(document).ready(function() {
+				
+				//touchstart
+				var startX,startY;
+				$('#test-area').on('vmousedown',function(evt) {
+					//$('#log').text('touchstart pageXY(' + event.pageX + ',' + event.pageY + ')');
+					startX = event.pageX;
+					startY = event.pageY;
+				});
+				
+				// $('#test-area').on('click',function(evt) {
+					// evt.preventDefault();
+				// });
+				
+				$('#test-area').on('vmouseup',function(event) {
+					//$('#log').text('vmouseup pageXY(' + event.pageX + ',' + event.pageY + ')');
+					
+					var result = getGesture(startX,startY,event.pageX,event.pageY);
+					
+					$(this).trigger('my-swipe',result);
+					
+				});
+				
+				$('#test-area').on('my-swipe',function(evt,result) {
+					//console.log(result);
+					$('#log').text('my-swipe : ' + result.dist + ','+ result.angle);
+					
+				});
+
+			});
+			
+		</script>
+
+	</head>
+
+	<body>
+		<div id='test-area' style="width:100%;height: 200px;background-color: red;" > swipe here! </div>
+		<div id='log'></div>	
+	</body>
+</html>

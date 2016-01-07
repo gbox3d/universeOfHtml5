@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>new operator and this </title>
+
+    <script>
+
+        function test1() {
+            var a = 1;
+
+            this.a = 3;
+
+            console.log(a);
+            console.log(this.a);
+            console.log(this);
+
+
+
+            (function child_test() {
+
+                console.log(this.a);
+                console.log(this);
+
+            })()
+
+
+        }
+
+        //여기서 this 는 window 이다.
+        //test1();
+
+        console.log('----------------use new--------------------')
+
+        //프로토 타이핑에 의해서 this가 서로 달라지게된다.
+        var test = new test1();
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

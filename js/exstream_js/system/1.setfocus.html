@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+        <title> focus </title>
+        <script language="javascript" type="text/javascript">
+            function copy(div_id) {
+                var inElement = document.getElementById(div_id);
+                var meintext = inElement.innerHTML;
+                inElement.focus();
+                inElement.select();
+
+                alert('done');
+                return;
+            }
+        </script>
+    </head>
+    <body>
+        <a href="javascript:copy('test');">click</a>
+        <textarea id="test" >
+some text here!!===========
+        </textarea>
+    </body>
+</html>

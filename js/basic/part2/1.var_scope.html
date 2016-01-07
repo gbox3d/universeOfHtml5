@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<title>Insert title here</title>
+
+		<script type="text/javascript">
+			(function() {
+				var result = 0;
+				//anti patten 1
+				function sum(x, y) {
+					// implied global
+					result = x + y; //global area
+					return result;
+				}
+				console.log(sum(1, 1));
+				console.log(result);
+
+			})();
+
+			(function() {
+				//preferred 1
+				var result = 1;
+				function sum(x, y) {
+					// a variable declared inside of a function is local to that function and not available outside the function
+					var result = x + y;  //local area
+					return result;
+				}
+
+
+				console.log(sum(1, 1));
+				console.log(result);
+			})();
+		</script>
+
+	</head>
+	<body>
+
+	</body>
+</html>

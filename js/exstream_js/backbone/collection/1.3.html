@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>collection event</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+
+        <script>
+            $(function() {
+                var Item = Backbone.Model.extend({
+                    default: {
+                        part1: 'hello',
+                        part2: 'world'
+                    },
+                    initialize: function() {
+                        console.log('create ' + this.get('part2'));
+
+                    }
+
+                }); // Item
+                var List = Backbone.Collection.extend({
+                    model: Item
+                }
+                );//List
+                var list = new List();
+
+//특정 멤버가 바뀌는것 골라서 처리해줄때...
+                list.on("change:part1", function(data) {
+                    console.log("part1 ");
+                    console.log(data);
+                });
+                list.on("change:part2", function(data) {
+                    console.log("part2 ");
+                    console.log(data);
+                });
+
+
+                list.add({part1: 'good', part2: 'night'}); //꼭 뉴로 생성하지않아도 된다.
+                list.add({part1: 'food', part2: 'night'}); //꼭 뉴로 생성하지않아도 된다.
+                list.add({part1: 'kood', part2: 'night'}); //꼭 뉴로 생성하지않아도 된다.
+
+                var temp = list.at(1);
+                temp.set({part2: 'noon'}); //change 이밴트 발생 
+
+                temp = list.at(2);
+                temp.set({part1: 'kook'});
+
+
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

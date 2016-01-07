@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>checked box</title>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("input").click(function() {
+
+		
+		var temp = '';
+		//체크된 버튼 배열을 받아와서 처리한다.
+		$.each($(":checked"), function(i, e) {
+			temp += $(e).val() + ' ';
+		});
+		$("#log").text(temp);
+
+		//$("#log").text($(":checked").val() + " is checked!");
+		//$("#log").text($(this).val() + " is checked!");
+	});
+});
+
+
+</script>
+
+</head>
+
+
+<body>
+
+<form>
+    <input type="checkbox" name="fruit" value="orange" id="orange">
+    <label for="orange">orange</label>
+  </div>
+  <div>
+    <input type="checkbox" name="fruit" value="apple" id="apple">
+    <label for="apple">apple</label>
+  </div>
+  <div>
+    <input type="checkbox" name="fruit" value="banana" id="banana">
+    <label for="banana">banana</label>
+  </div>
+</form>
+
+<p id ='log'></p>
+
+<!--
+<input type="file" />
+    <input type="hidden" />
+    <input type="image" />
+
+    <input type="password" />
+    <input type="radio" />
+
+  -->
+    
+</body>
+</html>

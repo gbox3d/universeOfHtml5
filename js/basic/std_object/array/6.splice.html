@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> insert remove replace sample using splice </title>
+
+		<script>
+			window.onload = function() {
+				var fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+//array.splice(index,howmany,item1,.....,itemX)
+//index 위치
+//howmany 몇개가 위치기준으로 삭제 될것인가 정함,0이면 삭제 되는것이 없고 추가만됨
+//item...n 삭제되고 그자리에 새로추가될 항목들
+				document.getElementById('ins').onclick = (function() {
+					var index=0;
+					return function() {
+						fruits.splice(2, 0,index++); //2번째 위치에 추가 시킨다.
+						
+						console.log(fruits);
+					}
+					
+				})();
+				
+				document.getElementById('del').onclick = (function() {
+					var index=0;
+					return function() {
+						fruits.splice(2, 1); //2번째 위치에서 삭제된다.
+						console.log(fruits);
+					}
+					
+				})();
+				
+				document.getElementById('overw').onclick = (function() {
+					var index=0;
+					return function() {
+						fruits.splice(2, 1,index++);
+						console.log(fruits);
+					}
+					
+				})();
+
+			}
+
+		</script>
+
+	</head>
+	<body>
+
+		<button id='ins'>
+			ins
+		</button>
+		<button id='del'>
+			del
+		</button>
+		<button id='overw'>
+			over write
+		</button>
+
+	</body>
+</html>

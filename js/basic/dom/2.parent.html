@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>부모 노드 얻기</title>
+</head>
+<body>
+
+<div style="text-align: center;background-color: green;">
+    <span id="child-node" style="display: inline-block;background-color: red; padding: 5px;"  >
+        click here!!
+    </span>
+</div>
+
+<script>
+
+    var testnode = document.getElementById('child-node');
+
+    testnode.addEventListener('click',function() {
+
+        this.parentNode.style.textAlign = '';
+        this.parentNode.style.backgroundColor = '#888888';
+
+    })
+
+
+    //console.log(document.getElementById('child-node').parentNode.getAttribute('test'));
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    console.log(escape("abc123"));     // "abc123"
+    console.log(escape('안녕하세요'));
+    // special characters
+    console.log(escape("@*_+-./"));    // "@*_+-./"
+
+    console.log(encodeURI('안녕 하세요'));
+    console.log(encodeURI(';,/?:@&=+$-_.!~*\'()'));
+
+    console.log(encodeURIComponent('안녕 하세요'));
+    console.log(encodeURIComponent(';,/?:@&=+$-_.!~*\'()'));
+
+    //console.log(encodeURI('\uD800\uDFFF'));
+
+
+
+</script>
+
+</body>
+</html>

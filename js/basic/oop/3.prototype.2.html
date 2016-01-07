@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> singleton </title>
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<style></style>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+		
+		/*
+		 * 프로토타입영역은 싱글턴 영역이다.
+		 * 이영역안에서는 같은 이름의 오브잭트들은 포로토타입안에서 선언된 내용들을 공유한다.
+		 * 프로토타입안에서 선언된 객체들은 여러개를 중복해서 new를 해도 메모리를 중복으로 차지하지 않는다.
+		 * 
+		 */
+			
+			CSuper = function(a) {
+				this.a = a;
+			};
+			
+			//프로토 타입선언
+			CSuper.prototype.a = 'poo'; //싱클턴 변수
+			
+			CSuper.prototype.set = function(a) {
+				this.a = a;
+			}
+			
+			CSuper.prototype.print = function() {
+				document.write(this.a);
+				document.write('<br/>');
+				document.write(this.__proto__.a);
+				document.write('<br/>');
+			}
+			
+			obj = new Array();
+			
+			obj[0] = new CSuper('foo');
+			obj[1] = new CSuper('bar');
+			
+			obj[0].print();
+			obj[1].print();
+			
+			document.write('----------------------------');
+			document.write('<br/>');
+			
+			obj[0].set('duracell');
+			
+			obj[0].print();
+			obj[1].print();
+			
+			document.write('----------------------------');
+			document.write('<br/>');
+			//CSuper.prototype.a = 'ultra'; 와 같다.
+			obj[0].__proto__.a = 'ultra';
+			
+			obj[0].print();
+			obj[1].print();
+
+		</script>
+
+	</head>
+
+	<body>
+
+	</body>
+</html>

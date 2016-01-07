@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<style>
+			#droppable {
+				width: 250px;
+				height: 250px;
+			}
+			.item {
+				width: 150px;
+				height: 150px;
+			}
+		</style>
+		<link rel="stylesheet" href="../jqueryui/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
+		<script src="../jqueryui/js/jquery-1.7.2.min.js"></script>
+		<script src="../jqueryui/js/jquery-ui-1.8.20.custom.min.js"></script>
+
+		<title>effect test</title>
+
+		<script>
+			$(document).ready(function() {
+				$("#dialog").dialog({
+					autoOpen : false,
+					show : "blind",
+					hide : "explode",
+					position : [50,50],
+					buttons: {
+						ok : function() {
+							
+							$(this).dialog('option',{hide: $('#inp1').val() })
+							$(this).dialog('close');
+							
+						}
+					}
+				});
+
+				$("#opener").click(function() {
+					$("#dialog").dialog("open");
+					return false;
+				});
+
+			});
+		</script>
+	</head>
+<!--
+	이펙트 종류
+	<option value="blind">Blind</option>
+	<option value="bounce">Bounce</option>
+	<option value="clip">Clip</option>
+	<option value="drop">Drop</option>
+	<option value="explode">Explode</option>
+	<option value="fade">Fade</option>
+	<option value="fold">Fold</option>
+	<option value="highlight">Highlight</option>
+	<option value="puff">Puff</option>
+	<option value="pulsate">Pulsate</option>
+	<option value="scale">Scale</option>
+	<option value="shake">Shake</option>
+	<option value="size">Size</option>
+	<option value="slide">Slide</option>
+	<option value="transfer">Transfer</option>
+</select>
+-->
+	<body>
+		<div id="dialog" title="Basic dialog">
+			input test : <input id='inp1' />
+			<p>
+				This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.
+			</p>
+		</div>
+
+		<button id="opener">
+			Open Dialog
+		</button>
+
+	</body>
+</html>

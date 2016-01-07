@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> simple uri parser </title>
+
+    <!-- 		<script src="http://code.jquery.com/jquery-latest.js"></script> -->
+    <script src="../libs/URI/URI.min.js"></script>
+    <script>
+
+        var parser = document.createElement('a');
+        parser.href = "http://example.com:3000/pathname/?search=test#hash";
+
+        console.log(parser.protocol); // => "http:"
+
+        console.log(parser.hostname); // => "example.com"
+        console.log(parser.port);     // => "3000"
+        console.log(parser.pathname); // => "/pathname/"
+        console.log(parser.search);   // => "?search=test"
+        console.log(parser.hash);     // => "#hash"
+        console.log(parser.host);     // => "example.com:3000"
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+</html>

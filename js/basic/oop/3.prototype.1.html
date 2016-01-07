@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		
+		<title> none </title>
+		
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<style></style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			function CCalc(a,b) {
+				
+				var pri_a = a;
+				var pri_b = b;
+				this.pub_a = a;
+				this.pub_b = b;
+			}
+			
+			//프로토 타입은 객체지향 방법론중애 나오는 상속의 특수한 형태이다.
+			//오직 퍼블릭 변수만 사용할수있다.
+			CCalc.prototype.sum = function() {
+				
+				document.write(this.pub_a + this.pub_b);
+				document.write('<br/>');
+				/*
+				document.write(pub_a + pub_b);
+				document.write('<br/>');
+				*/
+			}
+			
+			
+			var obj = new CCalc(6,7);
+			
+			obj.sum();
+			
+			
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+</html>

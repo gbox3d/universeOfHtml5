@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>이벤트 체이닝 개념예제 2</title>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#root').on('click',function() {
+                console.log('root click');
+            });
+
+            $('#sub1').on('click',function() {
+                console.log('sub1 click');
+                return false;
+            });
+
+            /*
+            상위 루트로 이밴트를 전달하지만
+            같은 레벨의  겹치는 영역인 sub1에는 이벤트를 전달해주지는 않는다.
+             */
+            $('#sub2').on('click',function() {
+                console.log('sub2 click');
+                return true;
+            });
+
+
+
+
+        });
+    </script>
+</head>
+<body>
+
+<div id='root'  style="position: relative; background-color: red;width: 300px;height: 300px;">
+    <div id='sub1' style="position: absolute;  background-color: #ffff00;width: 300px;height: 100px;">
+
+    </div>
+
+
+    <div id='sub2'  style="position : absolute;background-color: green;width: 100px;height: 300px;">
+
+    </div>
+
+
+
+
+</div>
+
+
+</body>
+</html>

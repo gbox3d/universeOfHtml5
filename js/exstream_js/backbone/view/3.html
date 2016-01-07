@@ -1,0 +1,47 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+    
+    <script type="text/javascript">
+        TestView = Backbone.View.extend({
+            initialize: function() {
+                _.bindAll(this,'render','doSearch');
+                this.render();
+            },
+            render: function() {
+                this.$el.html('<button id="test-btn">test</button>');
+                
+            },
+            events: {
+                "click #test-btn": "doSearch"
+
+            },
+            doSearch: function() {
+                console.log('click search');
+            }
+        });
+
+        $(function() {
+            var search_view = new TestView({el: $("#test-container")});
+        });
+
+    </script>
+
+</head>
+<body>
+
+    <div id="test-container"></div>
+
+</body>
+</html>

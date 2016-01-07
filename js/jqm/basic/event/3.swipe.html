@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>phonegap jqm basic sample</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="../../lib/custom/jquery.mobile.custom.css" />
+		
+		<script src="../../lib/std-jqm/js/jquery.js"></script>
+		<script src="../../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				
+				$(document).on('swipeleft',function(evt) {
+					console.log(evt);
+					$('<p></p>').text('swipeleft').appendTo('#log');
+					
+				});
+				
+				$(document).on('swiperight',function(evt) {
+					console.log(evt);
+					$('<p></p>').text('swiperight').appendTo('#log');
+					
+				});
+			
+			});
+			
+		</script>
+
+	</head>
+
+	<body>
+		<div id='log'></div>	
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../libs/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+
+<button id="test" >test</button>
+
+
+<script>
+
+    document.querySelector('#test').addEventListener('click',function() {
+
+        try {
+            $.ajax({
+                url : "http://localhost:8080",
+                type : "GET",
+                dataType : "text",
+                timeout: 5000,
+                success : function(data,textStatus,jqXHR) {
+
+                    try {
+                        var _data = JSON.parse(data);
+
+                        console.log(_data);
+
+                    }
+                    catch(ex) {
+                        console.log(data);
+                        console.log(ex);
+                    }
+
+
+
+                },
+                complete : function() {
+
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
+
+
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

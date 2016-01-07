@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+</head>
+<body>
+
+
+<div id="dropper" style="width: 320px;height: 240px;background-color: #0000ff">
+
+</div>
+
+<div id="test1" style="width: 50px;height: 25px;background-color: red;" draggable="true">
+
+</div>
+
+<!--<img id="drag1" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69">-->
+
+<script>
+
+    function drag(ev)
+    {
+        ev.dataTransfer.setData("Text",ev.target.id);
+        console.log(ev);
+    }
+
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var data=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+
+    document.querySelector('#test1').addEventListener('dragstart',function(evt) {
+
+        console.log(evt);
+
+    });
+
+    document.querySelector('#test1').addEventListener('dragend',function(evt) {
+
+        console.log(evt);
+        //evt.preventDefault();
+
+        //evt.target.style.webkitTransform = 'translate(' + evt.pageX + 'px,'+ evt.pageY + 'px)';
+
+    });
+
+    document.querySelector('#dropper').addEventListener('drop',function(evt) {
+
+        console.log('dropped');
+
+
+
+    });
+
+    document.querySelector('#dropper').addEventListener('dragover',function(evt) {
+
+        console.log('droppenter');
+        evt.preventDefault();
+
+
+
+    });
+
+</script>
+
+</body>
+</html>

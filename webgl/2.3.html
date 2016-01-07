@@ -1,0 +1,226 @@
+<html>
+
+<head>
+    <title>pass color</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+    <script type="text/javascript" src="gl-matrix.js"></script>
+
+    <script id="shader-vs" type="x-shader/x-vertex">
+
+    attribute vec3 aVertexPosition;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+
+    uniform vec3 uMyColor;
+
+    varying vec3 vColor;
+
+    void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+
+        vColor = uMyColor;
+        vColor[0] = vColor[0] / 1000.0;
+        vColor[0] = (vColor[0] * 3.14);
+    }
+    </script>
+
+    <script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+
+    varying vec3 vColor;
+
+    void main(void) {
+        gl_FragColor = vec4(sin(vColor), 1.0);
+    }
+    </script>
+
+
+
+</head>
+
+
+<body>
+
+<canvas id="webgl-canvas" style="border: none;" width="500" height="500"></canvas>
+
+<script type="text/javascript">
+
+    var gl;
+    function initGL(canvas) {
+        try {
+            gl = canvas.getContext("webgl");
+            gl.viewportWidth = canvas.width;
+            gl.viewportHeight = canvas.height;
+        } catch (e) {
+        }
+        if (!gl) {
+            alert("Could not initialise WebGL, sorry :-(");
+        }
+    }
+
+
+    function getShader(gl, id) {
+
+        //쉐이더 소스 얻기
+        var shaderScript = document.getElementById(id);
+        if (!shaderScript) {
+            return null;
+        }
+
+        var str = "";
+        var k = shaderScript.firstChild;
+        while (k) {
+            if (k.nodeType == 3) {
+                str += k.textContent;
+            }
+            k = k.nextSibling;
+        }
+
+        var shader;
+        if (shaderScript.type == "x-shader/x-fragment") {
+            shader = gl.createShader(gl.FRAGMENT_SHADER);
+        } else if (shaderScript.type == "x-shader/x-vertex") {
+            shader = gl.createShader(gl.VERTEX_SHADER);
+        } else {
+            return null;
+        }
+
+        gl.shaderSource(shader, str);
+        gl.compileShader(shader);
+
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            alert(gl.getShaderInfoLog(shader));
+            return null;
+        }
+
+        return shader;
+    }
+
+
+    var shaderProgram;
+
+    function initShaders() {
+        var fragmentShader = getShader(gl, "shader-fs");
+        var vertexShader = getShader(gl, "shader-vs");
+
+        shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+            alert("Could not initialise shaders");
+        }
+
+        //쉐이더 프로그램 등록
+        gl.useProgram(shaderProgram);
+
+        //
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+
+        //
+        shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+        //
+        shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+
+        //커스텀컬러
+        shaderProgram.Mycolor = gl.getUniformLocation(shaderProgram, "uMyColor");
+    }
+
+
+    var mvMatrix = mat4.create();
+    var pMatrix = mat4.create();
+
+    function setMatrixUniforms() {
+
+    }
+
+    //정점버퍼
+    var triangleVertexPositionBuffer;
+
+    function initBuffers() {
+
+        //버퍼생성
+        triangleVertexPositionBuffer = gl.createBuffer();
+
+        //작업할 버퍼지정
+        gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+
+
+        //버퍼에 데이터 넣기
+        var vertices = [
+            0.0,  1.0,  0.0,
+            -1.0, -1.0,  0.0,
+            1.0, -1.0,  0.0
+        ];
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        triangleVertexPositionBuffer.itemSize = 3;
+        triangleVertexPositionBuffer.numItems = 3;
+
+    }
+
+
+    function drawScene() {
+        gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        mat4.perspective(pMatrix,45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0);
+        mat4.identity(mvMatrix);
+        mat4.translate(mvMatrix,mvMatrix, [-1.5, 0.0, -7.0]);
+
+        //console.log(mvMatrix);
+
+        var red_color = (new Date()).getTime();
+        red_color %= 1000;
+
+        //컬러값 전달해주기
+        gl.uniform3f(
+                shaderProgram.Mycolor,
+                red_color,0,0
+        );
+
+        //작업버퍼 지정
+        gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+
+        //버퍼에 집어넣기
+        gl.vertexAttribPointer(
+                shaderProgram.vertexPositionAttribute,
+                triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+        //메트릭스 적용
+        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+        gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+        //setMatrixUniforms();
+
+        gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
+
+        //루핑
+        requestAnimationFrame(drawScene);
+
+    }
+
+
+
+    function webGLStart() {
+        var canvas = document.getElementById("webgl-canvas");
+        initGL(canvas);
+        initShaders();
+        initBuffers();
+
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.enable(gl.DEPTH_TEST);
+
+        drawScene();
+    }
+
+    webGLStart();
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div class="group" >
+
+    <div><input type="radio" name="kbs" value="1" checked >item1</div>
+    <div><input type="radio" name="kbs" value="2" >item2</div>
+
+</div>
+
+<button id="btn-get" >get</button>
+<button id="btn-set" >set</button>
+
+<script>
+
+    function getCheckedRadioId(name) {
+        var elements = document.querySelectorAll('.group input[name=kbs]')//document.getElementsByName(name);
+
+        for (var i=0, len=elements.length; i<len; ++i)
+            if (elements[i].checked) return elements[i].value;
+    }
+
+    document.getElementById('btn-get').addEventListener('click',function(e) {
+
+        console.log(getCheckedRadioId('kbs'));
+
+        //var element = document.querySelector('.group input[checked]');
+
+        //console.log(element.value);
+
+
+    });
+
+    document.getElementById('btn-set').addEventListener('click',function(e) {
+
+        var elements = document.querySelectorAll('.group input[checked=true]');
+
+        elements[0].checked = true;
+
+    });
+
+</script>
+
+
+</body>
+</html>

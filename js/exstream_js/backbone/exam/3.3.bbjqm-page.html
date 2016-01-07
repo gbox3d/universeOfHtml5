@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>backbone + jqm  page make sample</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css" />
+
+
+
+        <script src="../lib/std-jqm/js/jquery.js"></script>
+
+
+        <script src="../lib/backbone/json2.js"></script>
+        <script src="../lib/backbone/underscore.js"></script>
+        <script src="../lib/backbone/backbone.js"></script>
+
+        <script>
+
+            $(document).bind('mobileinit', function(evt) {
+
+                //$.mobile 관련 전역변수 초기화는 여기서한다.
+                $.mobile.autoInitializePage = false;
+                console.log('mobile init');
+
+            });
+
+        </script>
+
+        <script src="../lib/std-jqm//js/jquery.mobile-1.2.0.js"></script>
+
+        <script type="text/javascript">
+
+            $(function() {
+                //페이지 초기화 이전작업은 여기서 코딩해준다..
+                $.mobile.ajaxEnabled = false;
+                $.mobile.linkBindingEnabled = false;
+                $.mobile.hashListeningEnabled = false;
+                $.mobile.pushStateEnabled = false;
+                // Remove page from DOM when it's being replaced
+
+                $(document).on('pagehide', 'div[data-role="page"]', function(event, ui) {
+                    console.log(event.currentTarget);
+                    console.log('remove');
+                    $(event.currentTarget).remove();
+                });
+
+                // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+                $.mobile.initializePage();
+
+                //페이지 초기화 이후작업 여기에 코딩해준다.
+                app = new AppRouter();
+                Backbone.history.start();
+
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <script>
+            window.HomeView = Backbone.View.extend({
+                template: _.template($('#home').html()),
+                render: function(eventName) {
+                    $(this.el).html(this.template());
+                    return this;
+                },
+                events: {
+                    "click :jqmData(role='content') ul li a": "gopage"
+                },
+                gopage: function(evt) {
+                    console.log(evt);
+                    window.location.href += '#' + $(evt.target).attr('data-role-goto');
+
+                }
+            });
+
+            window.Page1View = Backbone.View.extend({
+                template: _.template($('#page1').html()),
+                render: function(eventName) {
+                    $(this.el).html(this.template());
+                    return this;
+                },
+                events: {
+                    "click :jqmData(role='content') ul li a": "gopage"
+                },
+                gopage: function(evt) {
+                    console.log(evt);
+                    var strTokens = location.href.split('#');
+                    window.location.href = strTokens[0] + '#' + $(evt.target).attr('data-role-goto');
+                }
+            });
+
+            window.Page2View = Backbone.View.extend({
+                template: _.template($('#page2').html()),
+                render: function(eventName) {
+                    $(this.el).html(this.template());
+                    return this;
+                },
+                events: {
+                    "click :jqmData(role='content') ul li a": "gopage"
+                },
+                gopage: function(evt) {
+                    console.log(evt);
+                    var strTokens = location.href.split('#');
+                    window.location.href = strTokens[0] + '#' + $(evt.target).attr('data-role-goto');
+
+                }
+            });
+
+            var AppRouter = Backbone.Router.extend({
+                routes: {
+                    "": "home",
+                    "page1": "page1",
+                    "page2": "page2"
+                },
+                initialize: function() {
+                    // Handle back button throughout the application
+                    $('body').on('click', '.back', function(event) {
+                        window.history.back();
+                        return false;
+                    });
+                    this.firstPage = true;
+                },
+                home: function() {
+                    console.log('#home');
+                    this.changePage(new HomeView());
+                },
+                page1: function() {
+                    console.log('#page1');
+                    this.changePage(new Page1View());
+                },
+                page2: function() {
+                    console.log('#page2');
+                    this.changePage(new Page2View());
+                },
+                changePage: function(page) {
+                    $(page.el).attr('data-role', 'page');
+                    page.render();
+                    $('body').append($(page.el));
+                    var transition = $.mobile.defaultPageTransition;
+                    // We don't want to slide the first page
+                    if (this.firstPage) {
+                        transition = 'none';
+                        this.firstPage = false;
+                    }
+                    $.mobile.changePage($(page.el), {changeHash: false, transition: transition});
+                }
+
+            });
+        </script>
+
+
+        <!-- The Templates -->
+        <script type="text/template" id="home">
+            <div data-role="header">
+                <h1>Backbone.js + jQuery Mobile</h1>
+            </div>
+            <div data-role="content">
+                <h3>Application Template for using Backbone.js and jQuery Mobile.</h3>
+                <p>Backbone.js is used for code organization (Models, Views) and "routing".</p>
+                <p>jQuery Mobile is used for its mobile styles and widgets. The routing and navigation capabilities of jQuery Mobile are disbled to let Backbone.js handle these requirements.</p>
+                <p>This is the Home page. It was created dynamically using an underscore.js template.</p>
+                <p>Navigate to:</p>
+                <ul data-role="listview"  data-inset="true">
+                    <li><a data-role-goto="page1">Page 1</a></li>
+                    <li><a data-role-goto="page2">Page 2</a></li>
+                </ul>
+            </div>
+        </script>
+
+        <script type="text/template" id="page1">
+
+            <div data-role="header">
+                <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+                <h1>Page 1</h1>
+            </div>
+
+            <div data-role="content">
+                <p>This is Page 1. It was created dynamically using an underscore.js template.</p>
+                <p>Navigate to:</p>
+                <ul data-role="listview" data-inset="true">
+                    <li><a data-role-goto="">Home</a></li>
+                    <li><a data-role-goto="page2">Page 2</a></li>
+                </ul>
+            </div>
+
+        </script>
+
+        <script type="text/template" id="page2">
+
+            <div data-role="header">
+                <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+                <h1>Page 2</h1>
+            </div>
+
+            <div data-role="content">
+                <p>This is Page 2. It was created dynamically using an underscore.js template.</p>
+                <p>Navigate to:</p>
+                <ul data-role="listview" data-inset="true">
+                    <li><a data-role-goto="">Home</a></li>
+                    <li><a data-role-goto="page1">Page 1</a></li>
+                </ul>
+            </div>
+
+        </script>
+
+
+    </body>
+</html>

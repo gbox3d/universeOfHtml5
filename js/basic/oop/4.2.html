@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+    <title> inheritance </title>
+
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+    <style></style>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+
+        /////////// CRect ////////////////////
+        function CShape(x,y) {
+            if(x != undefined) {
+                this.X = x;
+                this.Y = y;
+            }
+            else {
+                this.X = 0;
+                this.Y = 0;
+            }
+        }
+
+        /////////// CRect ////////////////////
+        function CRect(x,y,w,h) {
+            this.height = h;
+            this.width = w;
+
+            CShape.apply(this,[x,y]); //부모클래스 초기화하고 멤버 변수들 상속받기
+        }
+
+        obj = [];
+
+        obj.push(new CRect(1,2,3,4));
+        obj.push(new CRect(5,6,7,8));
+        obj.push(new CShape());
+
+
+        for(index in obj) {
+            console.log(obj[index]);
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+</html>

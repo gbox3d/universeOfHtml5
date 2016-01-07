@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title> jquery </title>
+                <script src="../lib/jquery-1.7.1.min.js"></script>
+		
+		<script>
+			
+			$(function() {
+				
+				$('p:eq(0)').queue(function() {
+					console.log('1 function 1');
+					$(this).dequeue();
+				});
+				
+				$('p:eq(0)').delay(1000);
+				
+				$('p:eq(0)').queue(function() {
+					console.log('1 function 2');
+					$(this).dequeue();
+				});
+				
+				$('p:eq(0)').queue(function() {
+					console.log('1 function 3');
+					$(this).dequeue();
+				});
+				
+	/////////////////////두번째 등록/////////////////////////	
+				$('p:eq(1)').queue(function() {
+					console.log('2 function 1');
+					$(this).dequeue();
+				});
+				
+				//1초 기다리는 동안에도 계속 수행된다.
+				//그래서 여기서부터 실행을 앞서나간다.
+				$('p:eq(1)').queue(function() {
+					console.log('2 function 2');
+					$(this).dequeue();
+				});
+				
+				$('p:eq(1)').queue(function() {
+					console.log('2 function 3');
+					$(this).dequeue();
+				});
+				
+			})
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+		<p></p>
+		<p></p>
+		
+	</body>
+</html>

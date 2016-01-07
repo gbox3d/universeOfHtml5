@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<title> 특정 키워드가 지원하는지 알아보는 코드</title>
+
+		<script>
+			window.onload = function() {
+				//testrotine();
+
+				$('input').bind('change', function() {
+					var result = (function test_key_word(keyword) {
+						var wrong = false;
+						try {
+							eval(keyword + "=42");
+						} catch(e) {
+							wrong = true;
+						} finally {
+							if(wrong) {
+								return "예약된 키워드가 맞습니다."
+							} else if(window[keyword] !== 42) {
+								return "very probably, wrong"
+							} else {
+								return keyword + "는(은) : 지원하지 않는 키워드 입니다. 그래서 변수로 사용될수있습니다."
+							}
+						}
+					})($(this).val());
+
+					$('#out').text(result);
+
+				});
+
+				//console.log(result);
+
+			}
+
+		</script>
+
+	</head>
+
+	<body>
+            <input type="text" value="yield"/>
+		<p id='out' ></p>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>json_parse</title>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script>
+            function init() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://sf2009.web-bi.net/work/api/get_talklist.php",
+                    data: {
+                        startno: 0,
+                        listcount: 5
+                    },
+                    jsonp: 'jsonpCallback',
+                    jsonpCallback: 'mycallback',
+                    dataType: "jsonp",
+                    success: function(data, textStatus, jqXHR) {
+                        console.log('success');
+
+                        $.each(data.items, function(index, item) {
+                            $('div').append($('<p></p>').text(item.TEXT));
+                        });
+
+                    },
+                    complete: function(jqXHR, textStatus) {
+                        console.log('complete');
+                    },
+                    error: function(qXHR, textStatus, errorThrown) {
+                        console.log('error');
+
+                    }
+                });
+
+
+            }
+
+
+            $(document).ready(init);
+
+        </script>
+    </head>
+    <body>
+        <div></div>
+    </body>
+</html>

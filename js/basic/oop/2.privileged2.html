@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		
+		<title> none </title>
+		
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<style></style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			function CCalc(a,b) {
+				
+				//프라이빗
+				var a =a;
+				
+				//퍼블릭 변수로 선언
+				this.b =b;
+				
+				//특권 (privileged) 함수는 동시에 프라이빗,퍼블릭, 두가지 타입의 멤버변수에 접근가능하다.
+				this.Sum = function() {
+					
+					var b = 0;
+					
+					//이름이 같으면 지역변수가 우선이다.
+					document.write(b);
+					document.write('<br/>');
+					
+					//로컬영역의 지역변수와 구분하기 위해 앞에 this를 붙이는것이 좋다.
+					//만약같은 이름의 지역변수가 없으면 클로져로 동작한다.
+					return a + this.b; 
+				}
+			}
+			
+			var obj = new CCalc(6,7);
+			
+			document.write(obj.Sum());
+			document.write('<br/>');
+			
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+</html>

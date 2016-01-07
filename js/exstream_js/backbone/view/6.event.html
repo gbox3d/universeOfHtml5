@@ -1,0 +1,60 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>이밴트처리 예제 </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+        
+        <script src="../lib/std-jqm//js/jquery.mobile-1.2.0.js"></script>
+
+        <script>
+            Pageview = Backbone.View.extend({
+                initialize: function() {
+                    this.render();
+
+                },
+                render: function() {
+                    var templ = _.template($("#page-template").html());
+                    this.$el.html(templ);
+
+                },
+                events: {
+            //뷰단위로 이밴트가 구분되어 들어옴 서로 겹칠염려가 없음
+                    "vmousedown #btn-test": "test"
+                },
+                test: function() {
+                    $('#log',this.$el).append($("<p>test</p>"));
+
+                }
+
+            });
+        
+            $(function() {
+                var view1 = new Pageview({el:$("#container-1")});
+                var view2 = new Pageview({el:$("#container-2")});
+
+
+
+
+            });
+        </script>
+
+
+    </head>
+    <body>
+        <div id="container-1"></div>
+        <div id="container-2"></div>
+        <script type="text/template" id="page-template">
+            <button id="btn-test" >test</button>
+            <div id='log'></div>
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+		<title>이벤트 체이닝 개념예제</title>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				$('div').on('click',function() {
+					console.log('div click event');
+				});
+				
+				
+				//false 를 반환하면 더이상 이벤트를 상위 객체로 전달하지않는다.
+				$('.nosend').on('click',function() {
+					console.log('p nosend click event');
+					return false;
+				});
+				
+				//true를 반환하면 상위 객체로 이벤트를 전달한다.
+				$('.send').on('click',function() {
+					console.log('p send click event');
+					return true; // 리턴문이 만약 없다면 디폴트가 true 반환으로 처리
+				});
+				
+
+			});
+		</script>
+	</head>
+	<body>
+
+		<div style="background-color: red;width: 100px;height: 100px;">
+			<p class='nosend' style="background-color: blue"> no send click </p>
+			<p class='send' style="background-color: yellow"> send click </p>
+		</div>
+		
+		
+	</body>
+</html>

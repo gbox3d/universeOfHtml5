@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <title> push pop shift unshift </title>
+
+</head>
+<body>
+
+<button id='push'>
+    push
+</button>
+<button id='unshift'>
+    unshfit
+</button><br>
+<button id='shift'>
+    shift
+</button>
+<button id='pop'>
+    pop
+</button>
+
+<script>
+
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+    fruits.push('grape');
+
+    console.log(fruits);
+
+    //pop front
+    document.getElementById('shift').onclick = function() {
+        console.log(fruits.shift());
+        console.log(fruits);
+    };
+    //push front
+    document.getElementById('unshift').onclick = (function() {
+        var index = 0;
+        return function() {
+            fruits.unshift('fruit' + index++);
+            console.log(fruits);
+        }
+    })();
+
+
+    document.getElementById('pop').onclick = function() {
+        fruits.pop();
+        console.log(fruits);
+    };
+
+    document.getElementById('push').onclick = (function() {
+        var index = 0;
+        return function() {
+            fruits.push('fruit' + index++);
+            console.log(fruits);
+        }
+    })();
+
+</script>
+
+
+</body>
+</html>

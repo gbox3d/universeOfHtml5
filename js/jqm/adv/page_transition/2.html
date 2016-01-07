@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>tab bar sample</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css"/>
+
+        <script src="../../lib/std-jqm/js/jquery.js"></script>
+
+        <script>
+
+            $(document).bind('mobileinit', function(evt) {
+
+                //리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+                var strTokens = location.href.split('#');
+                console.log('size : ' + strTokens.length);
+                if (strTokens.length >= 2) {
+                    location.href = strTokens[0];
+                    console.log('current page : #' + strTokens[1]);
+                    console.log('reset startup page');
+                    return false;
+                }
+
+                //$.mobile 관련 전역변수 초기화는 여기서한다.
+                $.mobile.autoInitializePage = false;
+                console.log('mobile init');
+
+            });
+
+        </script>
+
+        <script src="../../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+        <script>
+            $(document).ready(function() {
+                console.log('document ready..');
+                console.log('before jqm pageinit');
+
+                //페이지 관련 이밴트들은 여기서 바인딩시켜줘야한다.
+                //$(':jqmData(role="content")').text('hello jqm!');
+                $.mobile.initializePage();
+                // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+
+                // 이 시점부터 첫 페이지가 보이기 시작.....
+                console.log('after jqm pageinit');
+
+                //$(':jqmData(role="navbar") li:eq(0)').addClass('.ui-btn-active');
+                $.mobile.loadPage('#second-page');
+                
+                $('#main-page').data('active-page','main-page');
+                
+                //document 이벤트관련 초기화는 여기서 한다.
+                $(':jqmData(role="navbar") li').on('click', function(evt) {
+
+                    console.log(evt);
+                    console.log($(this).data('href'));
+                    var prev_page = $('#main-page').data('active-page') || '';
+                    var next_page = $(this).data('href');
+                    if ( prev_page != next_page) {
+                        switch (next_page) {
+                            case 'main-page':
+                                $('#main-page .content-root-container').appendTo($('#'+prev_page + ' :jqmData(role="content")'));
+                                $('#backup-page .content-root-container').appendTo($('#main-page :jqmData(role="content")'));
+                                break;
+                            case 'second-page':
+
+                                $('#main-page .content-root-container').appendTo($('#backup-page :jqmData(role="content")'));
+                                $('#'+ next_page +' .content-root-container').appendTo($('#main-page :jqmData(role="content")'));
+                                
+                                break;
+                        }
+                        $('#main-page').data('active-page',next_page);
+
+                    }
+                });
+
+            });
+
+            $(document).on('pageinit', function(evt) {
+                console.log(evt.target.id);
+
+            })
+
+
+        </script>
+
+    </head>
+
+    <body>
+        <div data-role="page" id="main-page">
+            <div class="root-container">
+
+                <div data-role="header" data-position="fixed"  data-theme='a'>
+                    <h1>Home</h1>
+                </div><!-- /header -->
+
+                <div data-role='content' >
+                    <div class="content-root-container" >
+                        <P>첫번째 페이지 입니다.!</P>
+                        <a data-role='button'> go </a>
+                    </div>
+                </div><!-- /content -->
+
+                <div data-role='footer' data-position="fixed" >
+                    <div data-role='navbar'>
+                        <ul>
+                            <!--                        
+                            액티브 상태 유지를 위해서는 ui-state-persist가 필요하다 그렇지 않으면 페이지가 바뀔때 
+                                                    ui-btn-active 가 없어진다.-->
+                            <li data-href="main-page"><a>first</a></li>
+                            <li data-href="second-page"><a>second</a></li>
+
+                        </ul>
+                    </div>
+
+                </div><!-- /footer -->
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="second-page">
+            <div data-role="header">
+                <h1>page 2</h1>
+            </div>
+
+            <div data-role="content">
+                <div class="content-root-container">
+                    <P>2번째 페이지 입니다.!</P>
+                    <button>이거슨 버튼!</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div data-role="page" id="backup-page" >
+            <div data-role="content">
+
+            </div>
+        </div>
+
+    </body>
+</html>

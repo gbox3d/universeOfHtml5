@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <title> 트리거 </title>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+</head>
+<body>
+
+<button class="click" >click </button>
+<button class="click-trigger" >click trigger</button>
+
+<script>
+
+
+
+    $(".click").on('click', function(event, a, b) {
+        $('ul').append('<li>' + a + ',' + b +'</li>');
+    });
+
+
+    $(".click-trigger").on('click', function(event) {
+        $(".click").trigger("click", ["foo", "bar"]);
+    });
+
+</script>
+
+<ul></ul>
+</body>
+</html>

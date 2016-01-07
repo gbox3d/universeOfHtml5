@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title> decode uri </title>
+
+<script type="text/javascript">
+
+data = {
+escape : 'http%3A//test.co.kr%3Ftest%3D%uD55C%uAE00%uC785%uB2C8%uB2E4',
+encodeURI : 'http://test.co.kr?test=%ED%95%9C%EA%B8%80%EC%9E%85%EB%8B%88%EB%8B%A4',
+encodeURIComponent : 'http%3A%2F%2Ftest.co.kr%3Ftest%3D%ED%95%9C%EA%B8%80%EC%9E%85%EB%8B%88%EB%8B%A4'
+};
+
+window.onload = function() {
+	var logs = document.getElementsByTagName('li');
+	
+	logs[0].innerHTML = unescape(data.escape);
+	logs[1].innerHTML = decodeURI(data.encodeURI);
+	logs[2].innerHTML = decodeURIComponent(data.encodeURIComponent);
+
+
+    console.log(decodeURI('http://bestpoll.kr/gbox3d/insert_survey.jsp?apikey=bestfull71004&id=kis&usim=01230123451&title=%EA%B8%88%EC%9C%B5%EC%82%B0%EC%97%85%20%EB%B0%9C%EC%A0%84%EB%B0%A9%ED%96%A5&e_year=2014&e_mon=3&e_day=6&target_sex=%EC%A0%84%EC%B2%B4&target_age=%EC%A0%84%EC%B2%B4&area1=%EC%A0%84%EA%B5%AD&area2=&sample=100&que_count=1&q01=%EC%A0%84%EB%B6%81%ED%98%81%EC%8B%A0%EB%8F%84%EC%8B%9C%EB%A5%BC%20%EC%95%84%EC%8B%AD%EB%8B%88%EA%B9%8C?&q02=&q03=&q04=&q05=&item1_01=%EB%84%A4&item1_02=%EC%95%84%EB%8B%88%EC%98%A4&item1_03=&item1_04=&item1_05=&item1_06=&item1_07=&item1_08=&item1_09=&item1_10=&item2_01=&item2_02=&item2_03=&item2_04=&item2_05=&item2_06=&item2_07=&item2_08=&item2_09=&item2_10=&item3_01=&item3_02=&item3_03=&item3_04=&item3_05=&item3_06=&item3_07=&item3_08=&item3_09=&item3_10=&item4_01=&item4_02=&item4_03=&item4_04=&item4_05=&item4_06=&item4_07=&item4_08=&item4_09=&item4_10=&item5_01=&item5_02=&item5_03=&item5_04=&item5_05=&item5_06=&item5_07=&item5_08=&item5_09=&item5_10='));
+
+
+}
+
+
+</script>
+
+</head>
+<body>
+
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+
+</body>
+</html>

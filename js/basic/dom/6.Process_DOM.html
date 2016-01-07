@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>DOM edit node sample </title>
+
+    <!--
+        자식노드는 children이라는 변수로 접근이 가능하다. 배열이다.
+
+         createElement
+         appendChild(추가할노드)
+         removeChild(삭제할노드)
+
+         replaceChild(새노드,기존노드) 새노드로 교체한다.
+         cloneNode() //복제 한다. 인자값이 참이면 자식노드까지 모두 복제한다.
+
+         insertBefore(삽일할노드,삽일할위치에있는기준노드)
+    -->
+
+</head>
+<body>
+<button id ='btn1'> add </button>
+<button id ='btn2'>	inserBefore</button>
+
+<button id ='btn3'>	removeChild</button>
+<button id ='btn4'>	replace</button>
+<button id ='btn5'>	clone node</button>
+
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+
+<script>
+    var ul_elm = document.querySelectorAll('ul')[0];
+    //				var elm = document.body.children;
+
+    var btns = document.querySelectorAll('button');
+
+    //add button
+    btns[0].addEventListener('click',function() {
+        var node = document.createElement('li');
+        node.innerText = 'test node';
+        ul_elm.appendChild(node);
+    });
+
+    //insert before
+    btns[1].addEventListener('click',function() {
+        var node = document.createElement('li');
+        node.innerText = 'test node insertBefore';
+        var refNode = ul_elm.firstChild;
+        ul_elm.insertBefore(node, refNode);
+    });
+
+    //remove child
+    btns[2].addEventListener('click',function() {
+        var node = ul_elm.children[0];
+        ul_elm.removeChild(node);
+    });
+
+    //리스트에서 골라서 삭제하기
+    ul_elm.addEventListener('click',function(evt) {
+
+        ul_elm.removeChild(evt.target);
+
+    });
+
+
+
+    //replace
+    btns[3].addEventListener('click',function() {
+        var old_node = ul_elm.children[0];
+        var new_node = document.createElement('li');
+        new_node.innerText = 'test node replaceChild';
+        ul_elm.replaceChild(new_node,old_node);
+    });
+
+    //clone
+    btns[4].addEventListener('click',function() {
+
+        var node = ul_elm.cloneNode(
+                true //true면 자식노드까지 복제한다.
+        );
+        document.body.appendChild(node);
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>

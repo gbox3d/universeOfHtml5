@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title></title>
+
+</head>
+<body>
+
+<div id="log"></div>
+
+<script>
+
+    /*
+     자바스크립트 오브잭트 출력하기
+
+     for in  구문으로 내용을 자동으로 얻어와 출력할수있다.
+
+     */
+
+    //http://stackoverflow.com/questions/957537/how-can-i-print-a-javascript-object
+
+    var obj = {
+        name : '윤아',
+        group : '소녀시대',
+        song : '없음'
+    }
+
+    for(var property in obj) {
+
+        console.log(property +':' + obj[property]);
+
+        var ele = document.createElement('p');
+
+        var parent = document.getElementById('log');
+
+        ele.innerText = property +':' + obj[property];
+
+        parent.appendChild(ele);
+
+    }
+
+    //배열에서 원소를 얻어오는 방식으로도  얻어 올수 있다.
+    console.log(obj['name']);
+    console.log(obj.name);
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="../jqueryui/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
+		<script src="../jqueryui/js/jquery-1.7.2.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		
+		<style>
+			#draggable {
+				width: 150px;
+				height: 150px;
+			}
+			/*드래그할때 빨간색으로 만든다.*/
+			.ui-draggable-dragging {
+				border: 5px solid red;
+			}
+		</style>
+
+		<title>2</title>
+		<script>
+			$(document).ready(function() {
+				$("#draggable").draggable(
+					{
+						start: function() {
+							$(this).find('p').text('drag start~');
+							console.log($(this).attr('class'));
+							
+						},
+						drag: function() {
+							$(this).find('p').text('dragging~');
+							console.log($(this).attr('class'));
+						},
+						stop: function() {
+							$(this).find('p').text('drag stop!');
+							//alert('drag stop!');
+						}	
+					}
+				);
+			});
+
+		</script>
+
+	</head>
+
+	<body>
+		<div>
+			<div id="draggable" class="ui-widget-content">
+				<p>
+					drag me
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

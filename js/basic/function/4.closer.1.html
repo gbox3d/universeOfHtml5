@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>closer sample1</title>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				function closer() {
+					var count = 0;
+					return function(evt) {
+						$('<p></p>').text( evt.target.id + 'count :' + count++).appendTo('body');
+						return false;
+					}
+				}
+				
+				
+				$('#clo1').click(closer()); 
+				$('#clo2').click(closer());
+			});
+		</script>
+	</head>
+	<body>
+
+		<button id='clo1'>closer1</button>
+		<button id='clo2'>closer2</button>
+
+	</body>
+</html>

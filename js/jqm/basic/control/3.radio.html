@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>radio control sample 0</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+		
+		<script>
+			$(function() {
+				
+				//변경이 됐을때....
+				$(':jqmData(role="controlgroup"):eq(0)').change(function(event) {
+					console.log(event);
+					var checked = $(this).find(':checked');
+					
+					$('#log')[0].innerHTML = '';
+					$.each(checked,function(index,item) {
+						$('#log')[0].innerHTML += $(item).val();
+						
+						if( checked.filter(':last')[0] != item )
+						{
+								$('#log')[0].innerHTML +=  ',';
+						}
+						
+						
+					});
+					
+				});
+				
+				//읽이내기
+				$(':jqmData(role="button"):contains("읽기")').bind('click', function(event) {
+				 
+				  var checked = $('fieldset:eq(0) :checked');
+				  
+				  $('#log')[0].innerHTML += '<br>';
+				  
+					$.each(checked,function(index,item) {
+						$('#log')[0].innerHTML += $(item).val();
+						
+						
+						if( checked.filter(':last')[0] != item )
+						{
+								$('#log')[0].innerHTML +=  ',';
+						}
+						
+						
+					});
+				  
+				});
+				
+				//데이터 쓰기
+				$(':jqmData(role="button"):contains("쓰기")').on('click', function(event) {
+					
+					//$('fieldset:eq(0) :radio').attr('checked',false).checkboxradio('refresh').filter(':radio[value="japan"]').attr('checked',false).checkboxradio('refresh');
+                    $('fieldset:eq(0) :radio').attr('checked',false).checkboxradio('refresh').filter(':radio[value="japan"]').attr('checked',true).checkboxradio('refresh');
+					
+				}
+                        /*,
+				function(event) {
+					
+					$('fieldset:eq(0) :radio').attr('checked',false).checkboxradio('refresh').filter(':radio[value="japan"]').attr('checked',false).checkboxradio('refresh');
+					
+				}*/
+                );
+				
+				///////////////////////////////
+				
+			});
+		</script>
+		
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>Home</h1>
+			</div><!-- /header -->
+			
+			<!-- 
+			레이블의 for는 아이디값과 일치 시켜준다. 
+			
+			구룹은 기본적으로 name 으로 나눠지게되며  같은 이름 같은 아이디라 할지라도
+			filedset으로 나누면 다시 구룹이 따로 나눠지게된다.
+			
+			-->
+			
+			<div data-role='content'>
+				
+				<div data-role='fieldcontain'>
+					
+					<fieldset  data-role='controlgroup'>
+						
+						<label for='radio-french' >french</label>
+						<input type="radio" id='radio-french' name='food' value='french' />
+						
+						<label for='radio-italy' >italy</label>
+						<input type="radio" id='radio-italy' name='food' value='italy' />
+						
+						<label for='radio-japan' >japan</label>
+						<input type="radio" id='radio-japan' name='food' value='japan' />
+						
+						<label for='radio-china' >china</label>
+						<input type="radio" id='radio-china' name='food' value='china' />
+						
+					</fieldset>
+					
+<!-- 					이름이같지만 필드셋이달라서 다른 구릅으로 취급한다. -->
+					<fieldset  data-role='controlgroup'>
+						<label for='lang-french' >french</label>
+						<input type="radio" id='lang-french' name='food' value='french' />
+						
+						<label for='lang-italy' >italy</label>
+						<input type="radio" id='lang-italy' name='food' value='italy' />
+						
+						<label for='lang-japan' >japan</label>
+						<input type="radio" id='lang-japan' name='food' value='japan' />
+						
+						<label for='lang-china' >china</label>
+						<input type="radio" id='lang-china' name='food' value='china' />
+						
+					</fieldset>
+					
+				</div>
+				
+				
+				<a data-role='button'> 읽기 </a>
+				<a data-role='button'> 쓰기 </a>
+				
+				<p id='log' ></p>
+				
+			</div><!-- /content -->
+			
+			<div data-role='footer' data-position="fixed">
+				<h1>&copy; 2011-12 goorume</h1>
+			</div><!-- /footer -->
+		</div>
+			
+	</body>
+</html>

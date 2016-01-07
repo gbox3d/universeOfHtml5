@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+
+<button id="btn-del" >del</button>
+
+<script>
+
+    document.querySelector('#btn-del').addEventListener('click',function() {
+
+        var element = document.querySelector('ul');
+
+        /*
+        이 방법이 자식 개체수가 몇개 안될경우에는
+        innerHtml = ''
+         보다 더 빠르다.
+         */
+        //자식노드 모드 제거하기
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+
+    });
+
+
+
+</script>
+
+
+</body>
+</html>

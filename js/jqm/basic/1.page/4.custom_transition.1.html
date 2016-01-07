@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>타이밍 조절하기</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="../lib/jquery.mobile-1.1.0.css" />
+		
+		
+		<style>
+			
+			/*
+			* 페이드인 페이드아웃 페이지전환 타이밍관련 내용을 오버라이딩해준다.
+			*/
+			.fade.out {
+			
+			-webkit-animation-duration: 1250ms;/* 사라지는 시간을 늘려줌*/
+			-webkit-animation-name: fadeout;
+			}
+			.fade.in {
+			-webkit-animation-duration: 1225ms;
+			-webkit-animation-name: fadein;
+			}
+			
+			/*
+			 * .pop.in , .pop.out
+			 * .slide.out, .slide.in
+			 * .slidedown.out
+			 * .slideup.out
+			 * .flip.out
+			 * .turn.out
+			 * .flow.out
+			 */
+		</style>
+		
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script>
+		
+			$(document).bind('mobileinit', function(evt) {
+
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+
+				//$.mobile 관련 전역변수 초기화는 여기서한다.
+				$.mobile.autoInitializePage = false;
+				console.log('mobile init');
+
+			});
+
+		</script>
+		
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				console.log('document ready..');
+				console.log('before jqm pageinit');
+				
+				//페이지 관련 이밴트들은 여기서 바인딩시켜줘야한다.
+				//$(':jqmData(role="content")').text('hello jqm!');
+				
+				
+				
+				$.mobile.initializePage();
+				// 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+
+				// 이 시점부터 첫 페이지가 보이기 시작.....
+				console.log('after jqm pageinit');
+				//document 이벤트관련 초기화는 여기서 한다.
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>header</h1>
+			</div><!-- /header -->
+			
+			<div data-role='content'>
+				<a data-role='button' href='#page2' > next </a>
+			</div><!-- /content -->
+			
+			<div data-role='footer' data-position="fixed">
+				<h1>&copy; 2011-12 goorume</h1>
+			</div><!-- /footer -->
+		</div>
+		
+		<div data-role="page" id='page2' data-add-back-btn='true'>
+			<div data-role="header">
+				<h1>header</h1>
+			</div><!-- /header -->
+			
+			<div data-role='content'>
+				<p>page2</p>
+			</div><!-- /content -->
+			
+			<div data-role='footer' data-position="fixed">
+				<h1>&copy; 2011-12 goorume</h1>
+			</div><!-- /footer -->
+		</div>
+			
+	</body>
+</html>

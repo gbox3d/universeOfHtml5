@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hello-backbonejs</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+        <script>
+            $(function() {
+                var AppRouter = Backbone.Router.extend({
+                    routes: {
+                        "posts/:id": "getPost",
+                        "*actions": "defaultRoute" // Backbone will try match the route above first
+                    }
+                });
+                // Instantiate the router
+                var app_router = new AppRouter;
+                app_router.on('route:getPost', function(id) {
+                    // Note the variable in the route definition being passed in here
+                    console.log("Get post number " + id);
+                });
+                app_router.on('route:defaultRoute', function(actions) {
+                    console.log('action : ' + actions);
+                });
+                // Start Backbone history a necessary step for bookmarkable URL's
+                Backbone.history.start();
+                window.location = "2.html#/posts/386";
+                
+
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

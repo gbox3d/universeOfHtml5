@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+
+    <title> none </title>
+
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+    <style></style>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+
+        function CTest() {
+
+            this.label = 'hello';
+
+            function test() {
+
+                console.log('1 :' + this.label);
+            }
+
+            this.test2 = function() {
+
+                test();
+                console.log('2 :' + this.label);
+            }
+
+
+            setTimeout(this.test2,1)
+
+        }
+
+        var test = new CTest();
+
+        test.test2();
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+</html>

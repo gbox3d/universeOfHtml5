@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+p {
+	background: yellow;
+}
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+
+    var closer = (function() {
+        var index = 0;
+        return function() {
+            $("p").after($("<h1></h1>").text('index : ' + index++));
+            $("p").before($("<h1></h1>").text('index : ' + index++));
+        }
+
+    })();
+
+    $(function() {
+        $('button:eq(0)').on('click',
+                closer
+        );
+    });
+
+    /*
+  
+  $(document).ready(
+		  
+		  function() {
+			  var index =0;
+			  $('button:eq(0)').toggle(
+					  function() { $("p").after($("<h1></h1>").text('index : ' + index++)); },
+					  function() { $("p").before($("<h1></h1>").text('index : ' + index++)); }
+					  );
+			  
+			  //after insertAfter는 append 와 appendTo 처럼 기준의 차이이다.
+			  $('button:eq(1)').toggle(
+					  function() { 
+						  
+						  $("<h1></h1>").text('index : ' + index++).insertAfter($('p')); // 그냥 p 로 해주어도된다.
+					  },
+					  function() { 
+						  $("<h1></h1>").text('index : ' + index++).insertBefore($('p'));
+						  }
+					  );
+		     
+		  }
+  );
+  */
+  </script>
+</head>
+<body>
+	<button> test </button><button> test2 </button><br><br>
+	<p>I would like to say:</p>
+
+
+
+</body>
+</html>

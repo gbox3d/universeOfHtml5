@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		
+		<title> none </title>
+		
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<style></style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			function CHello(vaule) {
+				
+				this.public_value = vaule;
+				
+			}
+			
+			var objs = [];
+			
+			objs[0] = new CHello(1);
+			objs[1] = new CHello('hello');
+			
+			for(index in objs) {
+				document.write(objs[index].public_value + '<br/>');
+			}
+			
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+</html>

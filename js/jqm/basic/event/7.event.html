@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>1</title>
+        <meta name="description" content="" />
+        <meta name="author" content="이 석준" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                location.href = '#page1';
+
+                //페이지가보여질때
+                $('#page2').bind('pageshow',
+                        function(event, ui) {
+                            $(this).find('.content .movie').html('<video width="320" height="240" controls="controls">  <source src="http://www.w3schools.com/html5/movie.mp4" type="video/mp4" />  Your browser does not support the video tag.</video>');
+                        }
+                );
+
+                //페이지가 가려질때
+                //만약 다른 파일에있는 페이지일경우 bind 대신 live를 사용한다.
+                $('#page2').bind('pagehide',
+                        function(event, ui) {
+                            $(this).find('.content .movie').html('');
+
+                        }
+                );
+
+                //페이지가보여질때
+                $('#page3').bind('pageshow',
+                        function(event, ui) {
+                            //$('p').load('http://m.naver.com');
+                            $(this).find('.content .webview').html('<iframe width="480" height="320" src="http://m.naver.com" frameborder="0" allowfullscreen></iframe>');
+                        }
+                );
+                /*
+                 $('#page1').find('a').click(function() {
+                 console.log('click');
+                 $('#page2 .content .movie').html('<iframe width="480" height="320" src="http://www.youtube.com/embed/04rZ7adcMiM" frameborder="0" allowfullscreen></iframe>');
+                 
+                 });
+                 
+                 $('#page2').find('a').click(function() {
+                 $('#page2 .content .movie').html('');
+                 });	
+                 */
+
+            });
+
+        </script> 
+    </head>
+    <body>
+        <p id='test'> test </p>
+
+        <section id='page1' data-role='page'>
+            <header data-role='header'>
+                <h1>example 2</h1>
+            </header>
+            <div class='content'>
+                <p>
+                    first page
+                    <a href='#page2'>goto</a><br>
+                    second page
+                    <a href='#page3'>goto</a>
+                </p>
+            </div>
+            <footer data-role='footer'>
+                <h1>test</h1>
+            </footer>
+        </section>
+
+        <section id='page2' data-role='page' >
+            <header data-role='header'>
+                <h1>movie window</h1>
+            </header>
+            <div class='content'>
+                <div class='movie'>
+
+                </div>
+                <a href='#page1' data-direction='reverse' >back</a>
+            </div>
+            <footer data-role='footer'>
+                <h1>test</h1>
+            </footer>
+        </section>
+
+        <section id='page3' data-role='page' >
+            <header data-role='header'>
+                <h1>hello web window</h1>
+            </header>
+            <div class='content'>
+
+                <div class='webview'>
+
+                </div>
+                <a href='#page1' data-direction='reverse' >back</a>
+            </div>
+            <footer data-role='footer'>
+                <h1>test</h1>
+            </footer>
+        </section>
+
+    </body>
+
+
+</html>

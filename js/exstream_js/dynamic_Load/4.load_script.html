@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+
+<script>
+
+    function loadScript(url, callback) {
+        var scriptEl = document.createElement('script');
+        scriptEl.type = 'text/javascript';
+        // IE에서는 onreadystatechange를 사용
+        scriptEl.onload = function () {
+            callback();
+        };
+        scriptEl.src = url;
+        document.getElementsByTagName('head')[0].appendChild(scriptEl);
+    }
+
+
+    loadScript('./test.3.js',function() {
+
+        test();
+
+    });
+
+
+</script>
+
+</body>
+</html>

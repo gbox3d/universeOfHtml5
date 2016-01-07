@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>4. button </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+		<style>
+			
+			/*
+			 * 이름 명명 공식은 ui-icon-[새로정한 아이콘이름]
+			 */
+			.ui-icon-my-custom-icon {
+				
+				background-image: url(21-skull.png)/*{global-icon-set}*/;
+				
+				/* 아이콘 크기에 맞추기*/
+				width: 22px; 
+				height: 24px;
+				
+			/*글씨와 아이콘 간격 좁히기*/
+				margin-left: 10px; 
+				
+			}
+
+		</style>
+		
+		<script>
+			
+			$(function() {
+				$(':jqmData(role="button"):eq(0)').bind('click', function(event) {
+				  console.log('click');
+				  
+				  console.log(  $('span.ui-icon-my-custom-icon') );
+				   $('span.ui-icon-my-custom-icon').css('left','10px');
+				  
+				});
+			});
+			
+		</script>
+		
+
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>header</h1>
+			</div><!-- /header -->
+
+			<div data-role='content'>
+				<a href="#" data-role="button" data-icon="my-custom-icon" data-inline='true' data-mini='true'
+				
+				 >custom icon</a>
+			</div><!-- /content -->
+
+			<div data-role='footer'>
+				<p>
+					&copy; 2011-12 goorume
+				</p>
+			</div><!-- /footer -->
+		</div>
+
+	</body>
+</html>

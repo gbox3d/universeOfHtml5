@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		
+		<title>dom sample 1. get element</title>
+		
+		<script>
+			
+			window.onload = function() {
+				
+				//이름속성으로 찾기
+				var elem = document.getElementsByName('name_test');
+				
+				elem[1].innerText += ' getElementsByName test';
+				
+				//클래스속성으로 찾기
+				//var elem = document.getElementsByClassName('clstest');
+                elem = document.querySelectorAll('.clstest');
+				elem[2].innerText += ' getElementsByClassName test';
+				
+				//태그이름으로 찾기
+				//var elem = document.getElementsByTagName('li');
+                elem = document.querySelectorAll('li');
+				elem[2].innerText += ' getElementsByTagName test';
+				
+				//아이디속성으로 찾기
+				//var elem = document.getElementById('test');
+                elem = document.querySelector('#test');
+				elem.innerText += ' getElementById test';
+				
+				
+			}
+		</script>
+		
+	</head>
+	<body>
+		<ul>
+			<li name='name_test'>1 </li>
+			<li name='name_test'>2 </li>
+			<li name='name_test'>3 </li>
+			<li class='clstest'>4</li>
+			<li class='clstest'>5</li>
+			<li class='clstest'>6</li>
+			<li id='test'>7 </li>
+			<li >8 </li>
+		</ul>
+	</body>
+</html>

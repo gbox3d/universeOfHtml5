@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> inheritance </title>
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<style></style>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			/*
+			
+			//부모의 모든 프로토타입함수 상속받기
+			function extend(sub, base) {
+				for (var key in base.prototype) {
+					if (base.prototype.hasOwnProperty(key) && sub.prototype[key] === undefined) {
+						sub.prototype[key] = base.prototype[key];
+					}
+				}
+			}
+			*/
+			
+/////////// CRect ////////////////////
+			function CShape(x,y) {
+				if(x != undefined) {
+					this.X = x;
+					this.Y = y;
+				}
+				else {
+					this.X = 0;
+					this.Y = 0;
+				}
+			}
+			
+			CShape.prototype.setpos = function(x,y) {
+				this.X = x;
+				this.Y = y;
+			}
+			
+			CShape.prototype.draw = function() {
+				//console.log('draw shape : ' + this.X +','+ this.Y);
+				document.write('draw shape : ' + JSON.stringify(this) +'<br/>');
+			}
+			
+/////////// CRect ////////////////////
+			function CRect() {
+				this.height = 0;
+				this.width = 0;
+				
+				CShape.apply(this,[5,6]); //부모클래스 초기화하고 멤버 변수들 상속받기
+			}
+			
+			
+			// 프로토타입 함수 상속받기
+			CRect.prototype.setpos = CShape.prototype.setpos;
+			
+			//오버라이딩
+			CRect.prototype.draw = function() {
+				document.write('draw rect : ' + JSON.stringify(this) +'<br/>');
+			}
+			
+			obj = [];
+			
+			obj.push(new CRect());
+			obj.push(new CRect());
+			obj.push(new CShape());
+			
+			obj[1].setpos(3,4);
+			
+			for(index in obj) {
+				obj[index].draw();
+			}
+						
+		</script>
+
+	</head>
+
+	<body>
+
+	</body>
+</html>

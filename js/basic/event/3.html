@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div id='test1' name='parent' style= "position: absolute; background-color: #ff0;width: 200px;height: 200px;">
+
+    <div id="test2" style='position: absolute; background-color: red;width: 100px;height: 100px;
+    -webkit-transform : translate(50px,50px);' ></div>
+
+    <div id="test3" style='position: absolute; background-color: #002080;width: 50px;height: 50px;' ></div>
+
+</div>
+
+<!-- 자식노드가 전면에 나왔을때는 메시지를 받을수 있으나 동등한 노드가 앞을 가리면 메씨지를 받을수없다.  -->
+<div style='position: absolute;
+background-color: #ff00ff;
+width: 100px;
+height: 100px;
+    -webkit-transform : translate(0px,50px);
+    -webkit-user-select : none;
+    ' >
+</div>
+
+<div id='log' style="position: absolute; top:250px;" ></div>
+
+
+<script>
+
+    document.getElementById('test1').addEventListener('mousemove', function(event) {
+
+        event.preventDefault();
+
+        document.getElementById('log').innerText = event.layerX + ',' + event.layerY;
+
+        document.getElementById('test3').style.WebkitTransform = 'translate(' + (parseInt(event.layerX)-25) + 'px,' + (parseInt(event.layerY)-25) + 'px)';
+    });
+
+
+
+
+    //선택 모드로 빠지지않도록
+//    document.getElementById('test1').addEventListener('mousedown', function(event) {
+//
+//        event.preventDefault();
+//
+//    });
+
+
+
+
+</script>
+
+</body>
+</html>

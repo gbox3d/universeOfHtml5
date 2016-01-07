@@ -1,0 +1,55 @@
+<html>
+	<head>
+
+		<script type="text/javascript">
+			
+			
+			window.onload = function(event) {
+				/*
+				 * 
+				 * 
+				 * 세번째 인자는 이밴트 버플링의 여부를 묻는 인자로써 참일경우 밑에서부터 위로 이밴트가 전달된다. (부모부터 자식으로 이밴트가 전달됨.)
+				 * 디플트 값은 거짓이다.
+				 */
+				document.getElementById('test1').addEventListener('click', function(event) {
+	
+						console.log('test1');
+						console.log('target : ' + event.target.id);
+						
+						console.log(event.timeStamp  + " " + event.type);
+						
+						var node = document.createElement('p');
+						node.innerText = 'test1';
+						document.getElementById('log').appendChild(node);
+						
+					}, false);
+					
+				document.getElementById('test2').addEventListener('click', function(event) {
+	
+						console.log('test2');
+						console.log('target : ' + event.target.id);
+						
+						console.log(event.timeStamp  + " " + event.type);
+						
+						var node = document.createElement('p');
+						node.innerText = 'test2';
+						document.getElementById('log').appendChild(node);
+	
+					}, false);
+					
+			}
+
+		</script>
+
+	</head>
+	<body>
+		<div id='test1' name='parent' style=" background-color: #ff0;width: 200px;height: 200px;padding: 20px">
+			test1
+			<div id='test2' name='child' style='margin:auto;background-color: red;width: 100px;height: 100px' >  
+				test2
+            </div>
+		</div>
+		<div id='log'></div>
+		
+	</body>
+</html>

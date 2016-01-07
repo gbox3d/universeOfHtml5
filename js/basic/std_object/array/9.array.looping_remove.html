@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		
+		<title>dom sample 1. get element</title>
+		
+		<script>
+			
+			var array = [52,273,103,32,274,129];
+			
+			//100이상의 수만 골라서 제데로 지워지지않는다.
+			for(var index in array) {
+				if(array[index] > 100) 
+				{
+					array.splice(index,1);
+				}
+			}
+			
+			document.write(array + '<br>');
+			
+			//제대로 동작한다.			
+			for(var i=array.length;i >= 0;i--) 
+			{
+				if(array[i] > 100) 
+				{
+					array.splice(i,1);
+				}
+				
+			}
+			document.write(array + '<br>');
+			
+			
+		</script>
+		
+	</head>
+	<body>
+		
+	</body>
+</html>

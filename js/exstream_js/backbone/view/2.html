@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hello-backbonejs</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+
+        <script>
+            $(function() {
+                var ListView = Backbone.View.extend({
+                    initialize: function() {
+                        _.bindAll(this,'render');
+                        this.render();
+
+                    },
+                    render: function() {
+                        this.$el.append('<button>test</button>');
+                        console.log('test');
+
+                    }
+                });
+
+                var listView = new ListView({el: $('body')});
+
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

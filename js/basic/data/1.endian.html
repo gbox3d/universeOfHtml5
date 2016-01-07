@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    var buffer = new ArrayBuffer(12);
+    var x = new DataView(buffer, 0);
+    x.setInt8(0, 22);
+    x.setFloat32(1, Math.PI);
+    console.log(x.getInt8(0));
+    console.log(x.getFloat32(1));
+
+</script>
+
+</body>
+</html>

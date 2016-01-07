@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+
+        <title> none </title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script>
+
+            function Anim(user_param) {
+                //사용자 정의 변수는 초기값은 0
+                $('#test').animate(
+                        {param: user_param},
+                        {
+                            easing: "linear",
+                            duration: 1000,
+                            step: function(now, fx) {
+                                console.log(fx);
+                                console.log('now :' + now);
+                                //$('<p></p>').text(fx.now + ' , ' + fx.prop ).appendTo('#log');
+                                //$(this).css('-webkit-transform','rotate(' +	fx.now + 'deg)');
+                            },
+                            complete: function() {
+                                console.log('complete');
+                                //Anim(0);
+                                //$(this).stop();
+                                //loopAnim();
+                            }
+                        }
+                );
+
+            }
+
+            $(function() {
+
+                $.fx.interval = 200;
+                Anim(100);
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <div id='test' class='anim-box'></div>
+
+        <div id='log'></div>
+
+    </body>
+</html>

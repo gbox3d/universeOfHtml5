@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- 
+                제이쿼리 모바일용 교육용 코스웨어 샘플 프레임웍
+        작성자 : 도플광어 (twitter.com/gbox3d)
+        버전 : 1.0b
+        
+        -구성요소 정리-
+        jqm 1.1.1 (http://jquerymobile.com/blog/2012/07/12/jqm-1-1-1/)
+        iscroll 4.1 (http://cubiq.org/iscroll-4)
+        ios theme plugin (http://taitems.github.com/iOS-Inspired-jQuery-Mobile-Theme/)
+        
+        저작권 : jqm 과 iscoll 의 라이센스 정책을 상속받음
+        -->
+
+        <title>iqm simple sample</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../../libs/jqm/css/themes/default/jquery.mobile-1.2.0.css" />
+
+        <script src="../../libs/jqm/js/jquery.js"></script>
+
+        <script>
+
+            $(document).bind('mobileinit', function(evt) {
+                //$.mobile 관련 전역변수 초기화는 여기서한다.
+                $.mobile.autoInitializePage = false;
+                console.log('mobile init');
+
+            });
+
+        </script>
+
+        <script src="../../libs/jqm/js/jquery.mobile-1.2.0.js"></script>
+        <script src="../../libs/iscroll/iscroll.js"></script>
+
+        <script type="text/javascript">
+
+            $(function() {
+
+                //페이지 초기화 이전작업은 여기서 코딩해준다..
+
+                // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+                $.mobile.initializePage();
+
+
+                //페이지 초기화 이후작업 여기에 코딩해준다.
+
+                $('#btn-gettalk').on('click', function() {
+                    $.mobile.showPageLoadingMsg();
+                    $.ajax(
+                            {
+                                url: 'http://sf2009.web-bi.net/work/api/get_talklist.php',
+                                type: 'GET',
+                                jsonp: 'jsonpCallback',
+                                jsonpCallback: 'mycallback',
+                                dataType: "jsonp",
+                                data: {
+                                    startno: 0,
+                                    listcount: parseInt($('#input-list-count').val())
+                                },
+                                success: function(data, textStatus, jqXHR) {
+                                    console.log(data);
+                                    $('#api-ver').text(data.api_ver);
+
+                                    $('#qz-list').empty();
+                                    $.each(data.items, function(index, item) {
+                                        $('#qz-list').append(
+                                                $('<li></li>').data('quiz-detail', item).append(
+                                                $('<a></a>').text(item.QUIZ))
+                                                );
+                                    });
+                                    $('#qz-list').listview('refresh');
+                                },
+                                error: function(jqXHR, textStatus) {
+
+                                },
+                                complete: function(jqXHR, textStatus, errorThrown) {
+                                    $.mobile.hidePageLoadingMsg();
+                                }
+                            });
+
+                    $('#qz-list').on('click', 'li', function(event) {
+                        console.log('click');
+                        var qz_detail = $(this).data('quiz-detail');
+                        console.log(qz_detail);
+                        $('#solve-text').text(qz_detail.TEXT);
+                        $.mobile.changePage('#page-solve');
+
+                    });
+                });
+//////////////////퀴즈 업로드 처리
+                $('#btn-upload').on('click', function(event) {
+                    $.mobile.showPageLoadingMsg();
+                    $.ajax({
+                        url: 'http://sf2009.web-bi.net/work/api/insert.php',
+                        type: 'POST',
+                        jsonp: 'jsonpCallback',
+                        jsonpCallback: 'mycallback',
+                        dataType: "jsonp",
+                        data: {
+                            quiz: $('#input-qz').val(),
+                            text: $('#input-solve').val()
+                        },
+                        success: function(data, textStatus, jqXHR) {
+                            $('#log-result').text(data.result);
+                        },
+                        error: function(jqXHR, textStatus) {
+                        },
+                        complete: function(jqXHR, textStatus, errorThrown) {
+                            $.mobile.hidePageLoadingMsg();
+                        }
+                    });
+
+                });
+//////////////////////////
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="header" data-position="fixed"  data-theme='a'>
+                <h1>Home</h1>
+            </div><!-- /header -->
+
+            <div data-role='content' >
+                <p id='api-ver'></p>
+                <ul data-role="listview" id="qz-list" ></ul>
+                <br>
+
+                <ul data-role="listview">
+
+                    <li>
+                        <input type="number" id="input-list-count" value="5" />
+                        <button id="btn-gettalk">퀴즈얻기</button>
+                    </li>
+                    <li>
+                        <label>문제</label>
+                        <input type="text" id="input-qz"/>
+                        <label>답</label>
+                        <input type="text" id="input-solve"/>
+                        <button id='btn-upload'>퀴즈올리기</button>
+
+                    </li>
+                    <li>
+                        <p id="log-result"></p>
+                    </li>
+                </ul>
+
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed" >
+                <h1>&copy; 2011-12 goorume</h1>
+            </div><!-- /footer -->
+        </div>
+
+        <div data-role='page' id='page-solve' data-add-back-btn='true'>
+            <div data-role="header" >
+                <h1>정답은 바로...</h1>
+            </div>
+            <div data-role='content'>
+                <p id="solve-text"></p>
+            </div>
+        </div>
+
+    </body>
+</html>

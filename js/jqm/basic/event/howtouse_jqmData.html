@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>1</title>
+		<meta name="description" content="" />
+		<meta name="author" content="이 석준" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+		
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script>
+		
+			$(document).bind('mobileinit', function(evt) {
+
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+
+				//$.mobile 관련 전역변수 초기화는 여기서한다.
+				$.mobile.autoInitializePage = false;
+				console.log('mobile init');
+
+			});
+
+		</script>
+		
+		<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				
+				//페이지가보여질때
+				$(':jqmData(role="page")').bind('pageshow',
+					function(event,ui) {
+						console.log('page show :' + $(event.target).attr('id') );
+						console.log(event);
+						console.log(ui);
+					}
+				);
+				
+				$.mobile.initializePage();
+				
+			});
+
+		</script> 
+	</head>
+	<body>
+		<p id='test'> test </p>
+		<body>
+		<section id='page1' data-role='page'>
+			<header data-role='header'>
+				<h1>example 2</h1>
+			</header>
+			<div class='content'>
+				<p>
+					first page
+					<a href='#page2'>goto</a><br>
+					second page
+					<a href='#page3'>goto</a>
+				</p>
+			</div>
+			<footer data-role='footer'>
+				<h1>test</h1>
+			</footer>
+		</section>
+		
+		<section id='page2' data-role='page' >
+			<header data-role='header'>
+				<h1>movie window</h1>
+			</header>
+			<div class='content'>
+				<p>
+					movie page
+					<div class='movie'>
+						
+					</div>
+					<a href='#page1' data-direction='reverse' >back</a>
+				</p>
+			</div>
+			<footer data-role='footer'>
+				<h1>test</h1>
+			</footer>
+		</section>
+		
+		<section id='page3' data-role='page' >
+			<header data-role='header'>
+				<h1>hello web window</h1>
+			</header>
+			<div class='content'>
+				<p>
+					
+					<div class='webview'>
+						
+					</div>
+					<a href='#page1' data-direction='reverse' >back</a>
+				</p>
+			</div>
+			<footer data-role='footer'>
+				<h1>test</h1>
+			</footer>
+		</section>
+		
+	</body>
+		
+	</body>
+</html>

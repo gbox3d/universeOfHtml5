@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+        <script type="text/javascript">
+
+            /*
+         * jsonp 와 json으로 데이터를 전송하는것을 비교한다.
+         */
+
+            //보안이 된상태에서도 데이터를 주고받을수있다.
+            function test_jsonp() {
+                $('#log').text('loading...');
+                //http://sf2009.web-bi.net/api/jsonp_2.php?callback=jsonpCallback&name=suckzun
+                $.ajax({
+                    url: "http://sf2009.web-bi.net/work/api/jsonp_2.php",
+                    jsonp: 'jsonpCallback',
+                    jsonpCallback: 'mycallback',
+                    dataType: 'jsonp',
+                    data: {name: 'suckzun'},
+                    success: function(data) {
+                        $('#log').text('load success');
+                        console.log(data);
+                        $('<p></p>').text(data.message).appendTo('#out');
+                    }
+                });
+
+            }
+
+            //보안해제해야만 데이터를 받아볼수있다.
+            function test_json() {
+                $('#log').text('loading...');
+                //http://sf2009.web-bi.net/api/jsonp_2.php?name=suckzun
+                $.ajax({
+                    url: "http://sf2009.web-bi.net/work/api/json_2.php",
+                    dataType: 'json',
+                    data: {name: 'suckzun'},
+                    success: function(data) {
+                        $('#log').text('load success');
+                        console.log(data);
+
+                        $('<p></p>').text(data.message).appendTo('#out');
+                    },
+                    error: function(qXHR, textStatus, errorThrown) {
+                        console.log('error ');
+                        console.log(qXHR);
+                        $('#log').text('failed status :' + qXHR.status);
+
+                    }
+                });
+
+            }
+
+            $(document).ready(
+                    function() {
+
+                        $('#btn_jsonp').click(
+                                test_jsonp
+                                );
+
+                        $('#btn_json').click(
+                                test_json
+                                );
+
+                        $('#btn_clear').click(
+                                function() {
+                                    $('#out').empty();
+                                }
+                        );
+
+
+
+
+                    }
+            );
+
+        </script>
+
+    </head>
+    <body>
+        <button id='btn_jsonp' >jsonp</button>
+        <button id='btn_json' >json</button>
+        <button id='btn_clear' >clear</button>
+        <div id='log'></div>
+        <div id='out'></div>
+    </body>
+</html>

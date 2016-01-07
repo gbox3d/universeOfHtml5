@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>closer sample1</title>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+
+                function closer(name, loop, interval) {
+                    var count = 0;
+
+                    var Tid = window.setInterval(
+                            function(param) {
+
+                                $('<p></p>').text(param.name + ' count :' + count++).appendTo('body');
+
+                                if (count >= param.loop) {
+                                    clearInterval(Tid);
+                                }
+
+                                return false;
+                            },
+                            interval,
+                            {
+                                name: name,
+                                loop: loop,
+                                interval: interval
+                            }
+                    );
+                }
+
+                closer('closer1', 3, 300);
+                closer('closer2', 5, 100);
+
+
+
+            });
+        </script>
+    </head>
+    <body>		
+    </body>
+</html>

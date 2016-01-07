@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hello-backbonejs</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+        <script>
+            $(function() {
+                /* 
+         * To change this template, choose Tools | Templates
+         * and open the template in the editor.
+         */
+
+                Person = Backbone.Model.extend({
+                    initialize: function() {
+                        console.log('wellcome');
+                        console.log(this.attributes.name);
+                    }
+
+                });
+                var person = new Person({name: 'tom', age: 37, children: ['lyn']});
+                console.log(person.get('name'));
+                console.log(person.get('children'));
+                console.log(person.attributes.name);
+                
+
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

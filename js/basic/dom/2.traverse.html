@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+<!--
+	제귀적으로 DOM 트리 순회하기
+	-->
+		<title>2.traverse</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<style>
+			div  {
+				margin : 20px;
+				border : 1px solid;
+				background: red;
+			}
+			p {
+				background : yellow;
+			}
+		</style>
+		
+		<script>
+			function traverse(node) {
+				//var node = document.body;
+				var children = node.children;
+				
+				var i;
+				for (i = 0; i < children.length; i++) {
+					
+					var name = children[i].getAttribute('my-data');
+					
+					if(name != null)
+						console.log(name);
+					traverse(children[i]);
+					
+				}
+
+			}
+
+
+			window.onload = function() {
+				traverse(document.body);
+
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<div my-data='galaxy' >
+			<p>galaxy</p>
+			<div my-data='sun' >
+				<p>sun</p>
+				<div my-data='earth'>
+					<p>earth</p>
+					<div my-data='moon'>
+						<p>moon</p>
+					</div>
+				</div>
+				<div my-data='mars'>
+					<p>mars</p>
+					<div my-data='deimos'>
+						<p>deimos</p>
+					</div>
+				</div>
+				
+			</div>
+	
+		</div>
+		
+		
+	</body>
+</html>

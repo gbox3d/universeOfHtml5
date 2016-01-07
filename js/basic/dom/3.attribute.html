@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+    <title> set get attribute </title>
+
+
+</head>
+
+<body>
+<div movie='rambo' data-json='{"name":"siver star","job":"actor"}' > hot movie </div>
+
+<script>
+
+    var node = document.body.children[0];
+
+    console.log(node.getAttribute('movie'));
+    console.log( JSON.parse( node.getAttribute('data-json')).name);
+
+    node.setAttribute('movie','commando');
+    console.log(node.getAttribute('movie'));
+
+</script>
+
+</body>
+</html>

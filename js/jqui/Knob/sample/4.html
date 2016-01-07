@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> 쓰기 예제 </title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="../js/jquery.knob.js"></script>
+        
+		<script>
+			$(function() {
+				 $("input:eq(0)").knob();	
+				 
+				 $('button:contains("inc")').bind('click', function(event) {
+				   $("input:eq(0)").val( parseInt($("input:eq(0)").val()) + 1).trigger('change');
+				 });
+				 
+				 
+			});
+					
+		</script>
+		
+	</head>
+
+	<body>
+		<input type="text">
+		<button>inc</button>
+		
+	</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>data() sample</title>
+
+<style>
+div {
+	margin: 5px;
+	background: yellow;
+}
+
+button {
+	margin: 5px;
+	font-size: 14px;
+}
+
+p {
+	margin: 5px;
+	color: blue;
+}
+
+span {
+	color: red;
+}
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {	
+	
+	console.log('role : ',$('div').data('role'));
+	console.log('last-value:',$('div').data('last-value'));
+	console.log('options:',$('div').data('options').name );
+	
+	$('button').click(function() {
+		var value;
+		switch($('button').index(this)) {
+		case 0:
+			value = $('div').data('blah');
+			break;
+		case 1:
+			$('div').data('blah','hello');
+			value = 'stored';
+			break;
+		case 2:
+			$('div').data('blah',2011);
+			value = 'stored';
+			break;
+		case 3:
+			$('div').removeData('blah');
+			value = 'removed';
+			break;
+		}
+		$('span').text(" " + value);
+		
+	});
+	
+});
+</script>
+
+</head>
+<body>
+	<div data-role="page" data-last-value="43" data-options='{"name":"John"}'>A div</div>
+	<button>Get "blah" from the div</button>
+	<button>Set "blah" to "hello"</button>
+
+	<button>Set "blah" to 2011</button>
+	<button>Remove "blah" from the div</button>
+	<p>
+		The "blah" value of this div is <span>?</span>
+	</p>
+</body>
+</html>

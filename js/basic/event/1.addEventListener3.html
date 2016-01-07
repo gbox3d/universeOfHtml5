@@ -1,0 +1,46 @@
+<html>
+	<head>
+
+		<script type="text/javascript">
+			window.onload = function(event) {
+				
+				/*
+                 stopPropagation 을 사용하면 이밴트 전달을 금지 할수 있습니다.
+				 */
+				
+				document.getElementById('test1').addEventListener('click', function(event) {
+	
+						console.log('test1');
+						console.log('target : ' + event.target.id);
+						
+						console.log(event.timeStamp  + " " + event.type);
+	
+					});
+				document.getElementById('test2').addEventListener('click', function(event) {
+	
+						console.log('test2');
+						console.log('target : ' + event.target.id);
+						
+						console.log(event.timeStamp  + " " + event.type);
+						
+						//이밴트 전달 금지
+						event.cancelBubble = true;
+						event.stopPropagation();
+	
+					});
+					
+			}
+
+		</script>
+
+	</head>
+	<body>
+		<div id='test1' name='parent' style="background-color: #ff0;width: 200px;height: 200px;padding: 20px">test1
+			
+			<div id='test2' name='child' style='margin:auto;background-color: red;width: 100px;height: 100px' >test2  </div>
+		</div>
+		
+		<div id='log'></div>
+		
+	</body>
+</html>

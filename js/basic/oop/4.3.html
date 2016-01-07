@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+    <title> inheritance </title>
+
+    <script>
+
+        /////////// CRect ////////////////////
+        function CShape(x,y) {
+            if(x != undefined) {
+                this.X = x;
+                this.Y = y;
+            }
+            else {
+                this.X = 0;
+                this.Y = 0;
+            }
+        }
+        CShape.prototype.draw = function() {
+            console.log('draw shape : ' + this.X +','+ this.Y);
+        }
+        /////////////////////////////////
+
+        /////////// CRect ////////////////////
+        function CRect(x,y,w,h) {
+            this.height = h;
+            this.width = w;
+
+            CShape.apply(this,[x,y]); //부모클래스 초기화하고 멤버 변수들 상속받기
+        }
+        CRect.prototype.draw = function() {
+
+            //슈퍼클래스 멤버함수 호출
+            CShape.prototype.draw.call(this);
+
+            console.log('draw rect : ' + this.X +','+ this.Y + ','+this.width +','+this.height);
+        }
+        /////////////////////////////////
+
+        obj = [];
+
+        obj.push(new CRect(1,2,3,4));
+        obj.push(new CRect(5,6,7,8));
+        obj.push(new CShape());
+
+
+        for(index in obj) {
+            obj[index].draw();
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>js oop sample 1</title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
+		<script>
+			$(document).ready(function () {
+			  
+				
+			  obj = new ooptest();
+			  
+			  console.log(obj.pri_val);
+			  //퍼블릭 함수로는 프라이빗 변수를 다룰수없다.
+			  console.log(obj.getpub_prival());
+			  
+			  console.log(obj.pub_val);
+			  
+			  //프라이빗 변수이나 프리빌지드 함수(프라이빗 변수를 퍼블릭하게 볼수 있는 함수 )로 변수에 접근했다.
+			  console.log(obj.getpriv_prival());
+			  
+			  //호출할수없다.
+			  //obj.pri_func();
+			  
+			  
+			  
+			});
+			
+			function ooptest () {
+			  var pri_val = 'it is private'; //프라이빗 변수 선언 
+			  this.pub_val = 'it is public'; //퍼블릭 변수선
+			  
+			  //privileged
+			  this.getpriv_prival = function () {
+			  	//프리빌리지드함수는 프라이빗 함수 호출가능하다.
+			  	pri_func();
+			  	
+				return pri_val;
+			  }
+			  
+			  function pri_func() {
+			  	console.log('call private function');
+			  }
+			  
+			}
+			
+			ooptest.prototype.getpub_prival = function () {
+				//호출할수없다.
+				//pri_func();
+			  return this.pri_val; //프라잇변수를 다룰수없다.
+			}
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<h1>oop sample 1 private, privileged, public</h1>
+		
+	</body>
+</html>

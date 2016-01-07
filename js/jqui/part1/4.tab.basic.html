@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> jquery ui tab basic </title>
+
+		<link rel="stylesheet" href="../jqueryui/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
+		<script src="../jqueryui/js/jquery-1.7.2.min.js"></script>
+		<script src="../jqueryui/js/jquery-ui-1.8.20.custom.min.js"></script>
+
+		<style>
+		</style>
+
+		<title>2</title>
+		<script>
+			$(document).ready(function() {
+				$('#tabs').tabs();
+
+				$('#tabs').bind('tabsselect', function(event, ui) {
+					
+					console.log(ui.tab);
+					console.log(ui.panel);
+					console.log(ui.index);
+					// Objects available in the function context:
+					//ui.tab// anchor element of the selected (clicked) tab
+					//ui.panel// element, that contains the selected/clicked tab contents
+					//ui.index   // zero-based index of the selected (clicked) tab
+
+				});
+
+			});
+
+		</script>
+
+	</head>
+
+	<body>
+		<div class="demo">
+
+			<div id="tabs">
+				<ul>
+					<li>
+						<a href="#tabs-1">tab1</a>
+					</li>
+					<li>
+						<a href="#tabs-2">tab2</a>
+					</li>
+					<li>
+						<a href="#tabs-3">tab3</a>
+					</li>
+				</ul>
+				<div id="tabs-1">
+					<p>
+						hello tab 1
+					</p>
+				</div>
+				<div id="tabs-2">
+					<p>
+						hello tab 2
+					</p>
+				</div>
+				<div id="tabs-3">
+					<p>
+						hello tab 3
+					</p>
+				</div>
+			</div>
+
+		</div><!-- End demo -->
+
+	</body>
+</html>

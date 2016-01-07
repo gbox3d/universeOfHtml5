@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				var out = '';
+
+				for (var key in navigator) {
+					out += key + ':' + navigator[key] + '</br>'
+				}
+
+				var log = document.getElementById('log');
+
+				log.innerHTML = out;
+
+			}
+		</script>
+	</head>
+	<body>
+
+		<p id='log'></p>
+
+	</body>
+</html>

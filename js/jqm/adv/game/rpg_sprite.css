@@ -1,0 +1,48 @@
+/* 
+    Document   : fighter_sprite
+    Created on : 2012. 12. 4, 오후 4:47:06
+    Author     : gbox3d
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.sprite-32by48 {
+    position: absolute;
+    width: 32px;
+    height:  48px;
+}
+
+
+.character-img-fighter {
+    background-image: url(http://ukga.web-bi.net/files/rpg_pack/Graphics/Characters/006-Fighter06.png);
+}
+
+.character-anim-stand-0 {
+    background-position:  0px 0px;
+}
+.character-anim-stand-1 {
+    background-position:  0px -48px;
+}
+.character-anim-stand-2 {
+    background-position:  0px -96px;
+}
+.character-anim-stand-3 {
+    background-position:  0px -144px;
+}
+
+.character-anim-walk-front-0 {
+    background-position:  -32px -48px;
+}
+.character-anim-walk-front-1 {
+    background-position:  -64px -48px;
+}
+.character-anim-walk-front-2 {
+    background-position:  -96px -48px;
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+    0%   {-webkit-transform: translate(0px,200px); }
+    50%  {-webkit-transform: translate(200px,200px);}
+    100%  {-webkit-transform: translate(0px,200px);}
+}

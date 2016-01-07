@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> none </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<style></style>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(function() {
+				function CSuper() {
+
+					this.a = 'super';
+					this.b = 'super2'
+
+					var that = this;
+
+					this.test1 = function() {
+						
+						//특권함수내에서는 this가 상위생성자 함수객체를 가르킨다.
+						this.b = 'super2 change';			
+						test_1();
+						test_2();
+
+					}
+					
+					function test_1() {
+						this.a = 'sub global'; //밖에서는 this.a 대신 그냥 a 또는 window.a가 된다.
+					}
+					
+					function test_2() {
+						that.a = 'super change'; //클로져 이용해서 슈퍼셀프 값 접근하기
+						
+					}
+					
+				}
+
+				var obj = new CSuper();
+
+				
+				obj.test1();
+				$('p')[0].innerHTML += obj.a + '<br>';
+				$('p')[0].innerHTML += obj.b + '<br>';
+				$('p')[0].innerHTML += a + '<br>';
+				
+
+			});
+
+		</script>
+
+	</head>
+
+	<body>
+		<p></p>
+	</body>
+</html>

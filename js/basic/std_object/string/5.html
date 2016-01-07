@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <title>5 slice</title>
+  
+  <script>
+  	var strTemp = 'gbox3d.mireene.com/api/insert.php?quiz=슈퍼맨이더쎄요배트맨이더쎄요&text=헐크가 더센가?';
+  	
+  	var n =strTemp.slice(1,5);
+  	
+  	console.log(n);
+  	
+  	console.log(strTemp.slice(30,35)); //시작과 끝위치를 넣어준다.
+  	console.log(strTemp.substr(30,5)); //slice와 비슷하나 두번째 인자가 시작점 기준으로 잘라낼갯수이다.
+  	console.log(strTemp.slice(30,-3)); //시작에서 30번째부터 끝에서 3번째 까지 잘라내기
+
+      strTemp.splice(1,2);
+  	
+  </script>
+
+</head>
+
+<body>
+  <div>
+    
+  </div>
+</body>
+</html>

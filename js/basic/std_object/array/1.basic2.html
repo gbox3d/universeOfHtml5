@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> Array </title>
+
+		<meta name="viewport" content="
+		 width=device-width;
+		 maximum-scale=1.0;
+		 initial-scale=1.0" />
+		 
+		<!-- css 는 여기에... -->
+		<style>
+		</style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<!-- 자바스크립트는 는 여기에... -->
+		<script>
+			var myarray = [10,20,4,7,8,99,'apple',false];
+			
+			var i;
+			for(i=0;i< myarray.length  ;i++) 
+			{
+				document.write(myarray[i] + '<br/>');
+			}
+			
+			document.write( '-----------------------<br/>');
+			
+			//var myarray2 = []; //아래코드와 같은 의미이다.
+			var myarray2 = new Array();
+			myarray2[0] = 1;
+			myarray2[1] = 'hello';
+			//2, 3, 4
+			myarray2[5] = 'array';
+			
+			for(i=0;i< myarray2.length  ;i++) 
+			{
+				document.write( i + ' : ' +  myarray2[i] + '<br/>');
+			}
+			
+			
+		</script>
+	</head>
+<!-- HTML 태그들은 여기에... -->
+	<body>
+		
+	</body>
+</html>

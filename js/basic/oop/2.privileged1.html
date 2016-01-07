@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		
+		<title> none </title>
+		
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<style></style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			function CCalc(a,b) {
+				
+				//프라이빗 변수가 된다.
+				var a =a;
+				var b =b;
+				
+				//특권 (privileged) 함수
+				this.Sum = function() {
+					return a+b;
+				}
+			}
+			
+			var obj = new CCalc(6,7);
+			
+			document.write(obj.Sum());
+			document.write('<br/>');
+			
+			// obj.a 와 obj.b 는 undefined 상태가 된다.
+			document.write(obj.a + obj.b);
+			
+			
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+</html>

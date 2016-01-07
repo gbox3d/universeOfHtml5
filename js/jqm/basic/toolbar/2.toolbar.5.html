@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>3.listview</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="header" data-position="fixed" >
+
+                <div class="ui-grid-a">
+
+                    <div class="ui-block-a" style="width:60%">
+                        <h1 style="font-size:19px; margin-left:12px;">2,146 Songs</h1>
+                    </div>
+                    <div class="ui-block-b" style="width:38%; padding:6px 5px 0 0;">
+                        <select name="select-mini" id="select-mini" data-mini="true">
+                            <option value="">Sort...</option>
+                            <option value="date" selected>Newest</option>
+                            <option value="name">Name</option>
+                            <option value="rating">Top Rated</option>
+                            <option value="track">Track #</option>
+                        </select>
+                    </div>
+                </div><!-- /grid-b -->
+
+                <div class="ui-bar-d">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a" style="width:78%">
+                            <label for="text-mini" class="ui-hidden-accessible">Search Input:</label>
+                            <input type="search" name="name" id="search-mini" value="" data-mini="true" placeholder="Search songs..."  />
+                        </div>
+                        <div class="ui-block-b" style="width:22%">
+                            <button type="submit" data-mini="true" style="float:right" data-theme="d">
+                                Go
+                            </button>
+                        </div>
+                    </div><!-- /grid-a -->
+                </div><!-- /search bar -->
+
+            </div><!-- /header -->
+
+
+            <div data-role='content'>
+                <ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+
+                    <li>
+                        <a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-bb.jpg" />
+                            <h3>Broken Bells</h3>
+                            <p>Broken Bells</p>
+                        </a>
+                        <a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+                    </li>
+
+                    <li><a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-hc.jpg" />
+                            <h3>Warning</h3>
+                            <p>Hot Chip</p>
+                        </a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+                        </a></li>
+                    <li>
+                        <a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-p.jpg" />
+                            <h3>Wolfgang Amadeus Phoenix</h3>
+                            <p>Phoenix</p>
+                        </a>
+                        <a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+                        </a>
+                    </li>
+                    <li><a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-ok.jpg" />
+                            <h3>Of The Blue Colour Of The Sky</h3>
+                            <p>Ok Go</p>
+                        </a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+                        </a>
+                    </li>
+                    <li><a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-ws.jpg" />
+                            <h3>Elephant</h3>
+                            <p>The White Stripes</p>
+                        </a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+                        </a>
+                    </li>
+                    <li><a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-rh.jpg" />
+                            <h3>Kid A</h3>
+                            <p>Radiohead</p>
+                        </a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+                        </a>
+                    </li>
+                    <li><a href="index.html">
+                            <img src="http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-xx.jpg" />
+                            <h3>XX</h3>
+                            <p>XX</p>
+                        </a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+                        </a>
+                    </li>
+                </ul>
+
+            </div><!-- /content -->
+
+            <div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
+                <form action="#" method="get">
+                    <div data-role="fieldcontain">
+                        <label for="slider-2" style="margin-left:15px;">Volume:</label>
+                        <input type="range" name="slider" id="slider-2" value="50" min="0" max="100" data-highlight="true" data-mini="true"  class="ui-hidden-accessible" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

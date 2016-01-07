@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='ko'>
+	<head>
+		<meta charset="utf-8" />
+		
+		<title> 노드 리스트 순회 </title>
+		
+		<script>
+			
+			window.onload = function() {
+				
+				var elem_ar = document.getElementsByTagName('li');
+				
+				
+				for(var i=0;i<elem_ar.length;i++)
+				{
+					console.log(typeof(elem_ar[i]));
+					elem_ar[i].style.color = 'red';
+					
+				}
+				
+					// antipattern
+					// for-in loop without checking hasOwnProperty()
+				for (var i in elem_ar) {
+						console.log(i, ":", elem_ar[i]);
+				}
+					
+					// preferred 1
+				for (var i in elem_ar) {
+					if (elem_ar.hasOwnProperty(i)) { // filter
+						console.log(i, ":", elem_ar[i]);
+					}
+				}
+				
+				//포인문으로 하면 요소뿐만아니라 배열에 대한 정보까지(length, prototype) 얻어지므로 안됨
+				//나오므로 하지 않는것이 좋음.
+				/*
+				for(var index in elem_ar)
+				{
+					console.log(typeof(elem_ar[index]));
+					
+					if(typeof(elem_ar[index]) == HTMLLIElement ) {
+						elem_ar[index].style.color = 'red';
+					}
+				}
+				*/
+				
+				
+				
+				//elem[2].innerText = 'hello';
+				
+			}
+		</script>
+		
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			
+		</ul>
+		
+		
+	</body>
+</html>

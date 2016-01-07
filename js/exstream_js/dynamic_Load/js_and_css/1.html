@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script>
+
+        function removejscssfile(filename, filetype){
+
+            var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none" //determine element type to create nodelist from
+            var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none" //determine corresponding attribute to test for
+
+            var allsuspects=document.getElementsByTagName(targetelement);
+
+            for (var i=allsuspects.length; i>=0; i--){ //search backwards within nodelist for matching elements to remove
+                if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1)
+                    allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
+            }
+        }
+
+        $(function() {
+
+            //자바스크립트 동적 로딩
+            $('#btn_loadjs').on('click',function() {
+
+                var fileref = document.createElement('script');
+                fileref.setAttribute("type","text/javascript");
+                fileref.setAttribute("src","1.js");
+
+                if (typeof fileref!="undefined")
+                {
+                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                }
+//                fileref.onload = function() {
+//                    console.log('onload!');
+//                }
+                $(fileref).on('load',function() {
+                    console.log('onload!');
+
+                    dynamicTest();
+
+                });
+
+            });
+
+            //css 로딩하기
+            $('#btn_loadcss').on('click',function() {
+
+                var fileref = document.createElement('link');
+                fileref.setAttribute("rel","stylesheet");
+                fileref.setAttribute("type","text/css");
+                fileref.setAttribute("href","1.css");
+
+                if (typeof fileref!="undefined")
+                {
+                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                }
+
+
+            });
+
+            $('#btn_removecss').on('click',function() {
+                removejscssfile('1.css','css')
+            });
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+<button id='btn_loadjs'> load js test </button>
+
+<button id='btn_loadcss'> load css test </button>
+<button id='btn_removecss'> remove css test </button>
+
+<div id="dynamic_css"></div>
+
+</body>
+</html>

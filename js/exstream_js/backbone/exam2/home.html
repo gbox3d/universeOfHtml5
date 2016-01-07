@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>iqm simple sample</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+        <link rel="stylesheet" href="../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css" />
+
+        <script src="../lib/std-jqm/js/jquery.js"></script>
+
+
+        <script src="../lib/backbone/json2.js"></script>
+        <script src="../lib/backbone/underscore.js"></script>
+        <script src="../lib/backbone/backbone.js"></script>
+
+        <script>
+
+            $(document).bind('mobileinit', function(evt) {
+                //$.mobile 관련 전역변수 초기화는 여기서한다.
+                $.mobile.autoInitializePage = false;
+                console.log('mobile init');
+
+            });
+
+        </script>
+
+        <script src="../lib/std-jqm//js/jquery.mobile-1.2.0.js"></script>
+
+        <script type="text/javascript">
+            var MyApp = {};
+
+            window.HomeView = Backbone.View.extend({
+                //페이지 초기화
+                initialize: function(param) {
+                    console.log('init home view');
+                    this.el = $('#home');
+                    this.setup_event();
+                    //var superself = this;
+
+                },
+                //이밴트 핸들러 세팅
+                setup_event: function() {
+                    $(':jqmData(role="navbar") ul li a', $(this.el)).on('vclick', function(event) {
+                        //console.log('down');
+                        return false;
+                    });
+                    $(":jqmData(role='footer') div ul li a", $(this.el)).on('vmousedown', function(evt) {
+                        //var pagehash = $(this).data('gbox3d-href');
+                        var pagehash = $(this).attr('href');
+                        console.log(pagehash);
+
+                        if (pagehash != undefined) {
+                            $.mobile.changePage(pagehash, {
+                                transition: 'none',
+                                changeHash: false
+                            });
+                        }
+                        return false;
+                    });
+                }
+            });
+
+
+            $(function() {
+
+                //페이지 초기화 이전작업은 여기서 코딩해준다..
+                //페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+                $.mobile.initializePage();
+
+                //페이지 초기화 이후작업 여기에 코딩해준다.
+                MyApp.homeview = new window.HomeView();
+                MyApp.page1view = new window.Page1view(
+                        {
+                            page_id: 'page1',
+                            page_templete: './pages/page1.html',
+                            cb_pageload_complete: function(textstatus) {
+                                console.log('page1 ' + textstatus);
+                            }
+                        }
+                );
+                MyApp.page2view = new window.Page2view(
+                        {
+                            page_id: 'page2',
+                            page_templete: './pages/page2.html',
+                            cb_pageload_complete: function(textstatus) {
+                                console.log('page2 ' + textstatus);
+                            }
+                        }
+                );
+
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <div data-role="page" id="home">
+            <div data-role="header" >
+                <h1>Backbone.js + jQuery Mobile</h1>
+            </div>
+            <div data-role="content">
+                <h3>Application Template for using Backbone.js and jQuery Mobile.</h3>
+                <p>Backbone.js is used for code organization (Models, Views) and "routing".</p>
+                <p>jQuery Mobile is used for its mobile styles and widgets. The routing and navigation capabilities of jQuery Mobile are disbled to let Backbone.js handle these requirements.</p>
+                <p>This is the Home page. It was created dynamically using an underscore.js template.</p>
+                <p>Navigate to:</p>
+                <ul data-role="listview"  data-inset="true">
+                    <li><a data-role-goto="page1">Page 1</a></li>
+                    <li><a data-role-goto="page2">Page 2</a></li>
+                </ul>
+            </div>
+            <div data-role="footer" data-position="fixed" >
+                <div data-role='navbar'>
+                    <ul>
+                        <!-- 
+                        액티브 상태 유지를 위해서는 ui-state-persist가 필요하다 그렇지 않으면 페이지가 바뀔때 
+                        ui-btn-active 가 없어진다.
+                        -->
+                        <li><a class="ui-btn-active ui-state-persist" >home</a></li>
+                        <li><a href="#page1" >page1</a></li>
+                        <li><a href="#page2" >page2</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div> <!--         home end-->
+        <div id='target' ></div>
+
+        <script type="text/javascript" src="pages/page1.js"></script>
+        <script type="text/javascript" src="pages/page2.js"></script>
+
+    </body>
+</html>

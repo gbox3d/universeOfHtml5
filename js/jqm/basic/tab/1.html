@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>tab bar sample</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../../lib/std-jqm/css/themes/default/jquery.mobile-1.2.0.css"/>
+
+        <script src="../../lib/std-jqm/js/jquery.js"></script>
+
+        <script src="../../lib/std-jqm/js/jquery.mobile-1.2.0.js"></script>
+
+    </head>
+
+    <body>
+        <div data-role="page" id="first-page">
+            <div data-role="header" data-position="fixed"  data-theme='a'>
+                <h1>Home</h1>
+            </div><!-- /header -->
+
+            <div data-role='content' >
+                <P>첫번째 페이지 입니다.!</P>
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed" >
+                <div data-role='navbar'>
+                    <ul>
+<!--                        액티브 상태 유지를 위해서는 ui-state-persist가 필요하다 그렇지 않으면 페이지가 바뀔때 
+                        ui-btn-active 가 없어진다.-->
+                        <li><a class="ui-btn-active ui-state-persist" >first</a></li>
+                        <li><a href="#second-page">second</a></li>
+                        
+                    </ul>
+                </div>
+
+            </div><!-- /footer -->
+        </div>
+
+        <div data-role="page" id="second-page" 
+             data-add-back-btn="true">
+            <div data-role="header">
+                <h1>네비게이션바2</h1>
+            </div>
+            <div data-role="content">
+                <p>두번째 페이지 입니다.</p>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#first-page">first</a></li>
+                        <li><a class="ui-btn-active ui-state-persist" >second</a></li>
+                        
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

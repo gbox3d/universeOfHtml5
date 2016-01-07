@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title> 리스트뷰와 디테일뷰 구현 2안 </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		<script>
+			$(document).bind('mobileinit', function(evt) {
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if (strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+				//$.mobile 관련 전역변수 초기화는 여기서한다.
+				$.mobile.autoInitializePage = false;
+				console.log('mobile init');
+			});
+		</script>
+
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+		<!-- 자바스크립트는 는 여기에... -->
+		<script>
+			$(function() {
+				//페이지 관련 이밴트는 여기서 초기화
+				$.mobile.initializePage();
+				//도규먼트 객체 관련 이밴트 초기화는 여기서...
+
+				$(':jqmData(role="listview") li').bind('click', function(event) {
+					
+					$('#page-imgvw').data('myapp-detail',$(this).data('myapp-detail'));
+				});
+				
+				$('#page-imgvw').bind('pagebeforeshow', function(event) {
+				  console.log('prepare to show page ');
+				  
+				  var data = $(this).data('myapp-detail');		
+					var img_url = $(this).data('myapp-detail').img_url;
+					var detail_text = $(this).data('myapp-detail').text;
+
+					$(this).find('img:eq(0)').attr('src', img_url);
+					$(this).find('p:eq(0)').text(detail_text);
+				  
+				});
+				
+				/*
+				 * 
+				 http://ukga.web-bi.net/img/ejr6.jpeg 어느 매니아의 매듭
+				 http://ukga.web-bi.net/img/0613233133548.jpeg 효민
+				 * 
+				 */
+				
+				
+			});
+		</script>
+		
+		<style>
+			.ui-myimgvw-a {
+				width : 100%;
+				border-radius: 8px;
+			}
+		</style>
+		
+	</head>
+	<!-- HTML 태그들은 여기에... -->
+	<body>
+		<div data-role='page' >
+			<div data-role='header'>
+				<h1> 재미있는 사진 모아보는앱 </h1>
+			</div>
+			<div data-role='content'>
+				<ul data-role='listview' >
+					<li
+					data-myapp-detail =
+					'{"img_url":"http://ukga.web-bi.net/img/vyb9.jpeg","text" : "희망이 죽었네..."}'
+					>
+						<a href="#page-imgvw"><img src='http://ukga.web-bi.net/img/vyb9.jpeg' /> 절망의 나무 </a>
+					</li>
+					<li
+					data-myapp-detail =
+					'{"img_url" : "http://ukga.web-bi.net/img/gk.png","text" : "주인조차 못푸는..."}'
+					>
+						<a href="#page-imgvw"> <img src='http://ukga.web-bi.net/img/gk.png'/> 철통 보안의 비밀 </a>
+					</li>
+					<li
+					data-myapp-detail =
+					'{"img_url" : "http://ukga.web-bi.net/img/zao5.jpeg","text" : "미국은 머든지 크죠..."}'
+					>
+						<a href="#page-imgvw"> <img src='http://ukga.web-bi.net/img/zao5.jpeg'/> 아메리칸스타일 </a>
+					</li>
+					<li
+					data-myapp-detail =
+					'{"img_url":"http://ukga.web-bi.net/img/ejr6.jpeg","text" : "어느 덕후의 택배..."}'
+					>
+						<a href="#page-imgvw"><img src='http://ukga.web-bi.net/img/ejr6.jpeg' /> 어느 덕후의 택배 </a>
+					</li>
+				</ul>
+			</div>
+			<div data-role='footer' data-position='fixed'>
+				<h1> 정보영상진흥원 </h1>
+			</div>
+		</div>
+
+		<!---이미지 뷰---->
+		<div data-role='page' id='page-imgvw' data-add-back-btn='true'>
+			<div data-role='header'>
+				<h1> 내용보기 </h1>
+			</div>
+			<div data-role='content'>
+				<p>
+					나무가 죽었네요....
+				</p>
+				<img class="ui-myimgvw-a" src='http://ukga.web-bi.net/img/vyb9.jpeg'>
+			</div>
+		</div>
+		<!-----이미지뷰 끝----------->
+		
+		
+		
+	</body>
+</html>

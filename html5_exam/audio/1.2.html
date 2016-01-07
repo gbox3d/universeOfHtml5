@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+        BufferLoader
+    싸운드 파일 도우미 클래스  -->
+
+    <title> buffered sound </title>
+
+    <script src="buffer-loader.js"></script>
+
+</head>
+
+<body>
+<p id ='log'>loading....</p>
+
+<div>when : <input id="when" value="0" > </div>
+<div>offset : <input id="offset" value="0"> </div>
+<div>duration : <input id="duration" value="0" > </div>
+
+<button id="btn-play" >play</button><button id="btn-stop">stop</button>
+
+<script>
+
+    var context;
+    var bufferLoader;
+    var bufferList;
+
+
+    try {
+        context = new webkitAudioContext();
+        document.getElementById('log').innerText = 'this browser support webkitAudioContext ';
+
+        bufferLoader = new BufferLoader(context, ['./sounds/sound.mp3'],
+                function(_bufferList) {//로딩이 모두 완료 되면...
+
+                    document.getElementById('log').innerText = 'load ok';
+
+                    // Create two sources and play them both together.
+                    bufferList = _bufferList;
+
+                }
+        );
+
+        bufferLoader.load();
+
+        var source1;
+        document.getElementById('btn-play').addEventListener('click',function() {
+
+            source1 = context.createBufferSource();
+            source1.buffer = bufferList[0];
+            source1.connect(context.destination);
+
+            //반복 재생
+            //source1.loop = true;
+
+            //연주 끝나면..
+            source1.onended = function(evt) {
+                console.log('end play');
+            }
+
+            //단위는 초단위 1 이면 1초임
+            var when = document.getElementById('when').value; //언제 연주할것인지
+            var offset = document.getElementById('offset').value; // 어디서 부터 연주 할것인지
+            var duration = document.getElementById('duration').value; //얼마동안 연주 할것인지
+
+            source1.start(when,offset,duration);
+
+        });
+
+        document.getElementById('btn-stop').addEventListener('click',function() {
+
+            source1.stop(0);
+
+        });
+
+
+
+    } catch(e) {
+        alert('Web Audio API is not supported in this browser');
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

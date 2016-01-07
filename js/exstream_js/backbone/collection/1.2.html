@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>collection event</title>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/json2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+
+
+        <script>
+            $(function() {
+                var Item = Backbone.Model.extend({
+                    default: {
+                        part1: 'hello',
+                        part2: 'world'
+                    },
+                    initialize: function() {
+                        console.log('create ' + this.get('part2'));
+
+                    }
+
+                }); // Item
+                var List = Backbone.Collection.extend({
+                    model: Item
+                }
+                );//List
+                var list = new List();
+
+                list.on("add", function(data) {
+                    console.log("firing add event " + data.get('part1'));
+
+                });
+
+                list.on("remove", function(data) {
+                    console.log("firing remove event " + data.get('part1'));
+                });
+            
+                list.on("change", function(data) {
+                    console.log("firing chage event " + data.get('part1'));
+                });
+            
+                list.on("reset", function(data) {
+                    console.log("reset collection :");
+                    console.log(data);
+                });
+
+                list.add({part1: 'good', part2: 'night'}); //꼭 뉴로 생성하지않아도 된다.
+
+                var temp = new Item({part1: 'food', part2: 'morning'});
+                list.add(temp); //꼭 뉴로 생성하지않아도 된다.
+                
+                temp.set({part2:'noon'}); //change 이밴트 발생 
+
+                temp.destroy(); //remove 이밴트 발생 
+                
+                list.reset(); //모두 지우기 reset 이밴트 발생 
+
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

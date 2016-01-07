@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<input id="inp-test" />
+
+<div>
+    <button id="btn-focus">focus</button>
+    <button id="btn-blur">blur</button>
+
+</div>
+
+<script>
+
+    var input_node = document.querySelector('#inp-test');
+
+    document.querySelector('#btn-focus').addEventListener('click',function() {
+
+        input_node.focus();
+
+    });
+
+    document.querySelector('#btn-blur').addEventListener('click',function() {
+
+        input_node.blur();
+
+    });
+
+
+
+</script>
+
+</body>
+</html>

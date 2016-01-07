@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>페이지 전환 하면서 데이터 넘겨주기</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+        <script>
+
+            $(document).bind('mobileinit', function(evt) {
+
+                //리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+                var strTokens = location.href.split('#');
+                console.log('size : ' + strTokens.length);
+                if (strTokens.length >= 2) {
+                    location.href = strTokens[0];
+                    console.log('current page : #' + strTokens[1]);
+                    console.log('reset startup page');
+                    return false;
+                }
+
+                //$.mobile 관련 전역변수 초기화는 여기서한다.
+                $.mobile.autoInitializePage = false;
+                console.log('mobile init');
+
+            });
+
+        </script>
+
+        <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                console.log('document ready..');
+                console.log('before jqm pageinit');
+
+                //페이지 관련 이밴트들은 여기서 바인딩시켜줘야한다.
+                //$(':jqmData(role="content")').text('hello jqm!');
+
+                $.mobile.initializePage();
+                // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+
+                // 이 시점부터 첫 페이지가 보이기 시작.....
+                console.log('after jqm pageinit');
+                //document 이벤트관련 초기화는 여기서 한다.
+
+                $(':jqmData(role="listview"):eq(0) li').bind('click', function(event) {
+
+
+                    console.log(this);
+                    console.log($(this).data('gbox3d-param'));
+                    $('#page2 :jqmData(role="content") p:eq(0)').text($(this).data('gbox3d-param').name);
+
+                    $.mobile.changePage('#page2',
+                            {
+                                transition: 'flip',
+                                reverse: false,
+                                changeHash: true //뒤로 가기 정보 저장 여부 참이면 뒤로가기 정보가 기록된다.(백버튼을 누를때 동작을 제데로한다.) 
+                            });
+                });
+
+
+                //페이지가보여질때
+                $('#page2').bind('pageshow',
+                        function(event, ui) {
+                            console.log(ui);
+                            /*
+                                 $(this).find('.content .movie')
+                                 .html('<iframe width="480" height="320" src="http://www.youtube.com/embed/04rZ7adcMiM" frameborder="0" allowfullscreen></iframe>');
+                                 */
+                        }
+                );
+
+            });
+
+            /*
+                             http://ukga.web-bi.net/img/usa.jpg //미제국주의
+                             http://ukga.web-bi.net/img/zao5.jpeg //돌이끼었어요.
+                             http://ukga.web-bi.net/img/vyb9.jpeg //절망의 나무
+                             http://ukga.web-bi.net/img/gk.png //완벽 보안열쇠
+                             http://ukga.web-bi.net/img/7m4h.png //애플 바나나
+                             http://ukga.web-bi.net/img/jzq6.jpeg //공룡멸망의 가설
+                             http://ukga.web-bi.net/img/kimsr1.jpeg //김사랑
+                             http://ukga.web-bi.net/img/leesang-a.jpeg //이상아
+                             
+                             */
+
+        </script>
+
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="header">
+                <h1>header</h1>
+            </div><!-- /header -->
+
+            <div data-role='content'>
+                <ul  data-role='listview'>
+
+                    <li data-gbox3d-param='{"name":"김사랑"}'>
+                        <a href='#page2'>
+                            <img src='http://ukga.web-bi.net/img/kimsr1.jpeg' />test1</a>
+                    </li>
+
+                    <li data-gbox3d-param='{"name":"현아"}'><a href='#page2'>
+                            <img src='http://jquerymobile.com/demos/1.1.0/docs/lists/images/album-hc.jpg' />test2</a>
+                    </li>
+
+                </ul>
+
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed">
+                <h1>&copy; 2011-12 goorume</h1>
+            </div><!-- /footer -->
+        </div>
+
+        <!--page 2-->
+        <div data-role="page" id='page2' data-add-back-btn='true'>
+            <div data-role="header">
+                <h1>header</h1>
+            </div><!-- /header -->
+
+            <div data-role='content'>
+                <p></p>
+            </div><!-- /content -->
+
+            <div data-role='footer' data-position="fixed">
+                <h1>&copy; 2011-12 goorume</h1>
+            </div><!-- /footer -->
+        </div>
+
+    </body>
+</html>

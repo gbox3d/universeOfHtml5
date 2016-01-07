@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title> page event </title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<link rel="stylesheet" href="../lib/jquery.mobile-1.1.0.css" />
+		<script src="../lib/jquery.js"></script><script>
+
+		/*
+		 * 이 두 라이브러리가 서로 각자 초기화가 완료된 후에야 각 라이브러리에서 제공하는 모든 기능을 충분히 활용할 수 있게 됩니다. 
+		 * 하지만 이 두 라이브러리의 초기화 과정에서 서로 충돌이 발생해서 둘중 한가지는 
+		 * 충분히 초기화 되기 이전에 페이지가 사용자에게 노출되어 에러를 발생하게 하는 원인이 됩니다.
+		 * 
+		 */
+		//순서에 주의한다. 제이쿼리 와 제이쿼리 모바일의 중간에 위치 시킨다.
+			$(document).bind('mobileinit',function(evt) {
+				
+				//리프레쉬버튼을 눌렀을때 시작 페이지로 페이지 초기화를 한다.
+				var strTokens = location.href.split('#');
+				console.log('size : ' + strTokens.length);
+				if(strTokens.length >= 2) {
+					location.href = strTokens[0];
+					console.log('current page : #' + strTokens[1]);
+					console.log('reset startup page');
+					return false;
+				}
+				
+				$.mobile.autoInitializePage = false;  
+				console.log('mobile init');
+				
+				//폰갭등의 하이브리드 프레임웍사용시 디바이스 초기화 콜백 선언을 여기서 해준다.
+				//...
+				
+				// 아래와 같이 하면 이밴트는 등록 되지만 이런식으로 라이브를 남발하면 
+				// 퍼포먼스가 저하되는 참담한 결과에 봉착하게 될수도있다.
+				/*
+				$('#page2').live('pageshow', function(event) {
+					console.log('pageshow event :');
+				  	console.log(event);
+				});
+				*/
+				
+			} );
+		</script>
+		<!--
+			//$.mobile.autoInitializePage = true;(디폴) 이면   
+			//initializePage가 호출된다.
+			
+			-->
+		<script src="../lib/jquery.mobile-1.1.0.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				
+				$.mobile.initializePage(); // 페이지 초기화 관련 pageinit 메쎄지가 처리된다.
+				
+				
+				$("#page1 :jqmData(role='content') :jqmData(role='listview') li a").bind('click',function(evt) {
+					console.log($(this).text());
+					//파라메터를 뷰에 전송함
+					$('#page2').data('gbox-index',$(this).data('gbox-index'));	
+					console.log($(this).data('gbox-index'));
+				});
+				
+				
+				$('#page2').bind('pageshow', function(event) {
+					console.log('pageshow event :');
+				  	console.log(event);
+				  	console.log($(this).data('gbox-index'));
+				  	//gbox-index 에 넣어서 전송된 데이터를 뷰에서 보여줌 
+				  	$(this).find(":jqmData(role='content') p").text('select :' + $(this).data('gbox-index') );
+				});
+				
+				
+			});
+		</script>
+
+	</head>
+	<body>
+		<div data-role="page" id='page1'>
+
+			<div data-role="header">
+				<h1>Page1 Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<ul data-role='listview'>
+					<li><a href='#page2' data-gbox-index='1' >item1</a></li>
+					<li><a href='#page2' data-gbox-index='2' >item2</a></li>
+					<li><a href='#page2' data-gbox-index='3' >item3</a></li>
+				</ul>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id='page2'>
+
+			<div data-role="header">
+				<a href="#" data-icon='back' data-rel='back'>back</a>
+				<h1>Page2 Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					Page content goes here.
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+	</body>
+</html>

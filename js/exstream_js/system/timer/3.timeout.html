@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>timer sample - setTimeout </title>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var count = 0;
+				
+				function counter(param) {
+					count++;
+					
+					$('div').append('<p>'+ 
+					'tick :' + (new Date()).getTime() +',' + count
+					 + param.test +'</p>').text( );
+					 
+					 console.log(param);
+                                         
+					
+				}
+				
+				$('div').append('<p>'+ 
+					'tick :' + (new Date()).getTime() +',' + count
+					 +'</p>').text( );
+					
+				window.setTimeout(
+					counter,
+					1000, 
+					{test:'hello'} 
+					);
+				
+			});
+		</script>
+	</head>
+	<body>
+		<div></div>
+		
+	</body>
+</html>

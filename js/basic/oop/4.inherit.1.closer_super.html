@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		
+		<title> super classing </title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<style></style>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			
+			$(function() {
+				function CSuper() {
+				
+				this.a = 'super';
+				
+				var that = this;
+				
+				CSuper.prototype.CSub = function() {
+					
+					this.a = 'sub'; //서브클래싱
+					
+					console.log(that.a); //슈퍼클래스의 값 접근하기
+					console.log(this.a);
+					
+					}
+					
+				}
+				
+				var obj = new (new CSuper()).CSub();
+				
+				$('p')[0].innerHTML += obj.a
+					
+			});
+			
+		</script>
+		
+	</head>
+
+	<body>
+		<p></p>
+	</body>
+</html>

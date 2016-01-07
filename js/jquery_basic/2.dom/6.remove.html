@@ -1,0 +1,41 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Dynamic append vs remove</title>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript">
+
+            $(function() {
+                (function() {
+                    var index = 0;
+                    $('button:eq(0)').click(function() {
+                        $('ul').append($('<li></li>').text('append demo : ' + index).on('click',
+                                function(e) {
+                                    //this.remove();
+                                    console.log(e);
+                                    $(this).remove();
+                                    //e.target.remove();
+                                }));
+                        index++;
+                    });
+                })();
+
+            });
+        </script>
+    </head>
+    <body>
+        <div id='layout'>
+            <button> append </button>
+            <ul>
+
+            </ul>
+
+        </div>
+    </body>
+</html>

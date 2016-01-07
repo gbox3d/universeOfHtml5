@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>xmlparse 로컬에서 엑스엠엘파일 파싱</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			function parseXml(xml) {
+				//find every Tutorial and print the author
+				$(xml).find("Tutorial").each(function(index,item) {
+					//$("#output").append($(this).attr("author") + "<br />");
+					$("#output").append($(item).attr("author") + "<br />");
+					//console.log(item);
+				});
+				// Output:
+				// The Reddest
+				// The Hairiest
+				// The Tallest
+				// The Fattest
+			}
+
+			function init() {
+
+				$.ajax({
+					type : "GET",
+					url : "jquery_xml.xml",
+					dataType : "xml",
+					success : parseXml
+				});
+
+			}
+
+
+			$(document).ready(init);
+
+		</script>
+	</head>
+	<body>
+		<div>
+			<p id="someElement"></p>
+			<p id="anotherElement"></p>
+			<p id='output'></p>
+		</div>
+	</body>
+</html>
