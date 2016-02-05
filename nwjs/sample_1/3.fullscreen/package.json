@@ -1,0 +1,11 @@
+{
+  "name": "nw-demo",
+  "main": "index.html",
+  "window": {
+    "title": "node-webkit demo",
+    "icon": "icon.png",
+    "toolbar": false,
+    "frame": true,
+    "kiosk": true // set kiosk mode true
+  }
+}

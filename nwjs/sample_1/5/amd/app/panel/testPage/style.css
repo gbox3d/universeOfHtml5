@@ -1,0 +1,7 @@
+#amd-popup-testPage {
+    background-color: lavenderblush;
+}
+
+#amd-popup-testPage.hide {
+    display: none;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "debug exam",
+  "version": "1.0.0",
+  "main": "index.html",
+  "window": {
+    "frame": true,
+    "width": 640,
+    "height": 480,
+    "toolbar": true, /*디버깅을 위해 툴바 보이기 */
+    "position": "center",
+    "resizable": false
+  },
+  "scripts": {
+    "start": "nw ."
+  }
+}
