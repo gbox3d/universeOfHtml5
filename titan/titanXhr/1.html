@@ -13,7 +13,8 @@
 
     titanXhr({
         uri: "http://www.mocky.io/v2/55a02cb72651260b1a94f024",
-        useXDR: true
+        useXDR: true,
+        timeout : 3000
     }, function(err, resp, body) {
 
         console.log(resp.statusCode)
