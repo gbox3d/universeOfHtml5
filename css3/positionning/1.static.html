@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>1.static</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<style>
+			.box-red {
+				width : 50px;
+				height : 50px;
+				background-color: red;
+			}
+			.box-aqua {
+				width : 50px;
+				height : 50px;
+				background-color: aqua;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<!-----
+			포지셔닝은 기본값이 정적이며 이때에는 left,top으로 위치값을 조절할수없다.
+			relative, absolute  
+			--->
+		<div class="box-red"></div>
+		<div class="box-aqua" style="margin-left: 50px;"></div>
+		<div class="box-red" style="position:static; left: 50px;">static</div>
+		<div class="box-aqua" style="position:relative; left: 50px;">relative</div>
+	</body>
+</html>

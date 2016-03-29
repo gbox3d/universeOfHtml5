@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>1.font-size</title>
+		
+		<!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+		
+
+		<!---
+			폰트 싸이즈의 크기와 박스 크기를 비교한 예제
+			------>
+		
+		<style>
+			.box {
+				height : 22px;
+				width : 22px;
+				border: 1px solid red;
+				
+			}
+			.font1 {
+				font-size: 20px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+
+    <div>
+        size: <input id="inp-fontsize" type="range" min="0" max="100" value="20" />
+    </div>
+
+		<div class="box">
+			<div class="font1"> 가 </div>
+		</div>
+		<div class="box">
+			<div class="font1"> 가 </div>
+		</div>
+
+        <script>
+
+            var fontsize_slider = document.querySelector('#inp-fontsize');
+            var font_elements = document.querySelectorAll('.font1');
+            var box_elements = document.querySelectorAll('.box');
+
+            fontsize_slider.addEventListener('change',function(evt) {
+
+                for(var i=0;i<font_elements.length;i++) {
+
+                    font_elements[i].style.fontSize = this.value + 'px';
+
+                }
+
+                for(var i=0;i<box_elements.length;i++) {
+
+                    box_elements[i].style.height = this.value + 'px';
+                    box_elements[i].style.width = this.value + 'px';
+
+                }
+            });
+
+            /*
+            $(function() {
+                $('input:eq(0)').bind('change', function(event) {
+                    $('.font1').css('font-size',$(this).val()+'px');
+                    $('.box').css('height',$(this).val()+'px');
+                    $('.box').css('width',$(this).val()+'px');
+
+                    var left = parseInt($(this).val()) + 2;
+
+                    $('.box:eq(1)').css('margin-left', left +'px');
+
+                    var top = parseInt($(this).val()) + 2;
+
+                    $('.box:eq(1)').css('margin-top', -top +'px');
+                });
+
+            });
+            */
+        </script>
+		
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> background position </title>
+
+        <!---클래스를 미리 만들어두고 사용하는 방법을 배운다. ---->
+        <style>
+            .bg-box {
+                width: 128px;
+                height:  128px;
+                background-image: url(http://www.w3schools.com/css3/smiley.gif);
+                border: 1px solid;
+
+            }
+            .bg-image {
+                background-repeat: no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        <p>default</p>
+        <div class="bg-box" style="background-repeat: no-repeat"></div>
+
+        <p>center</p>
+        <div class="bg-box" style="background-repeat: no-repeat;
+             background-position: center;
+             "></div>
+                 
+        <p>center top</p>
+        <div class="bg-box" style="background-repeat: no-repeat;
+             background-position: center top;
+             "></div>
+        
+        <p>center bottom</p>
+        <div class="bg-box" style="background-repeat: no-repeat;
+             background-position: center bottom;
+             "></div>
+
+        <p>30px 20px</p>
+        <div class="bg-box" style="background-repeat: no-repeat;
+             background-position: 30px 20px;
+             "></div>
+
+
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+</head>
+<body>
+<button id='btn_test' >test</button>
+
+<div id='out'></div>
+
+<script type="text/javascript">
+
+    document.querySelector('#btn_test').addEventListener('click',function() {
+
+
+
+    });
+
+    var base_url = 'http://192.168.0.203:8080';
+
+    document.getElementById('btn_test').addEventListener('click',
+            function() {
+                $('#out').text('connecting.....');
+                $.ajax({
+                    url: base_url + '/test',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {somedata: 'gbox3d'},
+                    success: function(data, textStatus, jqXHR) {
+                        //console.log('success receive jsonp data');
+                        console.log( JSON.stringify(data) );
+                        //$('#out').text('hello ' + data.echo);
+
+                    },
+                    complete: function(jqXHR, textStatus) {
+                        console.log('complete');
+                    },
+                    error: function(qXHR, textStatus, errorThrown) {
+                        //$('#out').text('error');
+                        console.log('error');
+
+
+                    }
+                });
+
+            }
+
+    );
+
+
+    /*
+    $(function() {
+
+        var base_url = 'http://192.168.0.203:8080';
+
+
+
+
+
+    });
+
+*/
+
+</script>
+
+
+</body>
+</html>

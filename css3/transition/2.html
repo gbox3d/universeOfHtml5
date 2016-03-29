@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+    <title> transition sample </title>
+
+
+    <style type="text/css">
+        div {
+            width: 100px;
+            height: 100px;
+            background: red;
+
+            -webkit-transition: -webkit-transform 2s;
+        }
+
+    </style>
+
+</head>
+<body style="margin: 0px;">
+
+<div id="gameobj" >
+    클릭한 위치로 이동합니다.
+</div>
+
+<p id="log">
+</p>
+
+<script>
+
+
+    var gameobj_element = document.getElementById('gameobj');
+
+    //트랜지션 설정해주기
+    gameobj_element.style.WebkitTransition = '-webkit-transform 2s'; //웹킷기반 브라우져공통
+    gameobj_element.style.MozTransition = '-moz-transform 2s'; //파이어 폭스용
+    gameobj_element.style.OTransition = '-o-transform 2s'; //오페라
+    gameobj_element.style.msTransition = '-ms-transform 2s'; //ms 익스플로어
+
+    document.addEventListener('click',function(evt) {
+
+        gameobj_element.style.WebkitTransform = 'translate('+ evt.pageX +'px,'+ evt.pageY +'px)'; //웹킷기반 브라우져공통
+        gameobj_element.style.OTransform = 'translate('+ evt.pageX +'px,'+ evt.pageY +'px)'; //오페라
+        gameobj_element.style.MozTransform = 'translate('+ evt.pageX +'px,'+ evt.pageY +'px)'; //파이어 폭스용
+        gameobj_element.style.msTransform = 'translate('+ evt.pageX +'px,'+ evt.pageY +'px)'; //ms 익스플로어
+
+    });
+
+    gameobj_element.addEventListener('webkitTransitionEnd',function(evt) {
+
+        document.getElementById('log').innerText = 'finish transition';
+        console.log(e);
+
+    });
+
+</script>
+
+</body>
+</html>

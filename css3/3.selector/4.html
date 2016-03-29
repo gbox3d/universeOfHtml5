@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> 형제 선택자 </title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
+		<style>
+/*		바로아래동생얻기*/
+			div+p {
+				background-color: red;
+			}
+			div+p+p {
+				background-color: green;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div>
+			<p>1</p>
+		</div>
+		<p>2</p>
+		<p>3</p>
+		
+	</body>
+</html>

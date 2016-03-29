@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <title>hoking transition</title>
+
+    <style>
+        .box {
+            height: 50px;
+            width: 50px;
+            background-color: blue;
+        }
+        .box2 {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class='box'>hello</div>
+<div class='box2'>hello</div>
+<button class='toggleButton' >Play</button>
+<button class='btn-get-pos' >get</button>
+
+
+<script>
+
+    /*
+     트랜지션 중간에 가로채기 예제
+     */
+    var box = document.querySelector('.box');
+
+    document.querySelector('.toggleButton').addEventListener('click',function() {
+
+        if(this.innerHTML == 'Play') {
+
+            box.style.WebkitTransition = '10s';
+            box.style.WebkitTransform = 'rotate(360deg)';
+            this.innerHTML = 'Stop';
+        }
+        else {
+            var computedStyle = window.getComputedStyle(box);
+
+            var trans = computedStyle.getPropertyValue('-webkit-transform');
+
+            box.style.WebkitTransform = trans;
+            box.style.WebkitTransition = '';
+            this.innerHTML = 'Play';
+
+            var translated3D =
+                    new WebKitCSSMatrix(box.style.WebkitTransform);
+
+            console.log(translated3D);
+        }
+    });
+
+    //트랜지션 중간에 현재 값 구하기
+    document.querySelector('.btn-get-pos').addEventListener('click',function() {
+
+        var computedStyle = window.getComputedStyle(box);
+
+        console.log(computedStyle.getPropertyValue('-webkit-transform'));
+
+    });
+
+    (function gameloop() {
+
+        var gameplayer = document.querySelector('.box');
+
+
+        //gameplayer.style.WebkitTransform = 'translate(144px,104px) rotate('+ angle +'deg)';
+        //document.querySelector('#text-angle').innerText = angle;
+
+        //역으로 행렬값에서 다시 각도를 얻어옴
+        var computedStyle = window.getComputedStyle(gameplayer);
+        var trans = computedStyle.getPropertyValue('-webkit-transform');
+        var mat =
+                new WebKitCSSMatrix(trans);
+
+        var scale = Math.sqrt(mat.a*mat.a + mat.b*mat.b);
+       // var sin = mat.b/scale;
+        //var angle = Math.round(Math.asin(sin) * (180/Math.PI));
+        var _angle = Math.round(Math.atan2(mat.b/scale, mat.a/scale) * (180/Math.PI)) + 360;
+
+        gameplayer.innerText = _angle;
+
+
+        var gameplayer2 =  document.querySelector('.box2');
+        gameplayer2.style.WebkitTransform = 'rotate('+ _angle +'deg)';
+
+
+        requestAnimationFrame(gameloop);
+
+
+    })();
+
+</script>
+
+</body>
+</html>

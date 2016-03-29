@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>2</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<style>
+		
+			.box1 {
+				border: 1px solid blue;
+				width : 200px;
+				height: 200px;
+			}
+			
+			.contain1 {
+				border: 1px solid red;
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				background-clip : content-box;
+				margin : 10px;
+				padding: 30px;
+			}
+			.contain2 {
+				width: 50px;
+				height: 50px;
+				background-color: green;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<!---마진과 페딩의 차이점을 설명해준다.
+			마진과 페딩의 개념만 보여주는 단순한 예-->
+		<p>magin:10px; padding 30px;</p>
+		<div class='box1'>
+			<div class='contain1' >
+				<div class="contain2">
+				</div>
+				
+			</div>
+		</div>
+		
+		<p> no margin </p>
+		<div class='box1'>
+			<div class='contain1' style="margin: 0px" >
+				<div class="contain2">
+				</div>
+			</div>
+		</div>
+		
+		<p>no padding</p>
+		<div class='box1'>
+			<div class='contain1' style="padding: 0px" >
+				<div class="contain2">
+				</div>
+			</div>
+		</div>
+		<p>no margin no padding</p>
+		<div class='box1'>
+			<div class='contain1' style="padding: 0px;margin: 0px" >
+				<div class="contain2">
+				</div>
+			</div>
+		</div>
+		<!---
+			마진은 음수가 가능하지만 페딩은 음수가 가능하지않는듯하다.------>
+		<p>marin -10 </p>
+		<div class='box1'>
+			<div class='contain1' style="padding: 0px;margin: -10px" >
+				<div class="contain2">
+				</div>
+			</div>
+		</div>
+		<div style="background-color: gray">
+			footer
+		</div>
+		
+	</body>
+</html>

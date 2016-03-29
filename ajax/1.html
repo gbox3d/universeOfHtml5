@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <title></title>
+
+
+</head>
+<body>
+
+<button id="btn-test-Get"  > Get test </button>
+<button id="btn-test-Post"  > Post test </button>
+<div id="log" ></div>
+
+
+<script>
+
+    var eLog = document.getElementById('log');
+    var base_url = "http://localhost:8080";
+
+    document.getElementById('btn-test-Get').addEventListener('click',function() {
+
+
+
+        eLog.innerText = 'connecting...';
+
+        var request = new XMLHttpRequest();
+        request.open("GET", base_url + '/get_battle_data?zipcode=302&find=pizza&radisus=1km');
+        request.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+
+        request.onreadystatechange = function() {
+
+            var type = request.getResponseHeader("Content-Type");
+            console.log(type);
+
+            if(request.readyState ===4 && request.status === 200) {
+
+                var data;
+
+                switch (type) {
+
+                    case 'application/json':
+                        data = JSON.parse(request.responseText);
+                        break;
+                    case 'application/jsonp':
+                        break;
+                    default :
+                        data = request.responseText;
+                        break;
+
+                }
+                eLog.innerText = 'success connect !';
+                console.log(data);
+            }
+            else {
+                console.log('response readyState : ' +
+                request.readyState + '/response status : ' +
+                request.status );
+                //console.log( );
+            }
+        }
+
+        request.send(null);
+
+    });
+
+    document.getElementById('btn-test-Post').addEventListener('click',function() {
+
+        eLog.innerText = 'connecting...';
+
+
+        var request = new XMLHttpRequest();
+        request.open("POST", base_url);
+        request.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+
+        //포스트는 데이터를 바디에 넣어 전송할 수 있다.
+        //request.send('zipcode=302&find=pizza&radisus=1km');
+        request.send(JSON.stringify({zipcode:302,find:'pizza',radius:'1km'}));
+
+        request.onreadystatechange = function() {
+
+            var type = request.getResponseHeader("Content-Type");
+            console.log(type);
+
+            /*
+            readyState
+            0 : open yet
+            1 : send yet
+            2 : Header received
+            3 : load
+            4 : done
+             */
+
+            if(request.readyState ===4 && request.status === 200) {
+
+                var data;
+
+                switch (type) {
+
+                    case 'application/json':
+                        data = JSON.parse(request.responseText);
+                        break;
+                    case 'application/jsonp':
+                        break;
+                    default :
+                        data = request.responseText;
+                        break;
+
+                }
+                eLog.innerText = 'success connect !';
+                console.log(data);
+            }
+            else {
+                console.log(request.responseText);
+                console.log('response readyState : ' + request.readyState + '/response status : ' + request.status );
+                //console.log( );
+            }
+        }
+
+        request.onprogress = function(e) {
+            if(e.lengthComputable) {
+                console.log( 'process : ' + 100* (e.loaded / e.total ) + '%');
+            }
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>

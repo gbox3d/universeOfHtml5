@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script>
+
+        function animation(start_index) {
+
+            var info = {
+                key_frame : start_index
+            };
+
+            return function(position,el)  {
+                $(el).css('-webkit-transform','translate('+ position[start_index].x +'px,'+position[start_index].y + 'px)');
+                info.key_frame = start_index + 1;
+
+                //코루틴 역활
+                setTimeout(function() {
+
+                    $(el).css('-webkit-transition','-webkit-transform '+ position[start_index].time  +'s');
+                    $(el).css('-webkit-transform','translate('+ position[info.key_frame].x +'px,'+position[info.key_frame].y + 'px)');
+
+                    $(el).on('webkitTransitionEnd',function() {
+
+                        info.key_frame++;
+                        info.key_frame %= 3;
+                        console.log(info.key_frame);
+                        position[info.key_frame].callback(el);
+
+                    });
+
+                },0);
+
+            }
+
+        }
+
+
+        $(function() {
+
+            var position = [
+                {x:100,y:100,time:0.5,callback : function(el)  {
+                    $(el).css('-webkit-transition','-webkit-transform '+ this.time  +'s');
+                    $(el).css('-webkit-transform',
+                            'translate('+ this.x +'px,'+this.y + 'px)');
+
+                }},
+                {x:200,y:100,time:1,callback : function(el)  {
+                    $(el).css('-webkit-transition','-webkit-transform '+ this.time  +'s');
+                    $(el).css('-webkit-transform',
+                            'translate('+ this.x +'px,'+this.y + 'px)');
+
+                }},
+                {x:100,y:200,time:2,callback : function(el)  {
+                    $(el).css('-webkit-transition','-webkit-transform '+ this.time  +'s');
+                    $(el).css('-webkit-transform',
+                            'translate('+ this.x +'px,'+this.y + 'px)');
+
+                }}];
+
+            var aniobj = animation(0);
+
+            aniobj(position,$('#test'));
+
+            var aniobj2 = animation(1);
+
+            aniobj2(position,$('#test2'));
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+<div
+        id='test'
+        style="
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;">
+
+</div>
+
+<div style="position: absolute;
+-webkit-transform : translate(100px,100px);
+
+">
+    <div
+            id='test2'
+            style="
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: blue;">
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

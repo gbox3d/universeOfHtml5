@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        @keyframes myfirst
+        {
+
+            0%   { transform: translate(0px,0px); }
+            100%   { transform: translate(300px,0px);}
+
+        }
+
+        /* animation: name duration timing-function delay iteration-count direction fill-mode play-state; */
+
+        .my-box {
+            width: 64px;
+            height: 64px;
+            background-color: red;
+            animation : myfirst 0.5s infinite;
+            animation-direction : alternate;
+            animation-timing-function: linear;
+        }
+
+    </style>
+
+    <script src="../prefixfree/prefixfree.min.js"></script>
+
+</head>
+<body>
+
+<div class="my-box"></div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script>
+
+        $(function() {
+
+            $('#test').css('-webkit-transition','background-position 30s');
+
+            setTimeout(function() {
+
+                $('#test').css('background-position','-10000px,0px');
+
+
+            },0);
+
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+<div
+        id='test'
+        style="
+        position: absolute;
+        width: 600px;
+        height: 509px;
+
+        background-image: url(space_bkg.jpg);">
+
+</div>
+
+
+
+
+</body>
+</html>

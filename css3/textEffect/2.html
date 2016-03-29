@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>word wrap and overflow scrolling</title>
+		<style type="text/css">
+			p.test {
+				/* 정해진 크기 안에 글자 넣기(길면 잘라서..)*/
+				width: 11em;
+				border: 1px solid #000000;
+				word-wrap: break-word;
+			}
+			
+			p.test2 {
+				width: 50px;
+				height : 100px;
+				border: 1px solid #000000;
+				word-wrap: break-word;
+				overflow: auto;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<p class="test">
+			This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.
+		</p>
+		
+		<p class="test2">
+			This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.
+		</p>
+		
+	</body>
+</html>

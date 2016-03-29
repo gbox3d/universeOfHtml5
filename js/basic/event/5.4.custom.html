@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //날방법
+    var evt = document.createEvent("Event");
+    evt.initEvent("myEvent",true,true);
+    // custom param
+    evt.foo = "bar";
+
+    document.addEventListener('myEvent',function(event) {
+
+        console.log(event)
+    })
+
+    document.dispatchEvent(evt);
+
+    //새로운방법
+    var evt2 = new Event('myEvent2');
+    document.addEventListener('myEvent2',function(event) {
+
+        console.log(event)
+    })
+    document.dispatchEvent(evt2);
+
+
+
+
+</script>
+
+</body>
+</html>

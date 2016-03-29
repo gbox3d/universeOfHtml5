@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title> orient mode </title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<style>
+			
+
+			.content {
+				width: 90%;
+				height: 100px;
+				margin: 0px;
+				border: 1px solid;
+				
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+				-webkit-box-pack: center; /* 수평 정렬기준  */
+				-webkit-box-align: start;
+				
+			}
+
+			.box1 {
+				height : 40px;
+				border: 1px solid red;
+				background-color: yellow;
+				margin-left : 1px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!----
+			box-pack 은 
+			orient가 horizontal일 경우 start(좌),center,end(우) 
+						---->
+		<div class='content' >
+			<div class='box1'>
+				친구
+			</div>
+			<div class='box1'>
+				체팅
+			</div>
+			<div class='box1'>
+				추천
+			</div>
+			<div class='box1'>
+				설정
+			</div>
+		</div>
+		
+		<div class='content' style="-webkit-box-align: end;">
+			<div class='box1'>
+				친구
+			</div>
+			<div class='box1'>
+				체팅
+			</div>
+			<div class='box1'>
+				추천
+			</div>
+			<div class='box1'>
+				설정
+			</div>
+		</div>
+		
+		<div class='content' style="-webkit-box-align: center;">
+			<div class='box1'>
+				친구
+			</div>
+			<div class='box1'>
+				체팅
+			</div>
+			<div class='box1'>
+				추천
+			</div>
+			<div class='box1'>
+				설정
+			</div>
+		</div>
+		
+	</body>
+</html>

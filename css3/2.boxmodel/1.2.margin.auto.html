@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>allin test</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<style>
+			.screen {
+				border: 1px solid blue;
+				width: 300px;
+				height: 400px;
+			}
+			
+			.test {
+				border: 1px solid red;
+				background-color: yellow;
+				width:50%;
+				margin-top : 1px
+			}
+			.margin-lr-auto {
+				margin-left:  auto;
+				margin-right: auto;
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class='screen' >
+			
+			<!---
+				길이가 50% 남은 영역을 어떻게 배치할것인지를 계산한다.
+			 오토속성은 알아서 남은 영역을 체워주는데 예를 들면 오른쪽으로 마진이 없는 상태에서 왼쪽 마진 속성을 오토로 주면
+			 완전히 오른쪽끝에 붙게된다.
+			 
+			 양쪽모두 오토속성을 주면 가운데 정렬하게된다.(단 부모 노드와 여백이 있는 상태에서만 가능하다.)
+			 
+			-------->
+			
+			<div 
+			class='test'
+			style="
+			margin-left: auto;">
+				오른쪽 붙기
+			</div>
+			
+			
+			<div 
+			class='test'
+			style="
+			margin-left: auto;
+			margin-right: 10%;
+			">
+				오른쪽 여백 %
+			</div>
+			
+			<div 
+			class='test'
+			style="
+			margin-left: auto;
+			margin-right: 10px;
+			">
+				오른쪽 여백 px
+			</div>
+			
+			<div class='test margin-lr-auto' >
+				center
+			</div>
+			
+		</div>
+	</body>
+</html>

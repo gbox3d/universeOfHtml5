@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+    <title> skew sample </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+    <!--<style>-->
+
+    <!--#gameobj-player {-->
+    <!---webkit-transform-origin : 50% 50%;-->
+    <!---webkit-transform : translate(144px,104px) rotate(45deg);-->
+    <!--}-->
+
+    <!--</style>-->
+
+
+</head>
+
+<body>
+
+<div id='game_screen' style="
+    position: relative;
+    width : 320px;
+    height :240px;
+    ">
+
+    <svg class='helper-grid' style="
+        position: absolute;
+        height :240px;
+        border: 1px solid;
+        " >
+
+        <line x1="0" y1="120" x2="320" y2="120" style="stroke:#000000;"/>
+        <line x1="160" y1="0" x2="160" y2="240" style="stroke:#000000;"/>
+    </svg>
+
+    <div id='gameobj-player' style="
+    width: 64px;
+    height: 64px;
+    background-color: red;
+    position: absolute;
+    " >
+    </div>
+
+    <p id='text-angle'></p>
+
+</div>
+
+<script>
+
+    var angle = 0;
+
+    function onMouseMove(evt) {
+        angle += evt.webkitMovementX;
+    }
+
+    document.body.addEventListener('mousedown',function(evt) {
+        document.body.addEventListener('mousemove',onMouseMove);
+    });
+
+    document.body.addEventListener('mouseup',function(evt) {
+
+        document.body.removeEventListener('mousemove',onMouseMove);
+    });
+
+    //게임 루프
+    (function gameloop() {
+
+        var gameplayer = document.querySelector('#gameobj-player');
+
+        gameplayer.style.WebkitTransform = 'translate(160px,120px) ' + 'skew(' + angle + 'deg,0deg)';
+
+        document.querySelector('#text-angle').innerText = angle;
+
+        requestAnimationFrame(gameloop);
+
+    })();
+
+</script>
+
+
+
+</body>
+</html>

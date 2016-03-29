@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> bottom-fix sample </title>
+		
+		<!-- 하단에 맞춰서 화면을 칠하는 방법
+		넓이를 맞추는것은 width : 100%로 쉽게 구현할수있지만 높이를 맞추어서 화면을 칠하거나 화면 영역을 설정하는 것은 
+		height : 100% 로 잘되지않는다.
+		
+		position : absolute로주고 bottom으로 하단 여백을 조정해주면 된다. 
+		예를 들어 bottom:30px이라면 하단과의 여백은 항상 30픽셀을 유지한다. 화면크기를 줄이거나 늘려도 거기에 맞게 항상 30이 되는것이다. -->
+		
+ 		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
+		<style>
+			
+			#screen {
+				position: absolute;
+				top: 43px; /*상단 여백*/
+				bottom: 48px; /*하단 여백*/
+				left: 0;
+				width: 100%;
+				background: #aaa;
+				overflow: auto;
+			}
+			
+		</style>
+		
+	</head>
+
+	<body>
+		
+		<div id='screen'></div>
+		
+	</body>
+</html>

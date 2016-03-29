@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title> fill-mode </title>
+
+    <style>
+
+        @keyframes myfirst /* Safari and Chrome */
+        {
+
+            0%   { transform: translate(0px,0px); }
+            100%   { transform: translate(0px,300px);}
+
+        }
+
+        /* animation: name duration timing-function delay iteration-count direction fill-mode play-state; */
+
+        .my-box {
+            width: 64px;
+            height: 64px;
+            background-color: red;
+        }
+
+    </style>
+
+    <script src="../prefixfree/prefixfree.min.js"></script>
+
+
+</head>
+<body>
+
+<!--
+
+-forwards :
+애니메이션이 끝났을때 끝난 그 위치에 머무르게 한다.
+
+-->
+
+<div style="position: absolute;transform : translate(64px,0);">
+    <div class="my-box"
+         style="
+         animation : myfirst 1s 1;
+     animation-direction :reverse;
+     animation-fill-mode : forwards;
+     "
+            ></div>
+
+</div>
+
+
+
+<div class="my-box"
+     style="
+     animation : myfirst 2s 1;
+     animation-fill-mode : forwards;
+     "
+        ></div>
+
+</body>
+</html>

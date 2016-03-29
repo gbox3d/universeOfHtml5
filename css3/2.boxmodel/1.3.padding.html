@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>allin test</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<style>
+			
+			.test1 {
+				border: 1px solid red;
+				background-color: yellow;
+				width : 100px;
+				height : 100px;
+				
+			}
+			
+			.test2 {
+				border: 1px solid blue;
+				background-color: green;
+				width : 98px;
+				height : 98px;
+			}
+			
+			
+		</style>
+	</head>
+	
+	<body>
+		
+		<!----
+			
+			width,heght 는 컨텐츠 박스 영역의 크기이다.
+			실제 박스의 크기는 컨텐츠영역크기에 페딩영역과 보더 영역을 합친 총합이다.
+			마진이 박스와 박스사이의 간격을 지정하는 옵션이라
+			페딩은 그래서 하나의 박스 크기에 관계하는 옵션임을 알수있다.
+			
+			------>
+			<div class='test1' style="padding-left: 0px">
+				<div class='test2'></div>
+			</div>
+			
+			<div class='test1' style="padding-left: 10px">
+				<div class='test2'></div>
+			</div>
+			
+			<div class='test1' style="padding-right: 10px">
+				<div class='test2'></div>
+			</div>
+			
+			<div class='test1' style="
+			padding-left: 10px;
+			padding-right: 10px">
+				<div class='test2'></div>
+			</div>
+		
+	</body>
+</html>

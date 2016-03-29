@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>1.6.paddingvsmargin</title>
+		
+	</head>
+
+	<body>
+		<!-----
+			background-clip속성이 컨텐츠박스이면 외각선 기준으로 페딩없이 마진을 준것과 같은 결과가 도출된다.
+			----->
+		<div style="background-color: red">
+			bar
+		</div>
+		
+		<div style="background-color: orange;
+		margin: 20px;
+		
+		">
+		margin 20px</div>
+		
+		<div style="background-color: aqua;
+		padding:  20px;
+		">padding 20px</div>
+		
+		<div style="background-color: orange;
+		padding:  20px;
+		background-clip: content-box;
+		">padding 20px, background clip content</div>
+	
+	</body>
+</html>

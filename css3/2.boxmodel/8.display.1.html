@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>display sample</title>
+
+    <style>
+        .test {
+            width: 200px;
+            height: 100px;
+            border: 1px solid;
+            border-radius: 25px;
+
+            -webkit-box-sizing: border-box; /*페딩과 쌍으로 들어감을 기억하자.*/
+            padding: 25px;
+
+            margin: 1em;
+        }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script>
+
+        $(function() {
+
+            $("button:eq(0)").click(function() {
+                $(".test").css("display" ,"inline-block");
+            });
+
+            $("button:eq(1)").click(function() {
+
+                $(".test:eq(1)").css("display" ,"none");
+
+            });
+
+
+
+        });
+
+    </script>
+
+
+</head>
+<body>
+
+<button>inline-block</button>
+
+<button>none</button>
+
+<div>
+
+    <div class="test"> element </div>
+    <div class="test"> element </div>
+    <div class="test"> element </div>
+    <div class="test"> element </div>
+    <div class="test"> element </div>
+    <div class="test"> element </div>
+
+
+</div>
+
+</body>
+</html>

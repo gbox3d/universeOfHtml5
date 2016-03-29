@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>1.static</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<style>
+			
+			.box {
+				width : 50px;
+				height : 50px;
+				position:relative;
+			}
+			
+			.box-red {
+				background-color: red;
+			}
+			.box-aqua {
+				background-color: aqua;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<!-----
+			relative 는 마진으로 위치를 조절한것과 결과가 같다.
+						--->
+		<div class="box box-red"></div>
+		<div class="box box-aqua" style="margin-left: 50px;">margin</div>
+		<div class="box box-aqua" style="left: 50px;">relative</div>
+		<br>
+		<p>
+			마진을 주었을때
+		</p>
+		<div class="box box-red" style="margin-top:20px; left: 30px;">margin</div>
+		<div class="box box-aqua" style="left: 60px;"></div>
+		<br>
+		<p style="width : 300px;">
+			마진을 이용해서 위치를 이동시키면 그객체의 전체 영역이 커져버려서(영역의 크기가 바뀜) 다음 객체가 올 위치에 영향을 준다.
+			left,top으로 조정하면 크기는 그대로 두고 순수하게 위치만 바꾼다.
+			</p>
+		<div class="box box-red" style="top:20px; left: 30px;">relative pos</div>
+		<div class="box box-aqua" style="left: 60px;"></div>
+	
+	
+	</body>
+</html>

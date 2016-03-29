@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title> 자손과 자식 선택자 </title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
+		<style>
+/*		p가 div의 자손일경우 모두적용된다.*/
+			div p {
+				background-color: red;
+			}
+			
+/*			p가 div의 자식(1촌)일경우에 적용한다.*/
+			div>p {
+				background-color: green;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div>
+			
+			<span>
+				<p>1</p>	
+			</span>
+			<p>2</p>
+			
+		</div>
+		
+		<div>	
+			<p>1</p>	
+		</div>
+		
+	</body>
+</html>

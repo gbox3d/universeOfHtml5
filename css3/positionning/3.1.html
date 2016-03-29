@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title> z-index sample 2 </title>
+    <style>
+
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: yellow;
+            /*opacity: 0.5;*/
+            border: 1px solid #333333;
+        }
+        .myBox {
+            background-color: red;
+            opacity: 1.0;
+            z-index: 0;
+
+        }
+    </style>
+</head>
+<body>
+<div class="myBox">
+
+    <div style="">
+
+        <div class="box" style="top: 20px;left: 20px;">
+            z-index 0
+        </div>
+
+        <div>
+
+            <div class="box" style="top:40px;left:40px; z-index: -1;">
+                z-index 1
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

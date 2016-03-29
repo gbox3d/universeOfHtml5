@@ -1,0 +1,30 @@
+@CHARSET "EUC-KR";
+
+h1 {
+	color: #ff7643;
+	font-family : Arial,sans-serif;
+	font-size: 2em;
+	border-bottom: 2px dashed black;
+	border-top: 2px solid red;
+	padding: 0px;
+}
+
+h2 {
+	color: #fffffc;
+	/*top, right,bottom,left */
+	padding: 10px 10px 10px 10px;
+	background-color: #000000
+}
+
+p {
+	color: red;
+	font-size: 2.0em;
+	font-size: 0.9em;
+	line-height: 150%;  
+	margin-top: 0;
+}
+
+body {
+	background-image: url("bg.jpg");
+	background-repeat: repeat-x;
+}

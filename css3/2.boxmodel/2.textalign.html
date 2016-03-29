@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>phonegap jqm basic sample 0</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		
+		<style>
+			.box {
+				width : 100%;
+				background-color: red;
+			}
+			
+			.box > * {
+				background-color: yellow;
+				width : 50%;
+				border : 1px solid;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>Home</h1>
+			</div><!-- /header -->
+			<div data-role='content'>
+				
+				<!------
+					텍스트 정렬 속성은 텍스트만 가운데로 정렬해준다.
+					박스는 그대로 유지된체 그안에 텍스트에 만 적용되는 속성이다.
+					-------->
+				<div class="box" style="text-align: center">
+					<p>center</p>
+				</div>
+				
+				<div class="box" style="text-align: left">
+					<p>left</p>
+				</div>
+				
+				<div class="box" style="text-align: right">
+					<p>right</p>
+				</div>
+				
+				<div class="box" style="text-align: center">
+					<p style="margin-left: auto;" > right box </p>
+				</div>
+				
+				<div class="box" style="text-align: center">
+					<p style="margin-left: auto; margin-right: auto;" > 
+						center box </p>
+				</div>
+				
+			</div><!-- /content -->
+			<div data-role='footer' data-position="fixed">
+				<h1>&copy; 2011-12 goorume</h1>
+			</div><!-- /footer -->
+		</div>
+	</body>
+</html>
