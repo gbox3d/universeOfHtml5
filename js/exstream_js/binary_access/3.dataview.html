@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //bytes -> float
+    var view = new DataView(new ArrayBuffer(4));
+    view.setUint8(0,0xc3);//, 0xf5,0x48, 0x40);
+    view.setUint8(1,0xf5);
+    view.setUint8(2,0x48);
+    view.setUint8(3,0x40);
+    console.log(view.getFloat32(
+            0, //기준 위치
+            true //리틀엔디언
+    )); //bits of the 32 bit float
+
+    //float -> bytes
+    var view2 = new DataView(new ArrayBuffer(4));
+    view2.setFloat32(0,3.14,true)
+
+    for(var i=0;i<view2.byteLength;i++) {
+        console.log( view.getUint8(i).toString(16) )
+    }
+
+
+</script>
+
+</body>
+
+</html>
