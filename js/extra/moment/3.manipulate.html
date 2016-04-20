@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>manipulate</title>
+    <script src="../libs/moment/moment-with-locales.js"></script>
+</head>
+<body>
+
+<script>
+
+    var test = moment();
+    console.log(test.format('YYYY-MM-DD hh:mm:ss'))
+
+    test.add(3,'d')
+
+    console.log( '3+ day' +  test.format('YYYY-MM-DD hh:mm:ss'))
+
+    test.subtract(3,'M')
+
+    console.log( '3- month' +  test.format('YYYY-MM-DD hh:mm:ss'))
+
+    //m : 분 , s: sec, h:hour, ms:milisec , y:year
+
+
+</script>
+
+
+</body>
+</html>

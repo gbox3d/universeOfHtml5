@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>min max</title>
+    <script src="../libs/moment/moment-with-locales.js"></script>
+</head>
+<body>
+
+<script>
+
+    var m1 = moment({
+        year :2016,
+        month:2, //달은 0부터 센다 0이 1월 , 2는 3월
+        date:1,
+        hour : 4,
+        minute : 20,
+        second : 30
+    });
+    var m2 = moment({
+        year :2010,
+        month:2, //달은 0부터 센다 0이 1월 , 2는 3월
+        date:1,
+        hour : 5,
+        minute : 20,
+        second : 30
+    });
+    var m3 = moment({
+        year :2010,
+        month:2, //달은 0부터 센다 0이 1월 , 2는 3월
+        date:1,
+        hour : 5,
+        minute : 21,
+        second : 30
+    });
+
+    var max = moment.max(m1,m2,m3)
+    var min = moment.min(m1,m2,m3)
+
+    console.log(max.format('YYYY-MM-DD hh:mm:ss'));
+    console.log(min.format('YYYY-MM-DD hh:mm:ss'));
+
+    console.log(moment('2010-10-20').isBefore('2010-10-21'))
+    console.log(moment('2010-10-20').isSameOrBefore('2010-10-21'))
+
+
+    console.log(moment('2010-10-20').isAfter('2010-10-21'))
+    console.log(moment('2010-10-20').isSameOrAfter('2010-10-21'))
+
+    console.log(moment('2010-10-20').isSame('2010-10-20'));
+    console.log(moment('2010-10-20').isSame('2010-10-21'));
+    ///year month week day hour minute second
+    console.log(moment('2010-10-20').isSame('2010-10-21','year'));
+
+    console.log( 'between : ' +  moment('2010-10-20').isBetween('2010-10-19', '2010-10-25'))
+
+
+</script>
+
+</body>
+</html>

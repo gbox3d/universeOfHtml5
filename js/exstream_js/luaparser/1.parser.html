@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../libs/titanXhr.js"></script>
+    <script src="luaparse.js"></script>
+</head>
+<body>
+
+<script>
+
+    //https://github.com/oxyc/luaparse
+
+    titanXhr({
+        uri: "./test.lua",
+        useXDR: true,
+        timeout : 3000
+    }, function(err, resp, body) {
+        console.log(resp.statusCode)
+        console.log(body)
+
+        var ast = luaparse.parse(body);
+        console.log(ast);
+        //console.log(JSON.stringify(ast));
+
+
+
+    })
+
+
+
+</script>
+
+</body>
+</html>
