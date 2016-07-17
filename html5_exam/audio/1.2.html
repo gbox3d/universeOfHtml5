@@ -24,63 +24,113 @@
 
 <script>
 
-    var context;
-    var bufferLoader;
-    var bufferList;
+    var player;
 
 
-    try {
-        context = new webkitAudioContext();
-        document.getElementById('log').innerText = 'this browser support webkitAudioContext ';
-
-        bufferLoader = new BufferLoader(context, ['./sounds/sound.mp3'],
-                function(_bufferList) {//로딩이 모두 완료 되면...
-
-                    document.getElementById('log').innerText = 'load ok';
-
-                    // Create two sources and play them both together.
-                    bufferList = _bufferList;
-
-                }
-        );
-
-        bufferLoader.load();
-
-        var source1;
-        document.getElementById('btn-play').addEventListener('click',function() {
-
-            source1 = context.createBufferSource();
-            source1.buffer = bufferList[0];
-            source1.connect(context.destination);
-
-            //반복 재생
-            //source1.loop = true;
-
-            //연주 끝나면..
-            source1.onended = function(evt) {
-                console.log('end play');
-            }
-
-            //단위는 초단위 1 이면 1초임
-            var when = document.getElementById('when').value; //언제 연주할것인지
-            var offset = document.getElementById('offset').value; // 어디서 부터 연주 할것인지
-            var duration = document.getElementById('duration').value; //얼마동안 연주 할것인지
-
-            source1.start(when,offset,duration);
-
-        });
-
-        document.getElementById('btn-stop').addEventListener('click',function() {
-
-            source1.stop(0);
-
-        });
-
-
-
-    } catch(e) {
-        alert('Web Audio API is not supported in this browser');
+    //--------------------
+    function webAudioPlayerHelper(option) {
+        this.context = option.context;
+        this.buffer = option.buffer;
+        this.gainNode = null
     }
+
+    webAudioPlayerHelper.prototype.play = function (option) {
+
+        var context = this.context;
+        if (!context.createGain)
+            context.createGain = context.createGainNode;
+
+        var source = this.context.createBufferSource();
+        source.buffer = this.buffer
+        source.connect(this.context.destination);
+        //source.start(0);
+        this.source = source;
+
+        var gainNode = context.createGain();
+        source.connect(gainNode);
+        gainNode.connect(context.destination);
+
+        this.gainNode = gainNode;
+
+        if(option.onended)
+            source.onended = onended
+
+        source.start(option.when, //얼마지연후 시작인지결정 (초단위)
+                option.offset,//시작위치 초단위
+                option.duration //연주시간
+        )
+
+    }
+
+    webAudioPlayerHelper.prototype.stop = function () {
+        this.source.stop(0);
+    }
+    //----------------------------
+
+
+    function initAudio() {
+        try {
+
+            var context;
+            var bufferLoader;
+            //var bufferList;
+
+            context = new webkitAudioContext();
+            document.getElementById('log').innerText = 'this browser support webkitAudioContext ';
+
+            bufferLoader = new BufferLoader(context, ['./sounds/sound.mp3'],
+                    function(_bufferList) {//로딩이 모두 완료 되면...
+
+                        document.getElementById('log').innerText = 'load ok';
+
+                        // Create two sources and play them both together.
+                        //bufferList = _bufferList;
+
+                        player = new webAudioPlayerHelper({
+                            context : context,
+                            buffer : _bufferList[0]
+
+                        })
+
+
+
+                    }
+            );
+
+            bufferLoader.load();
+
+        } catch(e) {
+            alert('Web Audio API is not supported in this browser');
+        }
+
+    }
+
+
+    initAudio();
+
+
+    document.getElementById('btn-play').addEventListener('click',function() {
+
+        //단위는 초단위 1 이면 1초임
+        var when = document.getElementById('when').value; //언제 연주할것인지
+        var offset = document.getElementById('offset').value; // 어디서 부터 연주 할것인지
+        var duration = document.getElementById('duration').value; //얼마동안 연주 할것인지
+
+        player.play({
+            when : when,
+            offset:offset,
+            duration:duration}
+        )
+        //source1.start(when,offset,duration);
+
+    });
+
+    document.getElementById('btn-stop').addEventListener('click',function() {
+
+        player.stop();
+        //source1.stop(0);
+
+    });
 
 
 

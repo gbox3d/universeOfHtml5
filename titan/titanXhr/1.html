@@ -8,19 +8,16 @@
 <body>
 
 <script>
-
     //console.log(My_Xhr)
-
     titanXhr({
         uri: "http://www.mocky.io/v2/55a02cb72651260b1a94f024",
         useXDR: true,
         timeout : 3000
     }, function(err, resp, body) {
-
         console.log(resp.statusCode)
         console.log(body)
-
         console.log(resp.rawRequest)
+
         /*
         assert.ifError(err, "no err")
         assert.equal(resp.statusCode, 200)

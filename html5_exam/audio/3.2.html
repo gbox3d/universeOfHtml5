@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html></title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+        BufferLoader
+    싸운드 파일 도우미 클래스  -->
+
+    <title> buffered sound </title>
+    <script src="buffer-loader.js"></script>
+
+</head>
+<body>
+
+<p id ='log'>loading....</p>
+
+<input type="range" min="0" max="100" id="volume-control">
+<div>
+    <button id="btn-play" >play</button><button id="btn-stop">stop</button>
+</div>
+
+<div>
+    <button id="btn-play2" > effext </button>
+</div>
+
+<script>
+
+
+
+
+    try {
+        //context = new webkitAudioContext();
+        var context;
+        var bufferLoader;
+        var bufferList;
+        var gainNode;
+
+        context = new AudioContext();
+        document.getElementById('log').innerText = 'this browser support webkitAudioContext ';
+
+        bufferLoader = new BufferLoader(context, [
+                    './sounds/katusha.mp3','./sounds/hit1.wav'],
+                function(_bufferList) {//로딩이 모두 완료 되면...
+                    document.getElementById('log').innerText = 'load ok';
+                    // Create two sources and play them both together.
+                    bufferList = _bufferList;
+                }
+        );
+        bufferLoader.load();
+
+        var source1;
+        document.getElementById('btn-play').addEventListener('click',function() {
+            if (!context.createGain)
+                context.createGain = context.createGainNode;
+            source1 = context.createBufferSource();
+            source1.buffer = bufferList[0];
+            gainNode = context.createGain();
+            source1.connect(gainNode);
+            gainNode.connect(context.destination);
+
+            //연주 끝나면..
+            source1.onended = function(evt) {
+                console.log('end play');
+            }
+
+            source1.start();
+        });
+
+        document.getElementById('btn-stop').addEventListener('click',function() {
+
+            source1.stop(0);
+
+        });
+
+
+        document.querySelector('#btn-play2').addEventListener('click',function () {
+
+            gainNode.gain.value = 0.3;
+
+            var source = context.createBufferSource();
+            source.buffer = bufferList[1];
+            source.connect(context.destination);
+            source.start(0);
+
+            source.onended = function (evt) {
+                gainNode.gain.value = 1.0;
+            }
+        })
+
+        document.querySelector('#volume-control').addEventListener('input',function(e) {
+            //console.log(this.value);
+
+            var fraction = parseInt(this.value) / 100;
+            // Let's use an x*x curve (x-squared) since simple linear (x) does not
+            // sound as good.
+            console.log(fraction);
+            gainNode.gain.value = fraction * fraction;
+
+        });
+
+
+
+    } catch(e) {
+        console.log(e);
+        alert('Web Audio API is not supported in this browser');
+    }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+        BufferLoader
+    싸운드 파일 도우미 클래스  -->
+
+    <title> simple sample </title>
+
+    <script src="buffer-loader.js"></script>
+    <script src="../jquery.js"></script>
+
+
+
+
+</head>
+
+<body>
+<p id ='log'></p>
+
+<button id="btn-kick" >kick</button>
+<button id="btn-techno" >techno</button>
+
+<script>
+
+    var context;
+    var bufferLoader;
+    var source1,source2;
+
+
+    $(function() {
+
+        context = new webkitAudioContext();
+
+        //여러개의 싸운드 파일을 비동기적으로 로딩한다.
+        bufferLoader = new BufferLoader(context,
+                ['./sounds/techno.wav','./sounds/kick.wav'],
+                //['http://ukga.web-bi.net/mp3/rockGuitar.mp3', 'http://ukga.web-bi.net/mp3/horse.mp3'],
+                function(bufferList) {//로딩이 모두 완료 되면...
+
+                    $('#log').html($('#log').html() + 'load ok<br/>');
+
+                    document.querySelector('#btn-techno').addEventListener('click',function () {
+                        source1 = context.createBufferSource();
+                        //source2 = context.createBufferSource();
+                        source1.buffer = bufferList[0];
+                        //source2.buffer = bufferList[1];
+                        //source1.loop = true;
+                        source1.connect(context.destination);
+                        source1.start(0);
+                    });
+
+
+                    document.querySelector('#btn-kick').addEventListener('click',function () {
+                        source2 = context.createBufferSource();
+                        source2.buffer = bufferList[1];
+                        source2.connect(context.destination);
+                        source2.start(0);
+                        source2.onended = function(evt) {
+                            console.log('end play');
+                            source2.stop();
+                        }
+
+                    })
+
+                });
+
+        bufferLoader.load();
+    });
+
+
+
+</script>
+
+</body>
+
+</html>
