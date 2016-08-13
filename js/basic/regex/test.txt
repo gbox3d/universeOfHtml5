@@ -1,0 +1,3 @@
+#comment
+baud = 115200
+port = tty
