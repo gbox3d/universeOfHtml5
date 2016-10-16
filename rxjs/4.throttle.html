@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
+</head>
+<body>
+
+<button>click me </button>
+
+<script>
+
+    var button = document.querySelector("button");
+    Rx.Observable.fromEvent(button, 'click')
+            .throttle(1000)
+            .scan(count => count + 1, 0)
+            .subscribe(count => console.log(`Clicked ${count} times`));
+
+</script>
+</body>
+</html>

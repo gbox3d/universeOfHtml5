@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
+</head>
+<body>
+
+
+<button>click me </button>
+
+
+<script>
+
+    var button = document.querySelector("button");
+
+    Rx.Observable
+            .fromEvent(button, 'click')
+            .scan((count)=>count+1,
+                    10 //시작하는수 (초기 값)
+            )
+            .subscribe(count=>console.log(`count is ${count}`));
+
+
+
+
+</script>
+
+</body>
+</html>

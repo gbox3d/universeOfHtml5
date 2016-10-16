@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="./rxlib/rx.all.js"></script>
+</head>
+<body>
+
+<button>test</button>
+
+<script>
+    var button = document.querySelector('button');
+    Rx.Observable.fromEvent(button, 'click')
+            .throttle(1000)
+            .map( (event) => { console.log(event); return event.clientX; })
+            .scan((count, clientX) => count + clientX, 0)
+            .subscribe(count => console.log(count));
+
+</script>
+
+</body>
+</html>

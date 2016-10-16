@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
+
+</head>
+<body>
+
+<button>test</button>
+
+<script>
+    var button = document.querySelector('button');
+    Rx.Observable.fromEvent(button, 'click')
+            .subscribe(() => console.log('Clicked!'));
+</script>
+
+</body>
+</html>
