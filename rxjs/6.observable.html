@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="./rxlib/rx.all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.0.0-rc.1/Rx.js"></script>
+    <!--<script src="./rxlib/rx.all.js"></script>-->
 </head>
 <body>
 
@@ -16,8 +17,8 @@
         observer.next(3);
         setTimeout(() => {
             observer.next(4);
-            observer.completed();
-            //observer.complete();
+            //observer.completed();
+            observer.complete();
         }, 1000);
     });
 
