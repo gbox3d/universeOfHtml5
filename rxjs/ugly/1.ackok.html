@@ -29,63 +29,66 @@
 
 
 
+    var isRequesting = false;
+    var isRequstComplete = true;
+    var reTryTimer = 0;
+    var retryCouner = 5;
+
     function safe_sender(msg)
     {
-
-        let isRequesting = false;
-        let isRequstComplete = true;
-        let reTryTimer = 0;
-        let retryCouner = 5;
-
         function __loop() {
-            if(isRequesting == false) { //중복 호출 막기
-                isRequesting = true;
-                isRequstComplete = false;
-                retryCouner--;
 
-                if(retryCouner > 0) {
-                    //1초 이상 응답시간 걸리면 재전송
-                    reTryTimer = setTimeout(()=>{
+            retryCouner--;
+            isRequesting = true;
+
+            if(retryCouner >= 0) {
+                console.log('retry :' + retryCouner);
+                //1초 이상 응답시간 걸리면 재전송
+                reTryTimer = setTimeout(()=>{
+                    isRequesting = false;
+                    console.log("time out retry ");
+                    __loop(msg);
+                },1000)
+
+                sendPacket(msg,function (result) {
+
+                    if(isRequstComplete == false) { //완료 되지않은 요청이면
+                        clearTimeout(reTryTimer);
+                        console.log((result));
+
                         isRequesting = false;
-                        console.log("time out retry ");
-                        __loop(msg);
-                    },1000)
+                        isRequstComplete = true;
 
-                    sendPacket(msg,function (result) {
-
-                        if(isRequstComplete == false) { //완료 되지않은 요청이면
-                            clearTimeout(reTryTimer);
-                            console.log((result));
-                            isRequesting = false;
-                            isRequstComplete = true;
-                            if(result == 0) {
-                                console.log("success ok");
-                            }
-                            else {
-                                console.log("error retry ");
-                                __loop(msg);
-                            }
+                        if(result == 0) {
+                            console.log("success ok");
                         }
                         else {
-                            //이미 완료된 요청 이면 무시
+                            console.log("error retry ");
+                            __loop(msg);
                         }
+                    }
+                    else {
+                        //이미 완료된 요청 이면 무시
+                    }
 
-                    })
-
-                }
-                else {
-                    console.log("connection failed");
-                }
-
+                })
 
             }
             else {
-
+                console.log("connection failed");
+                isRequesting = false;
+                isRequstComplete = true;
             }
+
 
         }
 
-        __loop();
+        if(isRequesting == false) { //중복 호출 막기
+            retryCouner = 5;
+            isRequesting = true;
+            isRequstComplete = false;
+            __loop();
+        }
 
 
     }
