@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <button id="btn-send-packet"> send packet </button>
+</div>
+
+<script>
+
+
+    function sendPacket(msg,callback) {
+
+        console.log("connecting....")
+        let delay = (Math.random() * 3000) //최대 3초 딜레이 발생
+
+        setTimeout( () => {
+            let result = Math.floor(Math.random() * 3)
+            callback(result)
+
+        },delay)
+
+    }
+
+
+
+
+    function safe_sender(msg)
+    {
+
+        let isRequesting = false;
+        let isRequstComplete = true;
+        let reTryTimer = 0;
+        let retryCouner = 5;
+
+        function __loop() {
+            if(isRequesting == false) { //중복 호출 막기
+                isRequesting = true;
+                isRequstComplete = false;
+                retryCouner--;
+
+                if(retryCouner > 0) {
+                    //1초 이상 응답시간 걸리면 재전송
+                    reTryTimer = setTimeout(()=>{
+                        isRequesting = false;
+                        console.log("time out retry ");
+                        __loop(msg);
+                    },1000)
+
+                    sendPacket(msg,function (result) {
+
+                        if(isRequstComplete == false) { //완료 되지않은 요청이면
+                            clearTimeout(reTryTimer);
+                            console.log((result));
+                            isRequesting = false;
+                            isRequstComplete = true;
+                            if(result == 0) {
+                                console.log("success ok");
+                            }
+                            else {
+                                console.log("error retry ");
+                                __loop(msg);
+                            }
+                        }
+                        else {
+                            //이미 완료된 요청 이면 무시
+                        }
+
+                    })
+
+                }
+                else {
+                    console.log("connection failed");
+                }
+
+
+            }
+            else {
+
+            }
+
+        }
+
+        __loop();
+
+
+    }
+
+    document.querySelector('#btn-send-packet').addEventListener('click',function (evt) {
+        safe_sender("hello " + (new Date()).getTime() );
+    })
+
+
+
+</script>
+
+</body>
+</html>
