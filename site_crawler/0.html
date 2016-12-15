@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+        <title>jquery for Ajax</title>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+        <script type="text/javascript">
+
+
+            $(document).ready(function() {
+                $('button').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'text',
+                        url: 'http://sf2009.web-bi.net/server/test.xml',
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('success');
+                            console.log(data);
+                            console.log(textStatus);
+                            console.log(jqXHR);
+                            $('#textvw').val(data);
+
+                        },
+                        complete: function(jqXHR, textStatus) {
+                            console.log('complete');
+                        },
+                        error: function(qXHR, textStatus, errorThrown) {
+                            console.log('error');
+
+                        }
+                    });
+                })
+
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <button>download</button><br>
+        <textarea id='textvw' row="80"></textarea>
+
+    </body>
+</html>
