@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="printf-dom" ></div>
+
+<script>
+
+  /*
+   //https://wasdk.github.io/WasmFiddle/?1e1xen
+   char* hello() {
+   return "Hello World";
+   }
+   */
+
+  function fetchAndInstantiate(url, importObject) {
+    return fetch(url).then(response =>
+      response.arrayBuffer()
+    ).then(bytes =>
+      WebAssembly.instantiate(bytes, importObject)
+    ).then(results =>
+      results.instance
+    );
+  }
+
+
+  var wasmImports = {
+
+  };
+
+  function utf8ToString(h, p) {
+    let s = "";
+    for (i = p; h[i]; i++) {
+      s += String.fromCharCode(h[i]);
+    }
+    return s;
+  }
+
+  function printfDom(msg) {
+    let el = document.createElement('div');
+    el.innerText = msg;
+    document.querySelector('#printf-dom').appendChild(el);
+  }
+
+  fetchAndInstantiate('2.wasm', wasmImports ).then(function(instance) {
+    // Call an exported function:
+    var p = instance.exports.hello();
+    var h = new Uint8Array(instance.exports.memory.buffer);
+    printfDom(utf8ToString(h, p));
+  });
+
+
+</script>
+
+</body>
+</html>
