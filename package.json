@@ -1,0 +1,29 @@
+{
+  "name": "universeofhtml5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./canvas_basic/1.basic_line.html",
+  "window":{
+    "width": 640,
+    "height":480,
+    "toolbar":false,
+    "frame" : true
+  },
+  "dependencies": {
+    "nw": "^0.28.0-sdk"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbox3d/universeOfHtml5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbox3d/universeOfHtml5/issues"
+  },
+  "homepage": "https://github.com/gbox3d/universeOfHtml5#readme"
+}
