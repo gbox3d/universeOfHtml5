@@ -14,5 +14,5 @@ var test2 = test.map((v,index) => {
 
 });
 
-
+console.log(test)
 console.log(test2);

@@ -1,0 +1,10 @@
+
+노드에서 실행된 코드를 다음과 같이 번들을 만들수있다.
+browserify main.js -o bundle.js
+
+bundle.js 를 <script> 를 이용해서 포함시키는것으로
+require를 쓴코드들을 그대로 브라우져에서도 별도의 라이브러리 없이 불러쓸수있다
+
+<script src='"bundle.js"> </script>
+
+예제에서는 Global_Foo라는 전역변수를 이용해서 모듈에 접근할수있도록 구성하였다

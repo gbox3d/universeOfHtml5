@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>jquery for Ajax</title>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				function removeSingleTag(tagname, source) {
+					var result = source;
+
+					while (result.indexOf('<' + tagname) >= 0) {
+						var temp = result.slice(0, result.indexOf('<' + tagname));
+
+						var temp2 = result.slice(result.indexOf('<' + tagname), result.length);
+						temp2 = temp2.slice(temp2.indexOf('>') + 2, temp2.length);
+
+						result = temp + temp2;
+					}
+					return result;
+				}
+
+
+				$('button').click(function() {
+					$.ajax({
+						type : 'GET',
+						dataType : 'text',
+						url : 'http://medication.kfda.go.kr/common/common_03.jsp?country=kr&divId=1&pageNo=11',
+						success : function(data, textStatus, jqXHR) {
+							
+							console.log('success');
+							data = removeSingleTag('meta',data);
+							$('#textvw').val(data);
+
+						},
+						complete : function(jqXHR, textStatus) {
+							console.log('complete');
+						},
+						error : function(qXHR, textStatus, errorThrown) {
+							console.log('error');
+
+						}
+					});
+				})
+			});
+                        //*[@id="20121025_86/seouljji_1351103295472XoBs4_JPEG/movie_image.jpg"]
+                        //*[@id="post-view70149850657"]/ul[1]/li[1]/a
+
+		</script>
+
+	</head>
+	<body>
+		<button>
+			download
+		</button>
+		<br>
+		<textarea id='textvw' rows="" cols="" style="height: 200px; width: 320px; "></textarea>		
+
+
+	</body>
+</html>
