@@ -126,8 +126,7 @@ sysinfo.txt
 .idea/uiDesigner.xml
 
 # Gradle:
-.idea/gradle.xml
-.idea/libraries
+.idea
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
@@ -138,3 +137,5 @@ sysinfo.txt
 node_modules
 
 mongodb/data
+
+package-lock.json

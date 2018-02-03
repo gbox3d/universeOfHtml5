@@ -23,9 +23,10 @@ meteor npm install nw@0.13.3-sdk
   "name": "universeofhtml5",
   "version": "1.0.0",
   "description": "",
-  "main": "원하는경로",
+  "main": "원하는경로"
   
-  ...
+  
+ }
   
 ```
 
