@@ -27,10 +27,33 @@ meteor npm install nw@0.28.0-sdk
   "name": "universeofhtml5",
   "version": "1.0.0",
   "description": "",
-  "main": "원하는경로"
-  
-  
- }
+  "main": "원하는 실행경로",
+  "window":{
+    "width": 640,
+    "height":480,
+    "toolbar":false,
+    "frame" : true
+  },
+  "dependencies": {
+    "nw": "^0.28.0-sdk"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "meteor npx nw --enable-logging=stderr .",
+    "debug" : "meteor npx nw --remote-debugging-port=9222"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbox3d/universeOfHtml5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbox3d/universeOfHtml5/issues"
+  },
+  "homepage": "https://github.com/gbox3d/universeOfHtml5#readme"
+}
   
 ```
 
@@ -39,6 +62,11 @@ meteor npm install nw@0.28.0-sdk
 meteor npx nw
 ```
 
+package.json에서 스크립트 정의 한부분 사용해서 실행하려면 다음과 같이 한다.
+ 
+``` shell
+meteor npm start
+```
 
 ### 원격디버깅
 
