@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> welcome to html5 universe </title>
+
+</head>
+
+<body>
+
+    <p> read binary file or data with fetch</p>
+
+<script>
+
+
+(async ()=> {
+
+    let _buf = new Uint8Array( await (await (await fetch('./test.txt')).blob()).arrayBuffer()) 
+
+    console.log( _buf)
+
+})()
+
+    // /*
+    // fetch 로 파일을 바이너리로 읽어 들여 버퍼로 받아보는  예제
+    //  */
+    // fetch("./test.txt")
+    //         .then(response => {
+    //             console.log(response)
+    //             if(!response.ok) throw Error(response.statusText)
+
+    //             return response.blob()
+    //         })
+    //         .then(_=> {
+    //             return _.arrayBuffer()
+    //         })
+    //         .then(_=> {
+    //             console.log(_)
+
+    //             //배열로 변환 해서 버퍼내용을 [] 로 사용할수있다.
+    //             let _buf = new Uint8Array(_)
+    //             console.log(_buf)
+    //         })
+    //         .catch(err => console.log(err));
+
+</script>
+
+
+</body>
+
+</html>

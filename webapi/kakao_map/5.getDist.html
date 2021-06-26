@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>거리 구하기 </title>
+
+
+</head>
+<body>
+<script type="text/javascript"  src="kakaomapMyHepler.js"></script>
+
+<div id="map" style="width:500px;height:400px;"></div>
+<div name="output" ></div>
+
+<script>
+
+  var distanceOverlay
+
+  kakaoMapSetup({
+    "onReadyCallback"() {
+      var container = document.getElementById('map');
+
+      var options = {
+        center: new daum.maps.LatLng(33.450701, 126.570667),
+        level: 3
+      };
+
+
+      var map = new daum.maps.Map(container, options);
+
+      // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+      var mapTypeControl = new daum.maps.MapTypeControl();
+
+      // 지도 타입 컨트롤을 지도에 표시합니다
+      map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+      // 마커가 표시될 위치입니다
+      var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
+
+// 마커를 생성합니다
+      var marker = new daum.maps.Marker({
+        position: markerPosition
+      });
+
+// 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+
+// 마커가 드래그 가능하도록 설정합니다
+//       marker.setDraggable(true);
+
+      // 마커를 생성합니다
+      var marker2 = new daum.maps.Marker({
+        position: new daum.maps.LatLng(33.450301, 126.570667)
+      });
+
+// 마커가 지도 위에 표시되도록 설정합니다
+      marker2.setMap(map);
+
+// 마커가 드래그 가능하도록 설정합니다
+      marker2.setDraggable(true);
+
+      // 클릭한 위치를 기준으로 선을 생성하고 지도위에 표시합니다
+      var clickLine = new daum.maps.Polyline({
+        map: map, // 선을 표시할 지도입니다, 생략되면 지도에 표시되지않고 정보만 가지고있는다.
+        path: [marker.getPosition(),marker2.getPosition()], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+        strokeWeight: 3, // 선의 두께입니다
+        strokeColor: '#db4040', // 선의 색깔입니다
+        strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid' // 선의 스타일입니다
+      });
+
+      daum.maps.event.addListener(marker2,"dragend",(evt)=> {
+        // console.log(marker.getPosition())
+
+        clickLine.setPath([marker.getPosition(),marker2.getPosition()])
+        console.log(clickLine.getLength())
+
+        let distance =  Math.round( clickLine.getLength() )
+
+        let content = '<div >거리 <span >' + distance + '</span>m</div>'; // 커스텀오버레이에 추가될 내용입니다
+        let position = marker2.getPosition()
+
+        if(distanceOverlay) {
+          distanceOverlay.setPosition(position)
+          distanceOverlay.setContent(content)
+        }
+        else {
+          distanceOverlay = new daum.maps.CustomOverlay({
+            map : map,
+            content: content,  // 커스텀오버레이에 표시할 내용입니다
+            position: position, // 커스텀오버레이를 표시할 위치입니다.
+            xAnchor: 0,
+            yAnchor: 0,
+            zIndex: 3
+          })
+        }
+
+
+      })
+
+
+
+
+    }
+  })
+
+
+
+
+
+</script>
+</body>
+</html>

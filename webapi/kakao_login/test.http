@@ -1,0 +1,11 @@
+### rest test
+GET http://localhost:21040/rest/getSettings
+
+### get user info
+GET http://localhost:21040/rest/userInfo
+
+### logout
+GET http://localhost:21040/rest/logout
+
+### send memo
+GET http://localhost:21040/rest/sendMemo

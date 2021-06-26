@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title> title here! </title>
+
+    <meta charset="utf-8" />
+
+    <!-- 화면 크기고정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+    <h1>welcome to html5</h1>
+
+    <!-- render script -->
+    <script type="module">
+        "use strict"
+        console.log('welcome to js')
+
+        //xml오브잭트를 문자열로 출력하기 
+        
+        let _root = document.createElement('annotation')
+
+        {
+            let _ = document.createElement('folder')
+            _.innerText = 'labels'
+            _root.appendChild(_)
+
+
+        }
+
+        {
+            let _ = document.createElement('filename')
+            _.innerText = '_1607677728194_all.jpg'
+            _root.appendChild(_)
+        }
+
+        _dom.appendChild(_root)
+
+        var oSerializer = new XMLSerializer();
+        var _xml = oSerializer.serializeToString(_root)
+
+        console.log(_xml)
+
+
+
+    </script>
+
+</body>
+
+</html>

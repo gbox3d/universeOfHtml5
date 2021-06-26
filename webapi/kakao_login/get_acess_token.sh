@@ -1,0 +1,3 @@
+#!/bin/bash
+# curl -v -X POST "https://kauth.kakao.com/oauth/token" -d "grant_type=authorization_code" -d "client_id=42729699e847e0531758a0031b235b56" -d "redirect_uri=http://gears001.iptime.org:20180/rest/login" -d "code=YLbAMVS7Fih0GF6qhD7RXtToI4tUE-E_2J1gv0VjHfHOS2RNiH9L7QF_WtGnqgHb4ZOUeAo9cpgAAAF5sMZveA" -d "client_secret=rna6kMXkqHfcdOfcwM1pn9ieRmv2pmnc"
+curl -v -X POST "https://kauth.kakao.com/oauth/token" -d "grant_type=authorization_code&client_id=42729699e847e0531758a0031b235b56&redirect_uri=http://gears001.iptime.org:20180/rest/login&code=11mnYt09zGmVBOvc1IenzKwuo8zTdjPOVRYzu1D77wWA15jHFOZq00tw3iPZ3fKHMgAKFQo9c04AAAF5sM8Lig&client_secret=rna6kMXkqHfcdOfcwM1pn9ieRmv2pmnc"

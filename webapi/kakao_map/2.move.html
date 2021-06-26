@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Daum 지도 이동시키기</title>
+</head>
+<body>
+<script type="text/javascript"  src="kakaomapMyHepler.js"></script>
+
+<div id="map" style="width:500px;height:400px;"></div>
+
+<div>
+  <button name="setCenter">중심부로 이동시키기</button>
+  <button name="pathTo">중심부로 부드럽게 이동시키기</button>
+</div>
+<script>
+
+  kakaoMapSetup({
+    "onReadyCallback"() {
+      var container = document.getElementById('map');
+
+      var options = {
+        center: new daum.maps.LatLng(33.450701, 126.570667),
+        level: 3
+      };
+
+
+      var map = new daum.maps.Map(container, options);
+
+      // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+      var mapTypeControl = new daum.maps.MapTypeControl();
+
+      // 지도 타입 컨트롤을 지도에 표시합니다
+      map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+      document.querySelector('[name="setCenter"]').addEventListener('click',()=> {
+        // 이동할 위도 경도 위치를 생성합니다
+        var moveLatLon = new daum.maps.LatLng(33.452613, 126.570888);
+
+        // 지도 중심을 이동 시킵니다
+        map.setCenter(moveLatLon);
+      })
+
+      document.querySelector('[name="pathTo"]').addEventListener('click',()=> {
+        // 이동할 위도 경도 위치를 생성합니다
+        var moveLatLon = new daum.maps.LatLng(33.450580, 126.574942);
+
+        // 지도 중심을 부드럽게 이동시킵니다
+        // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+        map.panTo(moveLatLon);
+      })
+
+
+
+    }
+  })
+
+
+</script>
+</body>
+</html>

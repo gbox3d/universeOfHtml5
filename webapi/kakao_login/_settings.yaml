@@ -1,0 +1,6 @@
+client_id : '42729699e847e0531758a0.........'
+client_secret : 'rna6kMXkqHfcdOfcwM........'
+redirect_uri : 'http://kakao.wo.to:20180/rest/login'
+server_conf :
+  port : 20180
+  web_pub : './web'

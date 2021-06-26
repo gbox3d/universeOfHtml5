@@ -1,0 +1,68 @@
+<head>
+  <title>example</title>
+
+  <meta http-equiv="cleartype" content="on">
+  <meta name="MobileOptimized" content="320">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+
+
+</head>
+
+<body>
+
+{{>hello}}
+
+
+</body>
+
+
+
+<template name="hello">
+
+
+  <div id="panel" style="background-color: wheat">
+
+    <header style="border: 1px solid black;" >
+      <button class="toggle-button">☰</button>
+      <h2> Header </h2>
+    </header>
+
+    {{#if checkPage "main" }}
+      <h1>Welcome to Meteor!</h1>
+      {{> info}}
+
+    {{/if}}
+
+    {{#if checkPage "about" }}
+      <h1> About </h1>
+      <p>bla bla bla...</p>
+
+
+    {{/if}}
+
+  </div>
+
+
+  <nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+      <li name="main" >main</li>
+      <li name="about">about</li>
+      <li>contact</li>
+    </ul>
+  </nav>
+
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>

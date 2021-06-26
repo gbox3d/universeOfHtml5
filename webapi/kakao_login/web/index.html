@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+
+    <div>
+        <!-- <div>
+            address : <input id='address'>
+            port : <input id='port'>
+        </div> -->
+
+        <button id='kakao-login'>login</button>
+    </div>
+
+
+    <script>
+        // var dom_addreess = document.querySelector('#address')
+        // var dom_port = document.querySelector('#port')
+
+        // if (localStorage.address) {
+        //     dom_addreess.value = localStorage.address
+        //     dom_port.value = localStorage.port
+        // }
+
+
+        document.querySelector('#kakao-login').addEventListener('click', async (evt) => {
+
+
+            // localStorage.address = dom_addreess.value
+            // localStorage.port = dom_port.value
+
+            // let _address = dom_addreess.value
+            // let _port = parseInt(dom_port.value)
+
+            // let _uri = 'http://gears001.iptime.org:20180'
+
+            let _address = location.hostname;
+            let _port =  parseInt(location.port);
+
+            let _json = await (await fetch(`http://${_address}:${_port}/rest/getSettings`)).json();
+
+            console.log(_json);
+
+            let _client_id = _json.content.client_id // '42729699e847e0531758a0031b235b56'
+            let _redirect_uri = `http://${_address}:${_port}/rest/login`
+            let _client_secret = _json.content.client_secret  //'rna6kMXkqHfcdOfcwM1pn9ieRmv2pmnc'
+
+            let url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${_client_id}&redirect_uri=${_redirect_uri}&client_secret=${_client_secret}`
+            console.log(url)
+
+            location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${_client_id}&redirect_uri=${_redirect_uri}&client_secret=${_client_secret}&prompt=login`
+
+        });
+
+    </script>
+
+</body>
+
+</html>

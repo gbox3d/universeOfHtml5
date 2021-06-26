@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title> xml-js 사용 한 파싱 예제 </title>
+
+</head>
+
+<body>
+    <script type='module'>
+        'use strict';
+        import '../../node_modules/xml-js/dist/xml-js.js';
+
+        (async ()=>{
+
+            //외부라이브러리를 사용해서 무겁긴하지만 사용하기 편리한 json형식으로 변환하여 사용할수 있는 장점이 있다.
+            let _text = await (await fetch('./_1607677728194_all.xml')).text();
+            let _json = xml2json(_text,{compact:true}); //compact 옵션이 true면 좀더 간단한 형식으로 변환한다.
+            console.log(_json)
+
+        })();
+
+    </script>
+</body>
+
+</html>

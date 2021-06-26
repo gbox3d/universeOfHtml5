@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .slideout-menu {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 256px;
+      min-height: 100vh;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 0;
+      display: none;
+    }
+
+    .slideout-menu-left {
+      left: 0;
+    }
+
+    .slideout-menu-right {
+      right: 0;
+    }
+
+    .slideout-panel {
+      position: relative;
+      z-index: 1;
+      will-change: transform;
+      background-color: #FFF; /* A background-color is required */
+      min-height: 100vh;
+    }
+
+    .slideout-open,
+    .slideout-open body,
+    .slideout-open .slideout-panel {
+      overflow: hidden;
+    }
+
+    .slideout-open .slideout-menu {
+      display: block;
+    }
+
+    .fixed-header {
+      position: fixed;
+      width: 100%;
+      height: 50px;
+      backface-visibility: hidden;
+      z-index: 2;
+      background-color: red;
+    }
+
+    .btn-hamburger {
+      position: static;
+      height: 40px;
+      width: 40px;
+    }
+
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+
+</head>
+<body>
+
+<nav id="menu" class="menu">
+  <section class="menu-section">
+    <h3 class="menu-section-title">Docs</h3>
+    <ul class="menu-section-list">
+      <li><a href="https://github.com/mango/slideout#installation" target="_blank">Installation</a></li>
+      <li><a href="https://github.com/mango/slideout#usage" target="_blank">Usage</a></li>
+      <li><a href="https://github.com/mango/slideout#api" target="_blank">API</a></li>
+      <li><a href="https://github.com/mango/slideout#npm-scripts" target="_blank">npm-scripts</a></li>
+    </ul>
+  </section>
+
+  <section class="menu-section">
+    <h3 class="menu-section-title">Slideout</h3>
+    <ul class="menu-section-list">
+      <li><a href="https://github.com/mango/slideout" target="_blank">Fork it</a></li>
+      <li><a href="https://github.com/mango/slideout/issues/new" target="_blank">Create an issue</a></li>
+      <li><a href="https://github.com/mango/slideout/releases/">Download</a></li>
+    </ul>
+  </section>
+
+  <section class="menu-section">
+    <h3 class="menu-section-title">Mango</h3>
+    <ul class="menu-section-list">
+      <li><a href="https://getmango.com" target="_blank">About Mango</a></li>
+      <li><a href="https://twitter.com/getmango" target="_blank">Follow Us</a></li>
+    </ul>
+  </section>
+</nav>
+
+<header class="fixed-header">
+  <button class="btn-hamburger js-slideout-toggle"></button>
+</header>
+
+<main id="main" class="panel">
+  <ul>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+    <li>----------test -------------- </li>
+  </ul>
+
+</main>
+
+<script>
+
+  var slideout = new Slideout({
+    'panel': document.getElementById('main'),
+    'menu': document.getElementById('menu'),
+    'padding': 256,
+    'tolerance': 70
+  });
+
+  document.querySelector('.js-slideout-toggle').addEventListener('click', function() {
+    slideout.toggle();
+  });
+
+  var fixed = document.querySelector('.fixed-header');
+
+  slideout.on('translate', function(translated) {
+    fixed.style.transform = 'translateX(' + translated + 'px)';
+  });
+
+  slideout.on('beforeopen', function () {
+    fixed.style.transition = 'transform 300ms ease';
+    fixed.style.transform = 'translateX(256px)';
+  });
+
+  slideout.on('beforeclose', function () {
+    fixed.style.transition = 'transform 300ms ease';
+    fixed.style.transform = 'translateX(0px)';
+  });
+
+  slideout.on('open', function () {
+    fixed.style.transition = '';
+  });
+
+  slideout.on('close', function () {
+    fixed.style.transition = '';
+  });
+
+
+</script>
+
+</body>
+</html>

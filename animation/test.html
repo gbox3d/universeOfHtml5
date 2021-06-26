@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title> title here! </title>
+
+    <meta charset="utf-8" />
+
+    <!-- 화면 크기고정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <style></style> -->
+
+    <!-- bootstrap -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script> -->
+
+    <style>
+        .scrollbox {
+            position: absolute;
+            display: flex;
+            transform: translate(100px, 100px);
+            border: 1px solid black;
+            width: 512px;
+            height: 96px;
+            text-overflow: clip;
+            /* overflow: hidden; */
+            align-items: center;
+            white-space: nowrap;
+            font-size: 64px;
+        }
+
+        .item {
+            display: flex;
+        }
+        
+        .back {
+            margin-left: 10rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scrollbox">
+        <div class="item">
+            <div class="front">
+                기린대로. 덕진 주공아파트
+            </div>
+            <div class="back">
+                기린대로. 덕진 주공아파트
+            </div>
+
+        </div>
+        
+    </div>
+
+    <button id="getitemsize"> get item size </button>
+
+    <!-- render script -->
+    <script type="module">
+        "use strict"
+        import anime from '../libs/anime/anime.es.js'
+
+        console.log('welcome to js')
+
+        document.getElementById('getitemsize').addEventListener('click', evt => {
+            let _item = document.querySelector('.item');
+
+            //문장 가로크기 구하기 
+            console.log(_item.offsetWidth)
+
+            let _item_size = _item.offsetWidth
+
+            let _duration = 3000
+
+            //스크롤싸이즈 계산 1rem 은 16px
+            let _scroll_size = (_item_size - (_item_size/2) + (16*5))
+
+            anime({
+                targets: _item,
+                translateX: [{
+                    value : -_scroll_size,
+                    duration : _duration,
+                    endDelay : 1000
+                },
+                {
+                    value : 0,
+                    duration : 0
+                }
+                // {
+                //     value : 0,
+                //     delay : 500,
+                //     duration : (512/_item_size) * _duration
+                // }
+            ],
+                // rotate: '1turn',
+                // backgroundColor: '#000',
+                // color: '#f00',
+                // autoplay: false,
+                easing: 'linear',
+                loop : true
+                // duration: 1000
+            })
+            .finished.then(_=> {
+                console.log(_)
+            })
+        })
+
+
+    </script>
+
+</body>
+
+</html>

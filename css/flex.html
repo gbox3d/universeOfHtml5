@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title> title here! </title>
+
+    <meta charset="utf-8" />
+
+    <!-- 화면 크기고정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <style></style> -->
+    
+    <!-- bootstrap -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script> -->
+
+        <style>
+            .flexbox {
+                /* position: absolute; */
+                /* transform: translate(10rem,1rem); */
+                margin-top: 1rem;
+                margin-left: 1rem;
+                
+                display: flex;
+
+                width: 32rem;
+                height: 8rem;
+                border: 1px solid black;
+            }
+            .item {
+                /* height: 2rem; */
+                background-color: red;
+                color: white;
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+        </style>
+</head>
+
+<body>
+
+    <!-- 참고 : https://heropy.blog/2018/11/24/css-flexible-box/ -->
+
+    <h1>align items</h1>
+
+    <p>default</p>
+    <div class="flexbox">
+        <div class="item"> 하나 </div>
+        <div class="item"> 둘 </div>
+        <div class="item"> 라스트 </div>
+    </div>
+
+    
+    <p>center</p>
+    <div class="flexbox" style="align-items: center;" >
+        <div class="item"> 하나 </div>
+        <div class="item"> 둘 </div>
+        <div class="item"> 라스트 </div>
+    </div>
+
+    
+    <!-- render script -->
+    <script type="module">
+        "use strict"
+        console.log('welcome to js')
+        
+    </script>
+
+</body>
+
+</html>

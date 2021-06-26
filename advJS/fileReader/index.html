@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>file dialog box</title>
+
+</head>
+<body>
+
+<div id="filereader">
+
+    <p>use fileReader</p>
+    <input type="file" >
+    <textarea></textarea>
+
+</div>
+
+<div id="fetch">
+
+    <p>use fetch</p>
+    <input type="file" >
+    <textarea></textarea>
+
+</div>
+
+<div id="image">
+
+    <p>use image tag</p>
+    <input type="file" >
+    <textarea></textarea>
+
+</div>
+
+<div id="binary">
+    <p>read binary</p>
+    <input type="file" >
+    <textarea></textarea>
+</div>
+
+
+<div id="url">
+    <p>read url</p>
+    <button> test </button>
+
+</div>
+
+
+
+<script>
+
+    /*
+    클라이언트 웹에서는 바로 경로를 써주지못하고 blob형식의 데이터를 받아볼수있는 가상 주소로 파일경로를 변환하여 넣어준다.
+    (blob://xxx.xxx.xx 형식의 주소)
+     */
+
+    //https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+    document.querySelector('#filereader input').addEventListener('change',(evt)=> {
+
+        let _textArea = evt.target.parentNode.querySelector('textarea');
+        console.log(evt.target)
+
+        let _input = evt.target
+
+        console.log(_input.files)
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            // The file's text will be printed here
+            console.log(e.target.result)
+        };
+
+        //blob 내부적으로 처리
+        reader.readAsText(_input.files[0]);
+    })
+
+    document.querySelector('#fetch input').addEventListener('change',(evt)=> {
+
+        let _textArea = evt.target.parentNode.querySelector('textarea');
+
+        console.log(evt.target)
+
+        let _input = evt.target
+
+        console.log(_input.files)
+
+        console.log(window.URL.createObjectURL(_input.files[0]))
+
+        fetch(window.URL.createObjectURL(_input.files[0]))
+                .then(_=> {
+                    console.log(_)
+                    return _.text()
+                })
+                .then(_=> {
+                    console.log(_)
+                    _textArea.value = _
+                })
+    })
+
+    document.querySelector('#image input').addEventListener('change',(evt)=> {
+        let _img = document.createElement('img')
+        let _input = evt.target
+
+        _img.onload = _=> {
+
+            evt.target.parentNode.appendChild(_img)
+
+        }
+        _img.src = window.URL.createObjectURL(_input.files[0])
+    })
+
+    //fileObject( or blob) => ArrayBuffer => Uint8Array
+    document.querySelector('#binary input').addEventListener('change',(evt)=> {
+
+        let _textArea = evt.target.parentNode.querySelector('textarea');
+        let _input = evt.target
+
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            // The file's text will be printed here
+            console.log(e.target.result)
+
+            //배열로 변환
+            //https://stackoverflow.com/questions/52391921/how-to-get-an-array-from-arraybuffer
+            let _buffer = new Uint8Array( e.target.result )
+            console.log( _buffer )
+
+            _buffer.forEach(_=> {
+                _textArea.value += _ + ","
+            })
+
+        };
+
+        //blob 내부적으로 처리, 인자로 blob를 넣어줄수도있다.
+        reader.readAsArrayBuffer(_input.files[0]);
+    })
+
+
+
+</script>
+
+</body>
+</html>

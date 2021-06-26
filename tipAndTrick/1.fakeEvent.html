@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div name="testArea" style="width: 320px;height: 240px;background-color: red;" ></div>
+
+<script>
+
+  var testAreaElm = document.querySelector('[name=testArea]')
+
+  testAreaElm.addEventListener('click',function (e) {
+    console.log('event click fired')
+    console.log(e)
+  })
+
+  testAreaElm.addEventListener('mouseup',function (e) {
+    console.log('event mouseup fired')
+    console.log(e)
+  })
+
+  //자동으로 클릭 이밴트 발생
+  if (document.createEvent) {
+    console.log('create Event function founded!')
+    let e = document.createEvent("MouseEvents");
+    e.initMouseEvent("click", true, true, window,
+      0,
+      10, 20, //screen xy
+      30, 40, //client xy
+      false, false, false,
+      false, 0, null);
+
+    testAreaElm.dispatchEvent(e)
+
+    //lnk.dispatchEvent(e);
+  } else if (lnk.fireEvent) {
+    console.log('create Event function not founded!')
+    testAreaElm.fireEvent("onclick");
+  }
+
+  //자동으로 mouse up 이밴트 발생
+  if (document.createEvent) {
+    console.log('create Event function founded!')
+    let e = document.createEvent("MouseEvents");
+    e.initMouseEvent("mouseup", true, true, window,
+      0,
+      11, 21, //screen xy
+      31, 41, //client xy
+      false, false, false,
+      false, 0, null);
+
+    testAreaElm.dispatchEvent(e)
+
+    //lnk.dispatchEvent(e);
+  } else if (testAreaElm.fireEvent) {
+    //console.log('create Event function not founded!')
+    //testAreaElm.fireEvent("onclick");
+  }
+
+</script>
+
+</body>
+</html>

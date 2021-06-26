@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title> title here! </title>
+
+    <meta charset="utf-8" />
+
+    <!-- 화면 크기고정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+    <h1>welcome to html5</h1>
+
+    <!-- render script -->
+    <script type="module">
+        "use strict"
+        console.log('welcome to js');
+
+        const parser = new DOMParser();
+        
+
+        (async function() {
+
+            let _text = await (await fetch('./_1607677728194_all.xml')).text();
+
+            //기본 기능만 가지고 파싱하기 
+            const _xml = parser.parseFromString(_text,"application/xml")
+            console.log(_xml);
+
+            //이름 얻기 
+            console.log(_xml.getElementsByTagName('object')[0].getElementsByTagName('name')[0].textContent);
+
+        })();
+    </script>
+
+</body>
+
+</html>

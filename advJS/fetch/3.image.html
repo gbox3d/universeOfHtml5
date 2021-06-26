@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title> welcome to html5 universe </title>
+
+</head>
+
+<body>
+
+<div id="container">
+
+</div>
+
+<script>
+
+  function showImage(responseAsBlob) {
+    // Assuming the DOM has a div with id 'container'
+    let container = document.getElementById('container');
+    let imgElem = document.createElement('img');
+    container.appendChild(imgElem);
+    let imgUrl = URL.createObjectURL(responseAsBlob);
+    console.log(imgUrl)
+    imgElem.src = imgUrl;
+  }
+
+  function logResult(result) {
+    console.log(result);
+  }
+
+  function logError(error) {
+    console.log('Looks like there was a problem: \n', error);
+  }
+
+  function fetchImage(pathToResource) {
+    fetch(pathToResource)
+      .then(_=> {
+        if(!_.ok) {
+          throw  Error(_.statusText)
+        }
+        return _;
+      })
+      .then(_=>_.blob())
+      .then(showImage)
+      .catch(logError);
+  }
+
+  // fetchImage('./jomireng.jpg');
+  fetchImage('http://localhost:20110/rest/getNextAds');
+
+</script>
+
+
+</body>
+
+</html>
