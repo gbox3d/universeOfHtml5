@@ -1,18 +1,26 @@
 <template>
-  <h1>hello world!!!</h1>
+  <h1>{{ msg1 }}</h1>
+  <input type="text" v-model="msg1">
+  <button @click="testClick" > test </button>
+  
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 
-// export default {
-//   name: 'App',
-//   components: {
-//     HelloWorld
-//   }
-// }
-
-
+export default {
+  name: "App",
+  data() {
+    return {
+      msg1: "Hello World",
+    };
+  },
+  method : {
+    testClick() {
+      console.log('click')
+    }
+  }
+};
 </script>
 
 <style>
