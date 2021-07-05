@@ -1,15 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <loginDlgCompo :id='id' :passwd="passwd"/>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import loginDlgCompo from './components/loginDlg'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HelloWorld
+    loginDlgCompo
+  },
+  data() {
+    return {
+      id : 'lego',
+      passwd : 'qwer',
+
+    }
   }
 }
 </script>
