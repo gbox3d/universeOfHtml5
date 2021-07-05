@@ -12,14 +12,25 @@
   <p>{{ count }}</p>
   <button @click="incCount(1,$event)">count 1</button>
   <button @click="incCount(-1,$event)">count -1</button>
+
+  <hr>
+  <HomeComponent/>
+  <StatusComponent :param1="msg1"/>
+  <StatusComponent /> 
   
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import HomeComponent from './Home' 
+import StatusComponent from './Status'
 
 export default {
   name: "App",
+  components : {
+    HomeComponent,
+    StatusComponent
+  },
   data() {
     return {
       count : 0,
