@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
-// import { component } from 'vue'
+import vuetify from './plugins/vuetify'
 import App from './App.vue'
-// import StatusComponent from './Status'
-// import Vue from 'vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(vuetify)
 
-// component('AppStatus',StatusComponent)
+app.mount('#app')

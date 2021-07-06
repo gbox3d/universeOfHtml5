@@ -7,8 +7,6 @@
   <!-- <input type="text" v-model="passwd"> -->
   <p>{{ user.id }}, {{ user.passwd }}</p>
   <button>login</button>
-  <v-btn> cancel </v-btn>
-  <hr />
 </template>
 
 <script>
