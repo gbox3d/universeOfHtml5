@@ -1,16 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <div v-for="(item,index) in todoList" :key="index">{{item}}</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HelloWorld
+  },
+  data() {
+    return {
+      todoList : [
+        {
+          title: 'zooom...',
+          text : '설겆이 점심준비'
+        },
+        {
+          title : '민아 응원글',
+          text : '인스타 들려서 글남기기 '
+        }
+      ]
+    }
   }
+
 }
 </script>
 
