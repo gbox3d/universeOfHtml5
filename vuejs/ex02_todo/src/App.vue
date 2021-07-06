@@ -1,7 +1,20 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <div v-for="(item,index) in todoList" :key="index">{{item}}</div>
+
+  <div>
+    title : <input type="text" v-model="editTitle"><br>
+    text : <input type="text" v-model="editText"><br>
+    <button>add</button>
+    <button>update</button>
+  </div>
+
+  <hr>
+  <div v-for="(item,index) in todoList" :key="index" @click="itemClick(item)">
+    <div class="title" >{{item.title}}</div>
+    <div>{{item.text}}</div>
+    <button>del</button>
+  </div>
 </template>
 
 <script>
@@ -14,6 +27,8 @@ export default {
   },
   data() {
     return {
+      editTitle : "",
+      editText : "",
       todoList : [
         {
           title: 'zooom...',
@@ -25,6 +40,14 @@ export default {
         }
       ]
     }
+  },
+  methods : {
+    itemClick(item) {
+      console.log(item)
+      this.editTitle = item.title
+      this.editText = item.text
+    }
+
   }
 
 }
@@ -37,6 +60,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
 }
 </style>
