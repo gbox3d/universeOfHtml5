@@ -5,15 +5,15 @@
   <div>
     title : <input type="text" v-model="editTitle"><br>
     text : <input type="text" v-model="editText"><br>
-    <button>add</button>
-    <button>update</button>
+    <button @click="onAddTodo" >add</button>
   </div>
 
   <hr>
   <div v-for="(item,index) in todoList" :key="index" @click="itemClick(item)">
     <div class="title" >{{item.title}}</div>
     <div>{{item.text}}</div>
-    <button>del</button>
+    <button @click="onDelTodo(index)" >del</button>
+    <button @click="onUpdateTodo(index)" >update</button>
   </div>
 </template>
 
@@ -46,6 +46,26 @@ export default {
       console.log(item)
       this.editTitle = item.title
       this.editText = item.text
+    },
+    onAddTodo() {
+      this.todoList.push({
+        title : this.editTitle,
+        text : this.editText
+      })
+    },
+    onUpdateTodo(index) {
+
+      console.log(index)
+
+      this.todoList[index] = {
+        title : this.editTitle,
+        text : this.editText
+      } 
+
+    },
+    onDelTodo(index) {
+      console.log(index)
+      this.todoList.splice(index, 1);
     }
 
   }
