@@ -3,6 +3,7 @@
   <div id="nav" class="red" >
     <router-link to="/">Home</router-link> |
     <router-link to="/moon">Moon</router-link> |
+    <router-link to="/counter"> Counter </router-link> |
     <router-link to="/about">About</router-link>
     <div>
         <button @click="goHome">Home</button>

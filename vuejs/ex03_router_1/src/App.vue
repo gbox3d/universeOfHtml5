@@ -1,20 +1,34 @@
 <template>
   <Header/>
-   
   <router-view />
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
+// import Vuex from 'vuex'
+
+// const store = new Vuex.Store({
+//     state: {
+//       count: 0
+//     },
+//     mutations: {
+//       increment (state) {
+//         state.count++
+//       }
+//     }
+//   })
+
 
 export default {
   name: 'App',
   components: {
     Header,
     // HelloWorld
+  },
+  // store : store,
+  mounted() {
+    console.log('mounted app.vue')
   }
 }
 </script>

@@ -13,6 +13,11 @@ const routes = [
     component: () => import('@/views/Moon'), // 동적 import
   },
   {
+    path: '/counter',
+    name: 'Counter',
+    component: () => import('@/views/Counter'),
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('@/views/About'),
