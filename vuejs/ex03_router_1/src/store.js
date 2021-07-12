@@ -6,11 +6,11 @@ export const store = createStore({
 
     //local storage 에 count 값 보존
     let _count = 0
-    if(localStorage.count != undefined) {
-      _count = localStorage.count
+    if(localStorage.getItem('count') != undefined) {
+      _count = parseInt(localStorage.count)
     } 
     else {
-      localStorage.count = _count
+      localStorage.setItem('count',_count)
     }
 
     return {
