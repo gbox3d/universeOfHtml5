@@ -20,7 +20,7 @@ npm run build
 npm run lint
 ```
 
-### 라이터 설치하기
+### 라우터 설치하기
 
 ```bash
 npm i vue-router@next

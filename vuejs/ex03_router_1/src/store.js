@@ -10,6 +10,12 @@ export const store = createStore({
   mutations: {
     increment (state) {
       state.count++
+    },
+    decrement (state) {
+      state.count--
+    },
+    setvalue(state,playload) {
+      state.count = playload.value
     }
   }
 })
