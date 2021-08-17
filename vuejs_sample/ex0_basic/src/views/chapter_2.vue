@@ -1,5 +1,5 @@
 <template>
-  <div v-html="alertMsg"></div>
+  <div v-html="titleMsg"></div>
   <img v-bind:src="placeimg" />
   <hr />
 </template>
@@ -8,7 +8,7 @@
 export default {
     data() {
         return {
-            alertMsg : '<h2 class="red-font"> render html sample </h2>',
+            titleMsg : '<h2 class="red-font"> render html sample </h2>',
             placeimg : 'https://placeimg.com/100/100/tech',
         }
     }
