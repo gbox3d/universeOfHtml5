@@ -1,22 +1,15 @@
 {
   "type": "module",
-  "name": "uoh2",
+  "name": "uoh",
   "version": "1.0.0",
-  "description": "universe of html5 sample code version 2",
+  "description": "universe of html5 crash sample code",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "http": "npx http-server"
+    
   },
-  "author": "",
+  "author": "gbox3d",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^0.12.3",
-    "node-fetch": "^2.6.0",
-    "node-static": "^0.7.11",
-    "node-telegram-bot-api": "^0.53.0",
-    "vue": "^3.2.3",
-    "xml-js": "^1.6.11",
-    "yaml": "^1.10.2"
+    
   }
 }
