@@ -1,5 +1,11 @@
 # ex05_axios
 
+모듈 설치  
+```
+npm i axios
+npm i vuex@next
+```
+
 ## Project setup
 ```
 npm install
