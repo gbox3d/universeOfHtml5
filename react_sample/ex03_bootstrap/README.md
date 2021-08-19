@@ -1,3 +1,25 @@
+# 부트스트랩 설치 하는 법
+
+리액트 부트스트랩 설치
+```
+yarn add react-bootstrap bootstrap
+```
+
+public/index.html css link 추가(cdn 대신 직접 다운 받아 설치하는것 권장)
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+  integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+  crossorigin="anonymous"
+```
+
+모듈 포함시키기
+```js
+import { Button } from 'react-bootstrap';
+
+```
+ 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
