@@ -1,5 +1,5 @@
 <template>
-  <h1>
+  <h1 class="red" >
     Home
   </h1>
 </template>
@@ -9,3 +9,4 @@ export default {
 
 };
 </script>
+

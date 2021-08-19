@@ -1,5 +1,6 @@
 <template>
   <button @click="test" >test</button>
+  <button @click="test2" >test 2</button>
   
 </template>
 
@@ -18,8 +19,12 @@ export default {
         let {status,data} = await this.axios.get('https://randomuser.me/api?results=5');
         console.log(status)
         console.log(data)
-      })()
-      // console.log(this.axios)
+      })();
+    },
+    async test2() {
+      let {status,data} = await this.axios.get('http://localhost:8080/api/v1/memo/find/skip/2/limit/5');
+      console.log(status)
+      console.log(data)
     }
   }
 

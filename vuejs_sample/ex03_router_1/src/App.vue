@@ -4,22 +4,7 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
-// import Vuex from 'vuex'
-
-// const store = new Vuex.Store({
-//     state: {
-//       count: 0
-//     },
-//     mutations: {
-//       increment (state) {
-//         state.count++
-//       }
-//     }
-//   })
-
-
 export default {
   name: 'App',
   components: {
@@ -42,7 +27,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.red {
-  background-color : red
-}
+
 </style>

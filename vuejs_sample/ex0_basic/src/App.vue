@@ -60,13 +60,4 @@ export default {
   color: yellow;
 }
 
-.red {
-  color: red;
-}
-.green {
-  color: green;
-}
-.blue {
-  color: blue;
-}
 </style>
