@@ -4,12 +4,10 @@
   "version": "1.0.0",
   "description": "universe of html5 crash sample code",
   "main": "index.js",
-  "scripts": {
-    
-  },
+  "scripts": {},
   "author": "gbox3d",
   "license": "ISC",
   "dependencies": {
-    
+    "react-router-dom": "^5.2.0"
   }
 }

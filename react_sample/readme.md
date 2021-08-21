@@ -7,3 +7,6 @@ create-react-app이 없으면 자동으로 설치된다.
 npx create-react-app <앱이름>
 ```
 
+## 참고자료
+https://github.com/bradtraversy/react-crash-2021/
+
