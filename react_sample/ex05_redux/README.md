@@ -91,6 +91,34 @@ dispatch(counterSlice.actions.inc()) //슬라이서 호출
 dispatch(counterSlice.actions.set({value:1000})) //인자 전달예
 ```
 
+비동기 처리를 위한 createAsyncThunk 이 있다.  
+export 시켜서 외부에서 사용하게한다.  
+그리고 슬라이서의 '외부 리듀서'에 등록시켜 데이터를 동기화 시킨다.  
+
+```js
+
+export const getTodosAsync = createAsyncThunk(
+  'todos/getTodosAsync', //type
+  async () => {
+    const resp = await fetch('https://jsonplaceholder.typicode.com/todos');
+    console.log(resp)
+    if (resp.ok) {
+      const todos = await resp.json();
+      return { todos }; //playload
+    }
+  }
+);
+
+...
+
+  extraReducers: {
+    [getTodosAsync.fulfilled]: (state, action) => {
+      console.log(action)
+      return action.payload.todos;
+    },
+  }
+  
+```
 
 
 ## 참고자료
