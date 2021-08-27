@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const asyncLoadCountValue = createAsyncThunk(
+export const asyncLoadCountValue = createAsyncThunk(
     'counter/asyncLoadCountValue',
     async (delay, { rejectWithValue }) => {
 
@@ -23,7 +23,7 @@ const asyncLoadCountValue = createAsyncThunk(
     }
 )
 
-const counterSlice = createSlice({
+export const counterSlice = createSlice({
     name: 'counter',
     initialState: {
         fsm: 'startup',
@@ -75,5 +75,7 @@ const counterSlice = createSlice({
     }
 })
 
-// export default counterSlice.reducer
-export { counterSlice,asyncLoadCountValue }
+// export { counterSlice,asyncLoadCountValue }
+export const {inc,set} = counterSlice.actions
+
+export default counterSlice.reducer

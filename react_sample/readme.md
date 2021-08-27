@@ -8,5 +8,8 @@ npx create-react-app <앱이름>
 ```
 
 ## 참고자료
-https://github.com/bradtraversy/react-crash-2021/
+https://youtu.be/k68j9xlbHHk
+
+https://github.com/chrisblakely01/react-redux-todo-app
+
 

@@ -95,7 +95,7 @@ dispatch(counterSlice.actions.set({value:1000})) //인자 전달예
 export 시켜서 외부에서 사용하게한다.  
 그리고 슬라이서의 '외부 리듀서'에 등록시켜 데이터를 동기화 시킨다.  
 
-```js
+```jsx
 
 export const getTodosAsync = createAsyncThunk(
   'todos/getTodosAsync', //type

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { counterSlice, asyncLoadCountValue } from '../redux/counterSlice'
+import { inc,set, asyncLoadCountValue } from '../redux/counterSlice'
 
 const Counter = () => {
     const dispatch = useDispatch();
+
+    //스토어에 등록된 리듀서중에서 카운터 선택 
     const counter = useSelector((state) => state.counter);
 
     useEffect(() => {
@@ -23,13 +25,13 @@ const Counter = () => {
 
                         <button onClick={() => {
                             //호출하기 
-                            dispatch(counterSlice.actions.inc())
+                            dispatch(inc())
 
                         }} > inc </button>
 
                         <button onClick={() => {
                             //인자전달하기 
-                            dispatch(counterSlice.actions.set({ value: 1000 }))
+                            dispatch(set({ value: 1000 }))
 
                         }} > set 1000 </button>
 

@@ -86,4 +86,7 @@ export const todoSlice = createSlice({
   }
 })
 
-// export default todoSlice;
+//일종의 public 함수화 시키기 
+export const {addTodo,toggleComplete,deleteTodo} = todoSlice.actions
+
+export default todoSlice.reducer;
