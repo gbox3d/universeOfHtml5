@@ -23,3 +23,9 @@ result = oneTwoThree.map((v)=> {
 })
 
 console.log(result) //[ '짝수', '홀수', '짝수' ]
+
+result = oneTwoThree.map( (v,index)=> {
+  console.log(v,index)
+} );
+
+console.log(result); //map은 값을 리턴하지않으면 그부분을 undefined 값을 넣는다. 요소의 객수를 줄이고 싶으면 reduce 나 filter를 사용해야한다.
