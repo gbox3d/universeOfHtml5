@@ -1,6 +1,6 @@
 <template>
   <h1>Moon</h1>
-  <img class="jail-moon-size" src='@/assets/dog_jail.jpg'>
+  <img class="jail-moon-size" src='@/assets/sakura.jpg'>
 </template>
 
 <style>

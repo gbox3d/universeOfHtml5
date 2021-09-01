@@ -1,0 +1,28 @@
+/* 출처 : https://www.w3schools.com/css/css_navbar_horizontal.asp */
+.rogan.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.rogan.nav li {
+    float: left;
+}
+
+.rogan.nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.rogan.nav li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.rogan.nav .active {
+    background-color: #326ad3;
+}

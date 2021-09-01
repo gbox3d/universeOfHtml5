@@ -1,6 +1,6 @@
 <template>
 
-  <div id="nav" class="red" >
+  <div class="red" >
     <router-link to="/">Home</router-link> |
     <router-link to="/moon">Moon</router-link> |
     <router-link to="/counter"> Counter </router-link> |
@@ -36,3 +36,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.red {
+  background-color : red
+}
+</style>

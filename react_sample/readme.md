@@ -7,3 +7,9 @@ create-react-app이 없으면 자동으로 설치된다.
 npx create-react-app <앱이름>
 ```
 
+## 참고자료
+https://youtu.be/k68j9xlbHHk
+
+https://github.com/chrisblakely01/react-redux-todo-app
+
+
