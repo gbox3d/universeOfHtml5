@@ -1,5 +1,10 @@
 # Redux  
 
+## 설치
+
+```sh
+yarn add react-redux @reduxjs/toolkit
+```
 
 ## 노트
 
