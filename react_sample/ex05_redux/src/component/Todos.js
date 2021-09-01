@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { todoSlice } from '../redux/todoSlice';
-import { getTodosAsync } from '../redux/todoSlice';
+import { todoSlice } from '../reduex/todoSlice';
+import { getTodosAsync } from '../reduex/todoSlice';
 
 const Todos = () => {
 
