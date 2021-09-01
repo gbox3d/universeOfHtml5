@@ -68,8 +68,8 @@ export const counterSlice = createSlice({
             state.currentRequestId = action.meta;
             state.fsm = "fin";
             state.error = action.error
-            state.count = action.payload.count
-            console.log('fullfilled')
+            // state.count = action.payload.count
+            console.log('rejected')
         }
 
     }
