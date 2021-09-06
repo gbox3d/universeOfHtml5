@@ -34,7 +34,7 @@ const Exam05 = () => {
         return () => {
             console.log('text count')
         }
-    }, [text]) //카운터가 업데이트 될때 호출됨
+    }, [text]) //text가 업데이트 될때 호출됨
 
     return (
         <div>
