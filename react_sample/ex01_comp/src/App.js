@@ -21,7 +21,7 @@ function App() {
       <hr />
       {
         showModal ?
-          <MyModal msg={msg} />
+          <MyModal msg={msg} callBack={()=>{console.log('click')}} />
           : null
       }
       <hr/>
@@ -36,6 +36,7 @@ function MyModal(props) {
     <div className="MyModal" >
       <h2>Modal box</h2>
       <p> {props.msg} </p>
+      <button onClick={props.callBack} > call back test </button>
     </div>
   )
 }
