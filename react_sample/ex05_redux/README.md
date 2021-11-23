@@ -16,7 +16,7 @@ import counterSlice from './counterSlice'
 export default configureStore({
 	reducer: {
 		리듀서이름 : 슬라이서.리듀서객체,
-        counter : counterSlice.reducer
+    counter : counterSlice.reducer
 
 	},
 });
