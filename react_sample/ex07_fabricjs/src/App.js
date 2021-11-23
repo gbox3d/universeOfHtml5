@@ -8,16 +8,22 @@ function App() {
   const [canvas, setCanvas] = useState('');
   const [curObject,setCurObject] = useState();
 
-  const initCanvas = () => (
-    new fabric.Canvas('canvas', {
+  const initCanvas = () => {
+
+
+    console.log('initCanvas');
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    console.log(width, height);
+
+    return new fabric.Canvas('canvas', {
       height: 800,
-      width: 800,
-      backgroundColor: 'pink'
+      width: width,
+      backgroundColor: 'black'
     })
-
-
-  )
-
+  }
+    
 
   useEffect(() => {
     setCanvas(initCanvas());
@@ -34,20 +40,18 @@ function App() {
         });
 
         rect.on('mousedown',(evt)=> {
-
-          // console.log(this);
           setCurObject(evt.target)
-
         })
-
-
         canvas.add(rect);
         canvas.renderAll();
 
       }} > Rect</button>
       <button onClick={()=> {
-         var circle = new fabric.Circle({
+         const circle = new fabric.Circle({
           radius: 20, fill: 'green', left: 100, top: 100
+        });
+        circle.on('mousedown',(evt)=> {
+          setCurObject(evt.target)
         });
         canvas.add(circle)
         canvas.renderAll();
@@ -55,11 +59,11 @@ function App() {
 
 
       <button onClick={()=> {
-        curObject.set('fill','#0000ff')
-        canvas.renderAll()
+        if(curObject){
+          curObject.set('fill','red');
+          canvas.renderAll();
+        }
       }} > test </button>
-
-
 
       <canvas id="canvas" />
     </div>
