@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module">
+        import  main  from './index.js';
+        document.addEventListener('DOMContentLoaded', main);
+    </script>
+</head>
+<body>
+    <h1>멀봐임마</h1>
+    <div id="wellcome">
+        <form>
+            <input required>
+            <button>전송</button>
+        </form>
+    </div>
+    <div id="call">
+        <video id="myFace" autoplay playsinline width="400" height="400"></video>
+        <video id="peerFace" autoplay playsinline width="400" height="400"></video>
+
+    </div>
+    
+</body>
+</html>
