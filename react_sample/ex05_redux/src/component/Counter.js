@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { inc,set, asyncLoadCountValue } from '../redux/counterSlice'
+import { inc,set, asyncLoadCountValue } from '../reduex/counterSlice'
 
 const Counter = () => {
     const dispatch = useDispatch();

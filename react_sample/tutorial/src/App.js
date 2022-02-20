@@ -10,6 +10,7 @@ import Exam02 from './component/Exam02ConditionRender';
 import Exam03Axios from './component/Exam03Axios';
 import Exam04InlineStyle from './component/Exam04InlineStyle'
 import Exam05UseEffect from './component/Exam05UseEffect';
+import Exam06 from './component/Exam06UseRef';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <li><NavLink to="/exam03">exam 3 axios</NavLink></li>
             <li><NavLink to="/exam04">exam 4</NavLink></li>
             <li><NavLink to="/exam05">exam 5</NavLink></li>
+            <li><NavLink to="/exam06">exam 6</NavLink></li>
           </ul>
         </div>
 
@@ -32,6 +34,7 @@ function App() {
         <Route path="/exam03" component={Exam03Axios} />
         <Route path="/exam04" component={Exam04InlineStyle} />
         <Route path="/exam05" component={Exam05UseEffect} />
+        <Route path="/exam06" component={Exam06} />
 
         <div className="rogan footer">
           React Version : {React.version}
