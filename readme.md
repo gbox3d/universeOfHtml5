@@ -3,7 +3,7 @@
 
 npm 모듈 새로 설치하기
 ```sh
-npm i @babel/cli @babel/core @babel/node @babel/preset-env dotenv express fs-extra
+npm i @babel/cli @babel/core @babel/node @babel/preset-env dotenv express fs-extra socket.io
 npm i -D cross-env nodemon
 ```
 

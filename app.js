@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from "dotenv"
 import https from 'https'
+import http from 'http'
 import fs from 'fs'
 import SocketIO from "socket.io";
 // import SocketIO_version from "socket.io/package";
@@ -11,10 +12,10 @@ console.log(`run mode : ${process.env.NODE_ENV}`);
 
 const app = express()
 
-// app.use('/api/v1',fileControl);
 app.use('/tipAndTrick', express.static('./tipAndTrick'));
 app.use('/media', express.static(`./media`));
 app.use('/webrtc', express.static(`./webrtc`));
+
 app.use('/', express.static(`./public`));
 
 // console.log(__dirname)
@@ -26,19 +27,24 @@ app.all('*', (req, res) => {
     .send('oops! resource not found')
 });
 
-const options = {
-  key: fs.readFileSync('/home/ubiqos/work/project/cert_files/2022_2/private.key'),
-  cert: fs.readFileSync('/home/ubiqos/work/project/cert_files/2022_2/certificate.crt'),
-  ca: fs.readFileSync('/home/ubiqos/work/project/cert_files/2022_2/ca_bundle.crt'),
-};
-// https 서버를 만들고 실행시킵니다
-const httpsServer = https.createServer(options, app)
+let baseServer;
+if(process.env.SSL === 'True') {
+  console.log(`SSL mode ${process.env.SSL}`);
+  const options = {
+    key: fs.readFileSync(process.env.SSL_KEY),
+    cert: fs.readFileSync(process.env.SSL_CERT),
+    ca: fs.readFileSync(process.env.SSL_CA),
+  };
+  // https 서버를 만들고 실행시킵니다
+  baseServer = https.createServer(options, app)
+
+}
+else {
+  baseServer = http.createServer({}, app)
+}
 
 //socket io
-const wsServer = SocketIO(httpsServer);
-
-// console.log(SocketIO.Server.version)
-
+const wsServer = SocketIO(baseServer);
 
 wsServer.on("connection", (socket) => {
 
@@ -84,7 +90,7 @@ wsServer.on("connection", (socket) => {
 
 });
 
-httpsServer.listen(process.env.PORT, () => {
+baseServer.listen(process.env.PORT, () => {
   console.log(`server run at : ${process.env.PORT}`)
 });
 

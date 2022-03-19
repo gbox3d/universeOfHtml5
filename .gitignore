@@ -140,3 +140,5 @@ mongodb/data
 
 package-lock.json
 yarn.lock
+
+.env
