@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #touchpad {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: aquamarine;
+        }
+        #log {
+            width: 100%;
+            height: 100px;
+            overflow: auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="touchpad" >
+        <ul id="log"></ul>
+    </div>
+    
+    <script type="module">
+
+        
+        import main from './index.js';
+        main()
+
+
+        //<!-- log.innerHTML = 'ready'; -->
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>ex01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5" />
+    <style>
+        html,
+        body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        #joystick {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: 50%;
+            width: 50%;
+            background: rgba(0, 255, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="joystick"></div>
+    <div id="info">
+        <p>
+            <strong>X:</strong> <span class="x">0</span>
+        </p>
+        <p>
+            <strong>Y:</strong> <span class="y">0</span>
+        </p>
+        <p>
+            <strong>Angle:</strong> <span class="angle">0</span>
+        </p>
+        <p>
+            <strong>Distance:</strong> <span class="distance">0</span>
+        </p>
+        <p>
+            <strong>Direction:</strong> <span class="direction"></span>
+        </p>
+        <p>
+            <strong>Direction XY:</strong> <span class="directionX"></span> / <span class="directionY"></span>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.9.1/dist/nipplejs.min.js"></script>
+    <script type="module">
+        import main from './index.js';
+        main();
+    </script>
+</body>
+
+</html>
