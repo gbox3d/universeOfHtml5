@@ -3,7 +3,8 @@ import dotenv from "dotenv"
 import https from 'https'
 import http from 'http'
 import fs from 'fs'
-import SocketIO from "socket.io";
+// import SocketIO from "socket.io";
+import { Server as SocketIO } from "socket.io";
 // import SocketIO_version from "socket.io/package";
 
 // console.log(SocketIO_version);
@@ -44,7 +45,7 @@ else {
 }
 
 //socket io
-const wsServer = SocketIO(baseServer);
+const wsServer = new SocketIO(baseServer);
 
 wsServer.on("connection", (socket) => {
 
@@ -92,6 +93,12 @@ wsServer.on("connection", (socket) => {
 
 baseServer.listen(process.env.PORT, () => {
   console.log(`server run at : ${process.env.PORT}`)
+  
+  const protocol = process.env.SSL === 'True' ? 'https' : 'http';
+  const host = process.env.HOST || 'localhost'; // .env에 HOST 설정이 없는 경우 기본값은 'localhost'
+  const port = process.env.PORT;
+
+  console.log(`server running at: ${protocol}://${host}:${port}`);
 });
 
 
