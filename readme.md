@@ -1,18 +1,38 @@
 # 초연결시대를 위한  html5 예제
 
 
-npm 모듈 새로 설치하기
-```sh
-npm i @babel/cli @babel/core @babel/node @babel/preset-env dotenv express fs-extra socket.io
-npm i -D cross-env nodemon
-```
+## 설치하기
 
-기존 버전모듈로 설치하기
+**module**
 ```sh
 npm install
 ```
 
-.env 파일 생성하기
+
+**.env 파일**
 ```sh
 PORT=3000 # port 번호
+PORT=3000
+SSL=False
+#SSL_KEY= key 파일 경로
+#SSL_CERT= cert 파일 경로
+#SSL_CA= ca 파일 경로
+```
+
+## 실행하기
+
+**개발환경**
+```sh
+npm run dev
+```
+
+**배포환경**
+```sh
+npm start
+```
+
+**pm2**
+```sh
+pm2 start npm --name uoh -- start
+
 ```

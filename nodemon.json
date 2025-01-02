@@ -4,6 +4,6 @@
       "./webrtc/*",
       "./tipAndTrick/*"
     ],
-    "exec": "babel-node app.js"
+    "exec": "node app.js"
   }
   
