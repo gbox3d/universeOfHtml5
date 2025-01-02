@@ -142,3 +142,4 @@ package-lock.json
 yarn.lock
 
 .env
+ssl/
