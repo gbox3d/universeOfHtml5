@@ -6,6 +6,23 @@ const uploadInput = document.getElementById("upload");
 
 let faceLandmarker; // 전역 변수로 선언
 
+// 랜드마크 그리기
+function drawLandmarks(canvas, landmarks) {
+    const ctx = canvas.getContext("2d");
+
+    // 랜드마크 점 표시
+    landmarks.forEach(landmark => {
+        landmark.forEach(point => {
+            const x = point.x * canvas.width; // 정규화된 x 좌표
+            const y = point.y * canvas.height; // 정규화된 y 좌표
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, 2 * Math.PI); // 반지름 2로 점 그리기
+            ctx.fillStyle = "red"; // 색상
+            ctx.fill();
+        });
+    });
+}
+
 // 초기화
 async function main() {
     // 1. VisionTasks 초기화
@@ -59,22 +76,7 @@ async function main() {
         };
     });
 
-    // 랜드마크 그리기
-    function drawLandmarks(canvas, landmarks) {
-        const ctx = canvas.getContext("2d");
-
-        // 랜드마크 점 표시
-        landmarks.forEach(landmark => {
-            landmark.forEach(point => {
-                const x = point.x * canvas.width; // 정규화된 x 좌표
-                const y = point.y * canvas.height; // 정규화된 y 좌표
-                ctx.beginPath();
-                ctx.arc(x, y, 2, 0, 2 * Math.PI); // 반지름 2로 점 그리기
-                ctx.fillStyle = "red"; // 색상
-                ctx.fill();
-            });
-        });
-    }
+    
 }
 
 export default main;
