@@ -56,7 +56,7 @@ async function main() {
     //이미지 로드
     const img = new Image();
     // img.src = URL.createObjectURL(imageFileUrl);
-    img.src = "moon.webp";
+    img.src = "/moon.webp";
 
     img.onload = async () => {
         // 캔버스 크기 설정

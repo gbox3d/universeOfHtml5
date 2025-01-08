@@ -6,22 +6,46 @@ const uploadInput = document.getElementById("upload");
 
 let faceLandmarker; // 전역 변수로 선언
 
-// 랜드마크 그리기
-function drawLandmarks(canvas, landmarks) {
-    const ctx = canvas.getContext("2d");
 
-    // 랜드마크 점 표시
-    landmarks.forEach(landmark => {
-        landmark.forEach(point => {
-            const x = point.x * canvas.width; // 정규화된 x 좌표
-            const y = point.y * canvas.height; // 정규화된 y 좌표
-            ctx.beginPath();
-            ctx.arc(x, y, 2, 0, 2 * Math.PI); // 반지름 2로 점 그리기
-            ctx.fillStyle = "red"; // 색상
-            ctx.fill();
-        });
+
+/**
+ * 랜드마크 인덱스 쌍(Edge) 목록을 canvas에 그려주는 함수
+ *
+ * @param {CanvasRenderingContext2D} ctx - Canvas의 2D Context
+ * @param {Array} landmarks - FaceLandmarker.detect() 결과로 얻은 얼굴 랜드마크 배열
+ * @param {Array} edges - {start: number, end: number} 형태의 엣지 목록
+ * @param {number} width - 캔버스의 가로 길이
+ * @param {number} height - 캔버스의 세로 길이
+ * @param {string} [strokeColor='red'] - 선 색상
+ * @param {number} [lineWidth=2] - 선 두께
+ */
+function drawEdges(ctx, landmarks, edges, width, height, strokeColor = "red", lineWidth = 2) {
+    ctx.beginPath();
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = lineWidth;
+
+    // edge마다 두 점을 연결
+    edges.forEach(({ start, end }) => {
+        const p1 = landmarks[start];
+        const p2 = landmarks[end];
+
+        // 랜드마크 좌표 -> canvas 좌표
+        const x1 = p1.x * width;
+        const y1 = p1.y * height;
+        const x2 = p2.x * width;
+        const y2 = p2.y * height;
+
+        // 선 긋기
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
     });
+
+    ctx.stroke();
 }
+
+
+
+
 
 // 초기화
 async function main() {
@@ -39,6 +63,8 @@ async function main() {
                 delegate: "GPU" // GPU 사용
             },
             outputFaceBlendshapes: true,
+            outputFacialTransformationMatrixes: true,
+            
             runningMode: "IMAGE", // "IMAGE" or "VIDEO"
             numFaces: 1 // 탐지할 얼굴 수
         }
@@ -56,7 +82,7 @@ async function main() {
     //이미지 로드
     const img = new Image();
     // img.src = URL.createObjectURL(imageFileUrl);
-    img.src = "moon.webp";
+    img.src = "/moon.webp";
 
     img.onload = async () => {
         // 캔버스 크기 설정
@@ -72,7 +98,28 @@ async function main() {
         if (results.faceLandmarks) {
 
             console.log(results.faceLandmarks);
-            drawLandmarks(canvas, results.faceLandmarks);
+            // drawLandmarks(canvas, results.faceLandmarks);
+
+            // 랜드마크 그리기
+            results.faceLandmarks.forEach((landmarks) => {
+
+                console.log(landmarks);
+
+                console.log(FaceLandmarker.FACE_LANDMARKS_LEFT_EYE)
+
+                drawEdges(ctx, landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, img.width, img.height, "rgb(255,255, 0)");
+                drawEdges(ctx, landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE, img.width, img.height, "rgb(255,255, 0)");
+
+                drawEdges(ctx, landmarks, FaceLandmarker.FACE_LANDMARKS_FACE_OVAL, img.width, img.height, "rgb(255,0, 0)");
+
+
+            });
+
+            console.log(results.faceBlendshapes);
+
+            console.log(results.facialTransformationMatrixes);
+
+
         }
     };
 
