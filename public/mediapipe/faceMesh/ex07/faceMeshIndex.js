@@ -1,4 +1,4 @@
-export default faceIndex = [
+const faceIndex = [
     [127,  34, 139],
     [ 11,   0,  37],
     [232, 231, 120],
@@ -851,4 +851,6 @@ export default faceIndex = [
     [265, 372, 353],
     [390, 339, 249],
     [339, 448, 255]
-]
+];
+
+export default faceIndex;

@@ -11,6 +11,85 @@ let faceLandmarker;
 const video = document.getElementById('webcam');
 const clock = new THREE.Clock();
 
+function _initFaceMesh(scene) {
+    //FaceMesh Geometry 설정
+    const positions = new Float32Array(468 * 3);
+    const flatIndices = faceMeshIndex.flat();
+    const indexArray = new Uint16Array(flatIndices);
+
+    // 삼각형 인덱스 순서 바꾸기 (삼각형 뒤집기)
+    for (let i = 0; i < indexArray.length; i += 3) {
+        // [i, i+1, i+2] => 삼각형 한 개
+        // swap indexArray[i+1] <-> indexArray[i+2]
+        const temp = indexArray[i + 1];
+        indexArray[i + 1] = indexArray[i + 2];
+        indexArray[i + 2] = temp;
+    }
+
+    const faceGeometry = new THREE.BufferGeometry();
+    faceGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    faceGeometry.setIndex(new THREE.BufferAttribute(indexArray, 1));
+    faceGeometry.computeVertexNormals(); // 표면을 부드럽게
+
+    //**재질(Material) 변경**
+    const faceMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffddaa,  // 피부색 계열
+        metalness: 0.3,  // 금속 효과 조정
+        roughness: 0.5,  // 거칠기 조정 (0이면 완전 반사, 1이면 완전 무광)
+        transparent: true,
+        opacity: 0.95,  // 반투명 효과
+    });
+
+    // Mesh 생성 및 추가
+    const faceMesh = new THREE.Mesh(faceGeometry, faceMaterial);
+    faceMesh.castShadow = true; // 그림자 캐스팅
+    faceMesh.receiveShadow = true; // 그림자 받기
+    scene.add(faceMesh);
+
+    return {
+        mesh: faceMesh,
+        update: (landmarks) => {
+            const posArray = faceMesh.geometry.attributes.position.array;
+
+            // 468개 랜드마크 업데이트
+            for (let i = 0; i < 468; i++) {
+                posArray[i * 3] = landmarks[i].x - 0.5;    // X
+                posArray[i * 3 + 1] = -(landmarks[i].y - 0.5); // Y (수직 반전)
+                posArray[i * 3 + 2] = landmarks[i].z * 0.3;  // Z 보정
+            }
+
+            // 🔄 **정점 좌표 업데이트**
+            faceMesh.geometry.attributes.position.needsUpdate = true;
+
+            // 🔄 **법선 업데이트 (빛 반사)**
+            faceMesh.geometry.computeVertexNormals();
+
+            // 🔄 **바운딩 박스 업데이트 (충돌 감지 & 카메라 최적화)**
+            faceMesh.geometry.computeBoundingBox();
+
+        }
+    }
+}
+
+function _initLight(scene) {
+    // 5️⃣ **조명 추가**
+    // 🔆 환경광 (전체적인 밝기)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    scene.add(ambientLight);
+
+    // 🔦 방향성 조명 (햇빛 같은 효과)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(2, 2, 2); // 위쪽에서 비추게 설정
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
+
+    // 💡 포인트 라이트 (얼굴에 은은한 빛 추가)
+    const pointLight = new THREE.PointLight(0xffaa88, 1, 5);
+    pointLight.position.set(0, 0, -2); // 얼굴 앞쪽에서 비춤
+    scene.add(pointLight);
+}
+
+
 async function main() {
 
     //threejs version 표기
@@ -19,28 +98,46 @@ async function main() {
     //three.js 코드
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = -2;
-    camera.position.y = 0;
+    camera.position.set(0, 1, -2);  // 적절한 위치로 변경
 
     //lookAt 설정
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true; // 그림자 활성화
     document.body.appendChild(renderer.domElement);
 
-    // axisGroup 생성
-    // const axisGroup = createArrowAxies({ arrowSize: 2, arrowThickness: 0.1 });
-
-    // scene.add(axisGroup);
-
-    // ----------------
-    // 바닥(플레인) 추가
-    // ----------------
 
     //그리드헬퍼
     var helper = new THREE.GridHelper(100, 10, 0x00ff00, 0xff0000);
     scene.add(helper);
+
+    // document.addEventListener('keydown', async (event) => {
+
+    //     console.log(event.code);
+    //     if (event.code === 'Space') {
+
+    //         // 1) Mediapipe 호출 (단발성)
+    //         const results = await faceLandmarker.detectForVideo(video, performance.now());
+
+    //         // 2) 결과 해석
+    //         if (results.faceLandmarks && results.faceLandmarks.length > 0) {
+    //             // 가장 첫 번째 얼굴 기준
+    //             const landmarks = results.faceLandmarks[0];
+
+    //             // 3) 정적메쉬 생성
+    //             const staticFaceMesh = createStaticFaceMesh(landmarks);
+
+    //             // 4) 씬에 추가
+    //             scene.add(staticFaceMesh);
+
+    //             console.log('Added a static face mesh!');
+    //         }
+
+    //     }
+
+    // });
 
 
     // GUI 설정
@@ -50,15 +147,11 @@ async function main() {
     gui.add(cameraPosition, 'y').listen();
     gui.add(cameraPosition, 'z').listen();
 
-    // // axisGroup 위치 GUI에 추가
-    // const axisGroupPosition = { x: axisGroup.position.x, y: axisGroup.position.y, z: axisGroup.position.z };
-    // gui.add(axisGroupPosition, 'x').listen();
-    // gui.add(axisGroupPosition, 'y').listen();
-    // gui.add(axisGroupPosition, 'z').listen();
-
+    const faceMeshObj = _initFaceMesh(scene);
+    _initLight(scene);
 
     // fpsController를 초기화
-    const fpsController = setupFPSController({ camera, renderer });
+    const fpsController = setupFPSController({ camera, renderer, moveSpeed: 2.0 });
 
     // MediaPipe 코드
     const filesetResolver = await FilesetResolver.forVisionTasks(
@@ -75,88 +168,16 @@ async function main() {
     });
 
 
-
-    // 1️⃣ BufferGeometry 생성 (메쉬 형태)
-    const faceGeometry = new THREE.BufferGeometry();
-
-    // 2️⃣ FACE_LANDMARKS_TESSELATION을 사용하여 positions & indices 배열 생성
-    const faceTesselationIndices = FaceLandmarker.FACE_LANDMARKS_TESSELATION;
-    const positions = new Float32Array(468 * 3); // x, y, z 좌표 저장
-    const indices = new Uint16Array(faceTesselationIndices.length * 3); // 삼각형 인덱스 저장
-
-    // 3️⃣ 처음에는 "평면(z=0)"으로 초기화
-    for (let i = 0; i < 468; i++) {
-        const baseX = (i % 20) * 0.01 - 0.5;  // 20개 단위로 좌우 정렬
-        const baseY = Math.floor(i / 20) * -0.01 + 0.5; // 위에서 아래로 정렬
-        const baseZ = 0; // 평면
-
-        positions[i * 3] = baseX;
-        positions[i * 3 + 1] = baseY;
-        positions[i * 3 + 2] = baseZ;
-    }
-
-    // 4️⃣ 삼각형 인덱스 설정 (3개씩 묶어서 삼각형 생성)
-    for (let i = 0; i < faceTesselationIndices.length; i++) {
-        indices[i * 3] = faceTesselationIndices[i].start;
-        indices[i * 3 + 1] = faceTesselationIndices[i].end;
-        indices[i * 3 + 2] = faceTesselationIndices[(i + 1) % faceTesselationIndices.length].end; // 다음 점을 삼각형의 세 번째 점으로
-    }
-
-    // 5️⃣ Three.js BufferGeometry에 적용
-    faceGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    faceGeometry.setIndex(new THREE.BufferAttribute(indices, 1));
-    faceGeometry.computeVertexNormals(); // 표면 법선 계산
-
-    // 6️⃣ 재질(Material) 설정 (기본 색상 & 투명도 설정)
-    const faceMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00ff00, // 초록색
-        wireframe: true, // 와이어프레임 모드 (true면 삼각형 경계를 볼 수 있음)
-    });
-
-    // 7️⃣ Mesh 생성 & Scene에 추가
-    const faceMesh = new THREE.Mesh(faceGeometry, faceMaterial);
-    scene.add(faceMesh);
-
-
     const processFrame = async () => {
         const results = await faceLandmarker.detectForVideo(video, performance.now());
 
         try {
 
+            // 2) 결과 해석
             if (results.faceLandmarks && results.faceLandmarks.length > 0) {
+                // 예: 가장 첫 번째 얼굴만 사용한다고 가정
                 const landmarks = results.faceLandmarks[0];
-
-                // BufferGeometry에서 position 속성 가져오기
-                const positions = faceMesh.geometry.attributes.position.array;
-
-
-                // 468개의 landmark를 기반으로 선(Edge) 업데이트
-                for (let i = 0; i < faceTesselationIndices.length; i++) {
-                    const { start, end } = faceTesselationIndices[i];
-
-                    const startPoint = landmarks[start];
-                    const endPoint = landmarks[end];
-
-                    const index = i * 6;
-
-                    // 시작점 (x, y, z)
-                    positions[index + 0] = (startPoint.x - 0.5);
-                    positions[index + 1] = -(startPoint.y - 0.5);
-                    positions[index + 2] = startPoint.z;
-
-                    // 끝점 (x, y, z)
-                    positions[index + 3] = endPoint.x - 0.5;
-                    positions[index + 4] = -(endPoint.y - 0.5);
-                    positions[index + 5] = endPoint.z;
-                }
-
-                // 업데이트 반영
-                faceMesh.geometry.attributes.position.needsUpdate = true;
-
-                // 3️⃣ 바운딩 박스 재계산
-                faceMesh.geometry.computeBoundingBox(); // 정점이 변경되었으므로 바운딩 박스를 다시 계산
-
-
+                faceMeshObj.update(landmarks);
             }
 
         }
@@ -164,32 +185,6 @@ async function main() {
             console.error(error);
         }
 
-
-        // if (results.facialTransformationMatrixes.length > 0) {
-
-        //     const matrix = results.facialTransformationMatrixes[0];
-        //     const m = matrix.data; // 4x4 행렬
-
-        //     // Three.js에서 사용할 Matrix4 생성
-        //     const transformationMatrix = new THREE.Matrix4();
-        //     transformationMatrix.set(
-        //         m[0], m[4], m[8], m[12],  // 1열 (X축)
-        //         m[1], m[5], m[9], m[13],  // 2열 (Y축)
-        //         m[2], m[6], m[10], m[14],  // 3열 (Z축)
-        //         m[3], m[7], m[11], m[15]   // 4열 (W)
-        //     );
-
-
-        //     // axisGroup의 자동 행렬 업데이트 비활성화
-        //     axisGroup.matrixAutoUpdate = false;
-
-        //     // 변환 행렬 설정
-        //     axisGroup.matrix.copy(transformationMatrix);
-
-        //     // 월드 행렬 업데이트 플래그 설정
-        //     axisGroup.matrixWorldNeedsUpdate = true;
-
-        // }
         requestAnimationFrame(processFrame);
     };
 
