@@ -18,13 +18,13 @@ function _initFaceMesh(scene) {
     const indexArray = new Uint16Array(flatIndices);
 
     // 삼각형 인덱스 순서 바꾸기 (삼각형 뒤집기)
-    for (let i = 0; i < indexArray.length; i += 3) {
-        // [i, i+1, i+2] => 삼각형 한 개
-        // swap indexArray[i+1] <-> indexArray[i+2]
-        const temp = indexArray[i + 1];
-        indexArray[i + 1] = indexArray[i + 2];
-        indexArray[i + 2] = temp;
-    }
+    // for (let i = 0; i < indexArray.length; i += 3) {
+    //     // [i, i+1, i+2] => 삼각형 한 개
+    //     // swap indexArray[i+1] <-> indexArray[i+2]
+    //     const temp = indexArray[i + 1];
+    //     indexArray[i + 1] = indexArray[i + 2];
+    //     indexArray[i + 2] = temp;
+    // }
 
     const faceGeometry = new THREE.BufferGeometry();
     faceGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -53,7 +53,7 @@ function _initFaceMesh(scene) {
 
             // 468개 랜드마크 업데이트
             for (let i = 0; i < 468; i++) {
-                posArray[i * 3] = landmarks[i].x - 0.5;    // X
+                posArray[i * 3] = -(landmarks[i].x - 0.5);    // X
                 posArray[i * 3 + 1] = -(landmarks[i].y - 0.5); // Y (수직 반전)
                 posArray[i * 3 + 2] = landmarks[i].z * 0.3;  // Z 보정
             }
