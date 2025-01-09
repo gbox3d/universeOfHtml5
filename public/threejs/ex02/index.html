@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threejs Example</title>
     <style>
-        @import url('./main.css');
+        @import url('./main.css'); 
     </style>
     
 </head>
 <body>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@latest/build/three.module.min.js"
+          }
+        }
+    </script>
     <script type="module">
         import main from './index.js';
         main();
