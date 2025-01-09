@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { PointerLockControls } from 'https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/controls/PointerLockControls.js';
 
-export default function setup({ camera, renderer }) {
+export default function setup({ camera, renderer,moveSpeed=0.1 }) {
     // --- PointerLockControls(FPS 카메라) ---
     const controls = new PointerLockControls(camera, renderer.domElement);
 
@@ -11,7 +11,7 @@ export default function setup({ camera, renderer }) {
     });
 
     // 속도 조절용
-    const moveSpeed = 5.0; // 1초당 이동 거리
+    // const moveSpeed = 5.0; // 1초당 이동 거리
     let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
 
     // 키 눌렀을 때
