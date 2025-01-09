@@ -11,6 +11,31 @@ let faceLandmarker;
 const video = document.getElementById('webcam');
 const clock = new THREE.Clock();
 
+// 바닥(Plane) 추가
+function _initFloor(scene) {
+    // (1) PlaneGeometry(가로, 세로)
+    const planeGeometry = new THREE.PlaneGeometry(10, 10);
+    planeGeometry.rotateX(-Math.PI / 2); 
+    // 기본 PlaneGeometry는 XY 평면이므로, 
+    // 회전해서 바닥(Y=0, XZ 평면)처럼 만듦
+  
+    // (2) 바닥 재질 (MeshStandardMaterial 권장, 그림자 반응 가능)
+    const planeMaterial = new THREE.MeshStandardMaterial({
+      color: 0x808080,  // 회색 바닥
+      metalness: 0.0,
+      roughness: 0.5,
+    });
+  
+    // (3) Plane Mesh 생성
+    const floor = new THREE.Mesh(planeGeometry, planeMaterial);
+    floor.receiveShadow = true; // 바닥이 그림자를 받게 함
+  
+    // (4) 바닥 위치 (원하면 높이 조정 가능)
+    floor.position.y = 0; // 바닥을 월드 y=0에 둠
+    scene.add(floor);
+  }
+  
+
 function _initFaceMesh(scene) {
     //FaceMesh Geometry 설정
     const positions = new Float32Array(468 * 3);
@@ -109,35 +134,8 @@ async function main() {
     document.body.appendChild(renderer.domElement);
 
 
-    //그리드헬퍼
-    var helper = new THREE.GridHelper(100, 10, 0x00ff00, 0xff0000);
-    scene.add(helper);
-
-    // document.addEventListener('keydown', async (event) => {
-
-    //     console.log(event.code);
-    //     if (event.code === 'Space') {
-
-    //         // 1) Mediapipe 호출 (단발성)
-    //         const results = await faceLandmarker.detectForVideo(video, performance.now());
-
-    //         // 2) 결과 해석
-    //         if (results.faceLandmarks && results.faceLandmarks.length > 0) {
-    //             // 가장 첫 번째 얼굴 기준
-    //             const landmarks = results.faceLandmarks[0];
-
-    //             // 3) 정적메쉬 생성
-    //             const staticFaceMesh = createStaticFaceMesh(landmarks);
-
-    //             // 4) 씬에 추가
-    //             scene.add(staticFaceMesh);
-
-    //             console.log('Added a static face mesh!');
-    //         }
-
-    //     }
-
-    // });
+    // ---------- 바닥 추가 ----------
+    _initFloor(scene);
 
 
     // GUI 설정
@@ -148,6 +146,10 @@ async function main() {
     gui.add(cameraPosition, 'z').listen();
 
     const faceMeshObj = _initFaceMesh(scene);
+
+    faceMeshObj.mesh.position.set(0, 0.5, 0);
+
+
     _initLight(scene);
 
     // fpsController를 초기화
