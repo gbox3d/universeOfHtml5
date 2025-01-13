@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { GUI } from 'https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/libs/lil-gui.module.min.js';
 
 import setupFPSController from './fpsController.js';
-import { createArrowAxies } from './muutils.js';
+import { createArrowAxies } from './myutils.js';
 
 let faceLandmarker;
 const video = document.getElementById('webcam');
