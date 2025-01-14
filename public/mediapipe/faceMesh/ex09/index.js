@@ -84,6 +84,15 @@ async function main() {
     controls.enabled = true;   // 기본적으로 켜두기
     controls.update();
 
+    // window resize event
+    window.addEventListener('resize', () => {
+        {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+    });
+
     // MediaPipe 코드
     const filesetResolver = await FilesetResolver.forVisionTasks(
         'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm'
@@ -222,6 +231,8 @@ async function main() {
         renderer.render(scene, camera);
     }
     animate();
+
+
 
 }
 export default main;

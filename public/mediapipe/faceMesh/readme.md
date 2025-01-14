@@ -24,5 +24,11 @@ FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS, FaceLandmarker.FACE_LANDMARKS_LEFT_IRI
 얼굴변환을 3차원 공간으로 표시하기   
 
 ## ex07
-facemesh 3차원 표시   
+facemesh 3차원 표시  
+
+## ex08
+홍체를 3차원으로 표현
+
+## ex09
+조준점 3차원으로 표시 
 
