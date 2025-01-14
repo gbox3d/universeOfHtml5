@@ -7,3 +7,23 @@ body {
     padding: 0;
     
 }
+
+.webcam-style {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 10%;
+    height: 10%;
+}
+
+#info {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+	display:block;
+    color: white;
+}

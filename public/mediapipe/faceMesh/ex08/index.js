@@ -2,9 +2,10 @@ import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@m
 
 import * as THREE from "three";
 
-import { GUI } from 'https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/libs/lil-gui.module.min.js';
 
-import setupFPSController from './fpsController.js';
+import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
 
 let faceLandmarker;
 const video = document.getElementById('webcam');
@@ -42,9 +43,19 @@ async function main() {
     gui.add(cameraPosition, 'y').listen();
     gui.add(cameraPosition, 'z').listen();
 
+    gui.close();
 
     // fpsController를 초기화
-    const fpsController = setupFPSController({ camera, renderer, moveSpeed: 2.0 });
+    // const fpsController = setupFPSController({ camera, renderer, moveSpeed: 2.0 });
+
+    // OrbitControls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0, 0);
+    controls.maxDistance = 100;
+    controls.minDistance = 1;
+    controls.enablePan = false;
+    controls.update();
+
 
     // MediaPipe 코드
     const filesetResolver = await FilesetResolver.forVisionTasks(
@@ -70,41 +81,41 @@ async function main() {
 
     function get_iris_position(landmarks, connections) {
         const irisPosition = new THREE.Vector3();
-      
+
         let totalCount = 0;
-      
+
         connections.forEach((c) => {
-          // start
-          const s = landmarks[c.start];
-          const sx = -(s.x - 0.5);
-          const sy = -(s.y - 0.5);
-          const sz = s.z;
-      
-          irisPosition.x += sx;
-          irisPosition.y += sy;
-          irisPosition.z += sz;
-          totalCount++;
-      
-          // end
-          const e = landmarks[c.end];
-          const ex = -(e.x - 0.5);
-          const ey = -(e.y - 0.5);
-          const ez = e.z;
-      
-          irisPosition.x += ex;
-          irisPosition.y += ey;
-          irisPosition.z += ez;
-          totalCount++;
+            // start
+            const s = landmarks[c.start];
+            const sx = -(s.x - 0.5);
+            const sy = -(s.y - 0.5);
+            const sz = s.z;
+
+            irisPosition.x += sx;
+            irisPosition.y += sy;
+            irisPosition.z += sz;
+            totalCount++;
+
+            // end
+            const e = landmarks[c.end];
+            const ex = -(e.x - 0.5);
+            const ey = -(e.y - 0.5);
+            const ez = e.z;
+
+            irisPosition.x += ex;
+            irisPosition.y += ey;
+            irisPosition.z += ez;
+            totalCount++;
         });
-      
+
         // 이제 totalCount = connections.length * 2
         irisPosition.x /= totalCount;
         irisPosition.y /= totalCount;
         irisPosition.z /= totalCount;
-      
+
         return irisPosition;
-      }
-      
+    }
+
 
     //눈에 대한 지오메트리
     const eye_geometry = new THREE.SphereGeometry(0.005, 32, 32);
@@ -138,27 +149,19 @@ async function main() {
                 const leftIrisPosition = get_iris_position(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS);
                 const rightIrisPosition = get_iris_position(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS);
 
-                
-                // const leftIrisPosition = new THREE.Vector3(
-                //     landmarks[FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS[0].start].x - 0.5,
-                //     -(landmarks[FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS[0].start].y - 0.5),
-                //     landmarks[FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS[0].start].z
-                // );
-
-
                 irisRight.position.copy(leftIrisPosition);
                 irisLeft.position.copy(rightIrisPosition);
 
                 // 왼쪽 눈의 외각선을 표시하기위해 포인트만큼 구체 생성
                 left_eye_group.children.forEach((eye, index) => {
                     const point = landmarks[FaceLandmarker.FACE_LANDMARKS_LEFT_EYE[index].start];
-                    eye.position.set(-(point.x - 0.5), -(point.y - 0.5), point.z );
+                    eye.position.set(-(point.x - 0.5), -(point.y - 0.5), point.z);
                 });
 
                 // 왼쪽 눈의 외각선을 표시하기위해 포인트만큼 구체 생성
                 right_eye_group.children.forEach((eye, index) => {
                     const point = landmarks[FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE[index].start];
-                    eye.position.set(-(point.x - 0.5), -(point.y - 0.5), point.z );
+                    eye.position.set(-(point.x - 0.5), -(point.y - 0.5), point.z);
                 });
 
 
@@ -191,7 +194,7 @@ async function main() {
         const delta = clock.getDelta();
 
         // fpsController 갱신
-        fpsController.update(delta);
+        // fpsController.update(delta);
 
         cameraPosition.x = camera.position.x;
         cameraPosition.y = camera.position.y;

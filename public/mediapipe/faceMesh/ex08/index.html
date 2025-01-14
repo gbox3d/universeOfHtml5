@@ -10,12 +10,14 @@
     
 </head>
 <body>
-    <video class="hidden" id="webcam" autoplay playsinline></video>
+    <video class="webcam-style" id="webcam" autoplay playsinline></video>
+    <div id="info">iris 3d</div>
 
     <script type="importmap">
         {
           "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js"
+            "three": "https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/"
           }
         }
     </script>
