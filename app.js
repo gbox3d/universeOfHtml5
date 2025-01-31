@@ -13,9 +13,9 @@ console.log(`run mode : ${process.env.NODE_ENV}`);
 
 const app = express()
 
-app.use('/tipAndTrick', express.static('./tipAndTrick'));
-app.use('/media', express.static(`./media`));
-app.use('/webrtc', express.static(`./webrtc`));
+// app.use('/tipAndTrick', express.static('./tipAndTrick'));
+// app.use('/media', express.static(`./media`));
+// app.use('/webrtc', express.static(`./webrtc`));
 
 app.use('/', express.static(`./public`));
 
