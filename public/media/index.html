@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>select camera devices</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/npm/w3-css@4.1.0/w3.min.css');
+        @import url('./main.css');
+    </style>
 </head>
+
 <body>
 
-    <video id="myFace" autoplay playsinline width="400" height="400" ></video>
+    <div class="w3-container w3-section w3-orange">
+        <h2>Media Device Sample</h2>
+    </div>
 
-    <select id="cameraSelect"></select>
+    <div class="w3-container w3-section">
+        <a href="/" class="w3-button w3-black">Home</a>
+
+    </div>
+
+    <div class="w3-container w3-section">
+        <h3>Video Media Device Samples</h3>
+        <a href="./ex00" class="w3-button w3-blue">Hello WebCam Sample</a>
+        <a href="./ex01" class="w3-button w3-blue">Listing Device</a>
+        <a href="./ex02" class="w3-button w3-blue">Webcam - Render To Canvas</a>
+    </div>
+
+    <div class="w3-container w3-section">
+        <h3>Audio Media Device Samples</h3>
+    </div>
+
 
     <script type="module">
-        import  main  from './index.js';
+        import main from './index.js';
         document.addEventListener('DOMContentLoaded', main);
     </script>
-    
+
 </body>
+
 </html>

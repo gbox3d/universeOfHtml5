@@ -1,5 +1,5 @@
 
-const myFaceCamera = document.getElementById("myFace");
+const myFaceVideo = document.getElementById("myFace");
 const myCanvas = document.getElementById("myCanvas");
 
 export default async ()=> {
@@ -16,7 +16,7 @@ export default async ()=> {
         
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(myFaceCamera, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(myFaceVideo, 0, 0, canvas.width, canvas.height);
 
         //image processing here
 
@@ -24,19 +24,21 @@ export default async ()=> {
     };
 
     try {
-        let myStream = await navigator.mediaDevices.getUserMedia(constraints);
-        myFaceCamera.srcObject = myStream;
-        console.log("카메라 연결 성공");
-
+        let _webCamStream = await navigator.mediaDevices.getUserMedia(constraints);
+        myFaceVideo.srcObject = _webCamStream;
         
-        myFaceCamera.addEventListener('loadeddata', () => {
+        //myFaceVideo.play(); //auto play 옵션을 안주었다면 이라인 주석 해제
 
+        myFaceVideo.addEventListener('loadeddata', () => {
+            
+            console.log("카메라 연결 성공");
 
-            myCanvas.width = myFaceCamera.videoWidth;
-            myCanvas.height = myFaceCamera.videoHeight;
+            myCanvas.width = myFaceVideo.videoWidth;
+            myCanvas.height = myFaceVideo.videoHeight;
             
             processFrame(myCanvas);
         });
+
     } catch (e) {
         console.error("카메라 연결 실패:", e);
     }
