@@ -1,0 +1,19 @@
+server {
+    listen 22288;
+    server_name localhost;
+
+    root /home/gbox3d/work/universeOfHtml5/public;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # 필요한 경우 추가 설정
+    # 예: 큰 파일 업로드 허용
+    client_max_body_size 20M;
+
+    # 로그 설정
+    access_log /var/log/nginx/http_22288_access.log;
+    error_log /var/log/nginx/http_22288_error.log;
+}
