@@ -52,7 +52,7 @@ sudo systemctl reload nginx
 ```nginx
 server {
     listen 22280 ssl;
-    server_name ailab.miso.center;
+    server_name localhost;
 
     ssl_certificate /home/gbox3d/work/ssl/_wildcard_.miso.center_2024080760CE6.all.crt.pem;
     ssl_certificate_key /home/gbox3d/work/ssl/_wildcard_.miso.center_2024080760CE6.key.pem;
