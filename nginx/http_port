@@ -1,0 +1,11 @@
+server {
+    listen 21080;
+    server_name 192.168.4.210;  # 실제 도메인이나 IP로 변경
+
+    root /home/sensoftai01/work/universeOfHtml5/public;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
